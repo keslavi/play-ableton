@@ -24,6 +24,7 @@ const songTagInput = document.querySelector("#song-tag-input");
 const songTagAdd = document.querySelector("#song-tag-add");
 const songTagSuggestions = document.querySelector("#song-tag-suggestions");
 const songSelectedTags = document.querySelector("#song-selected-tags");
+const songFixedDocFont = document.querySelector("#song-fixed-doc-font");
 const songMetaSave = document.querySelector("#song-meta-save");
 const songMetaCancel = document.querySelector("#song-meta-cancel");
 const songMetaAttachment = document.querySelector("#song-meta-attachment");
@@ -94,6 +95,7 @@ const state = {
   pendingDocSceneIndex: null,
   editingSongSceneIndex: null,
   editingSongTags: [],
+  editingUseFixedDocFont: false,
   activeDocUrl: null,
   activeDocEmbedUrl: null
 };
@@ -288,13 +290,22 @@ const renderSongMetaModal = () => {
       : null;
     const doc = profile?.doc;
     if (doc?.url) {
-      songMetaAttachmentOpen.href = doc.url;
-      songMetaAttachmentOpen.textContent = doc.fileName ?? "Open current attachment";
+      const openUrl = doc.htmlUrl || doc.url;
+      songMetaAttachmentOpen.href = openUrl;
+      songMetaAttachmentOpen.textContent = doc.fileName
+        ? doc.htmlUrl
+          ? `${doc.fileName} (HTML preview ready)`
+          : doc.fileName
+        : "Open current attachment";
       songMetaAttachmentOpen.classList.remove("hidden");
     } else {
       songMetaAttachmentOpen.classList.add("hidden");
       songMetaAttachmentOpen.removeAttribute("href");
     }
+  }
+
+  if (songFixedDocFont) {
+    songFixedDocFont.checked = Boolean(state.editingUseFixedDocFont);
   }
 };
 
@@ -309,6 +320,10 @@ const docForActiveScene = () => {
 };
 
 const docEmbedUrl = (doc) => {
+  if (doc?.htmlUrl) {
+    return doc.htmlUrl;
+  }
+
   if (!doc?.url) {
     return null;
   }
@@ -390,8 +405,9 @@ const renderActiveSongDocument = () => {
   state.activeDocUrl = doc.url;
 
   const isPdf = (doc.mimeType ?? "").toLowerCase().includes("pdf") || String(doc.fileName ?? "").toLowerCase().endsWith(".pdf");
-  activeSongDocFallback.classList.toggle("hidden", isPdf);
-  if (!isPdf) {
+  const hasHtmlPreview = Boolean(doc.htmlUrl);
+  activeSongDocFallback.classList.toggle("hidden", isPdf || hasHtmlPreview);
+  if (!isPdf && !hasHtmlPreview) {
     activeSongDocFallback.textContent = "DOC/DOCX preview depends on browser support. Use Open in New Tab if embedded preview is unavailable.";
   }
   renderDocMenuButton();
@@ -414,6 +430,7 @@ const uploadSceneDocument = async (sceneIndex, file) => {
   if (payload.profile?.sceneIndex !== undefined) {
     state.songProfiles.set(payload.profile.sceneIndex, payload.profile);
   }
+  renderSongMetaModal();
   renderScenes();
   renderActiveSongDocument();
 };
@@ -424,6 +441,7 @@ const openSongMetaEditor = (sceneIndex) => {
   state.editingSongTags = Array.isArray(profile?.tags)
     ? profile.tags.map(normalizeTag).filter(Boolean)
     : [];
+  state.editingUseFixedDocFont = Boolean(profile?.useFixedDocFont);
 
   if (songMetaNotes) {
     songMetaNotes.value = profile?.notes ?? "";
@@ -471,7 +489,7 @@ const saveSongMetaEditor = async () => {
   const response = await fetch(`/api/songs/${state.editingSongSceneIndex}/profile`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ notes, tags: state.editingSongTags })
+    body: JSON.stringify({ notes, tags: state.editingSongTags, useFixedDocFont: state.editingUseFixedDocFont })
   });
 
   const payload = await response.json();
@@ -601,6 +619,36 @@ const setActivePage = (page) => {
   openLogButton?.classList.toggle("active", page === "log");
 };
 
+const applySceneMixToUiState = (mix) => {
+  if (!mix || typeof mix !== "object") {
+    return;
+  }
+
+  const levelEntries = Object.entries(mix.levels ?? {});
+  for (const [trackKey, level] of levelEntries) {
+    const trackIndex = Number(trackKey);
+    if (!Number.isInteger(trackIndex) || !Number.isFinite(level)) {
+      continue;
+    }
+
+    state.trackLevels.set(trackIndex, Math.max(0, Math.min(1, Number(level))));
+  }
+
+  const muteEntries = Object.entries(mix.mutes ?? {});
+  for (const [trackKey, mute] of muteEntries) {
+    const trackIndex = Number(trackKey);
+    if (!Number.isInteger(trackIndex)) {
+      continue;
+    }
+
+    state.trackMutes.set(trackIndex, Boolean(mute));
+  }
+
+  if (levelEntries.length > 0 || muteEntries.length > 0) {
+    renderTracks();
+  }
+};
+
 const startScene = async (sceneIndex) => {
   clearSceneStopTimer("scene-start");
   console.info("[scene] start requested", { sceneIndex });
@@ -609,8 +657,13 @@ const startScene = async (sceneIndex) => {
     const payload = await response.json();
     writeLog("scene.start", payload);
     console.info("[scene] start response", payload);
+    applySceneMixToUiState(payload?.event?.appliedMix);
     state.activeSceneIndex = sceneIndex;
     renderActiveSongDocument();
+    const sceneDoc = profileForScene(sceneIndex)?.doc;
+    if (sceneDoc?.url) {
+      setActivePage("doc");
+    }
     armSceneStopTimer(sceneIndex);
   } catch (error) {
     console.info("[scene] start error", { sceneIndex, message: error.message });
@@ -1008,6 +1061,7 @@ const startWs = () => {
       }
 
       if (payload.type === "scene.start.requested" && Number.isInteger(payload.sceneIndex)) {
+        applySceneMixToUiState(payload.appliedMix);
         state.activeSceneIndex = payload.sceneIndex;
         renderActiveSongDocument();
       }
@@ -1131,6 +1185,10 @@ songTagInput?.addEventListener("keydown", (event) => {
     event.preventDefault();
     addEditingTagFromInput();
   }
+});
+
+songFixedDocFont?.addEventListener("change", () => {
+  state.editingUseFixedDocFont = Boolean(songFixedDocFont.checked);
 });
 
 songMetaCancel?.addEventListener("click", () => {

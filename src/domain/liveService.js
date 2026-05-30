@@ -324,9 +324,9 @@ export class LiveService extends EventEmitter {
       if (this.#trackLevels.has(index)) {
         levels[String(index)] = this.#trackLevels.get(index);
       }
-      if (this.#trackMutes.has(index)) {
-        mutes[String(index)] = this.#trackMutes.get(index);
-      }
+      mutes[String(index)] = this.#trackMutes.has(index)
+        ? this.#trackMutes.get(index)
+        : false;
     }
 
     return { levels, mutes };
@@ -345,7 +345,7 @@ export class LiveService extends EventEmitter {
 
   async #applySongMix(sceneIndex) {
     if (!this.#songProfileStore) {
-      return;
+      return { levels: {}, mutes: {} };
     }
 
     const defaults = this.#songProfileStore.getDefaults();
@@ -353,21 +353,33 @@ export class LiveService extends EventEmitter {
     const tracks = this.#cacheStore.getTracks();
 
     const operations = [];
+    const appliedLevels = {};
+    const appliedMutes = {};
     for (const track of tracks) {
       const trackKey = String(track.index);
       const targetLevel = profile?.levels?.[trackKey] ?? defaults.levels?.[trackKey];
-      const targetMute = profile?.mutes?.[trackKey] ?? defaults.mutes?.[trackKey];
+      const hasProfileMute = typeof profile?.mutes?.[trackKey] === "boolean";
+      const hasDefaultMute = typeof defaults.mutes?.[trackKey] === "boolean";
+      const targetMute = hasProfileMute
+        ? profile.mutes[trackKey]
+        : hasDefaultMute
+          ? defaults.mutes[trackKey]
+          : false;
 
       if (Number.isFinite(targetLevel)) {
         operations.push(this.#setTrackVolumeInternal(track.index, targetLevel));
+        appliedLevels[trackKey] = Math.max(0, Math.min(1, Number(targetLevel)));
       }
 
-      if (typeof targetMute === "boolean") {
-        operations.push(this.#setTrackMuteInternal(track.index, targetMute));
-      }
+      operations.push(this.#setTrackMuteInternal(track.index, targetMute));
+      appliedMutes[trackKey] = Boolean(targetMute);
     }
 
     await Promise.all(operations);
+    return {
+      levels: appliedLevels,
+      mutes: appliedMutes
+    };
   }
 
   async #triggerAutoStop(reason, stopToken = this.#sceneStopToken) {
@@ -414,12 +426,12 @@ export class LiveService extends EventEmitter {
     return this.#songProfileStore.getSongProfile(sceneIndex);
   }
 
-  async setSongNotes(sceneIndex, notes, tags) {
+  async setSongNotes(sceneIndex, notes, tags, useFixedDocFont) {
     if (!this.#songProfileStore) {
       return null;
     }
 
-    return this.#songProfileStore.upsertSongMeta(sceneIndex, { notes, tags });
+    return this.#songProfileStore.upsertSongMeta(sceneIndex, { notes, tags, useFixedDocFont });
   }
 
   async setSongDocument(sceneIndex, doc) {
@@ -568,12 +580,13 @@ export class LiveService extends EventEmitter {
   }
 
   async startScene(sceneIndex) {
-    await this.#applySongMix(sceneIndex);
+    const appliedMix = await this.#applySongMix(sceneIndex);
     this.#armSceneStopController(sceneIndex);
     await this.#abletonClient.startScene(sceneIndex);
     const event = {
       type: "scene.start.requested",
       sceneIndex,
+      appliedMix,
       timestamp: new Date().toISOString()
     };
     this.emit("scene.start.requested", event);
@@ -581,16 +594,18 @@ export class LiveService extends EventEmitter {
   }
 
   async stopSong(reason = "manual") {
+    const stoppedSceneIndex = this.#activeSceneIndex;
     this.#clearSceneStopTimer();
     this.#sceneStopToken += 1;
     this.#playbackStopArmed = false;
     this.#sceneSlotsObservedSinceArm = false;
     this.#currentSongIsPlaying = false;
+    this.#activeSceneIndex = null;
     await this.#abletonClient.stopSong();
     const event = {
       type: "song.stop.requested",
       reason,
-      activeSceneIndex: this.#activeSceneIndex,
+      activeSceneIndex: stoppedSceneIndex,
       timestamp: new Date().toISOString()
     };
     this.emit("song.stop.requested", event);

@@ -3,12 +3,14 @@ import multer from "@koa/multer";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { z } from "zod";
+import { convertAttachmentToHtml } from "../docs/htmlConverter.js";
 
 const indexSchema = z.coerce.number().int().nonnegative();
 const volumeSchema = z.coerce.number().min(0).max(1);
 const notesSchema = z.object({
   notes: z.string().max(500).default(""),
-  tags: z.array(z.string().max(40)).max(20).optional()
+  tags: z.array(z.string().max(40)).max(20).optional(),
+  useFixedDocFont: z.boolean().optional()
 });
 
 const parseIndex = (value) => indexSchema.safeParse(value);
@@ -16,6 +18,42 @@ const parseIndex = (value) => indexSchema.safeParse(value);
 export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
   const router = new Router();
   const upload = multer({ storage: multer.memoryStorage() });
+
+  const buildHtmlStoredName = ({ sceneIndex, storedName }) => {
+    const ext = path.extname(storedName || "");
+    const baseName = path.basename(storedName || "", ext || undefined);
+    const fallback = `scene-${sceneIndex}-${Date.now()}-song_doc`;
+    return `${baseName || fallback}.html`;
+  };
+
+  const regenerateHtmlForProfile = async (sceneIndex, profile) => {
+    const doc = profile?.doc;
+    if (!doc?.storedName) {
+      return profile;
+    }
+
+    const sourcePath = path.join(storageConfig.songDocsDir, path.basename(doc.storedName));
+    const buffer = await fs.readFile(sourcePath);
+    const html = await convertAttachmentToHtml({
+      buffer,
+      originalName: doc.fileName,
+      forceMonospace: Boolean(profile?.useFixedDocFont)
+    });
+
+    if (typeof html !== "string" || html.length === 0) {
+      return profile;
+    }
+
+    const htmlStoredName = doc.htmlStoredName || buildHtmlStoredName({ sceneIndex, storedName: doc.storedName });
+    const htmlPath = path.join(storageConfig.songDocsDir, htmlStoredName);
+    await fs.writeFile(htmlPath, html, "utf8");
+
+    return liveService.setSongDocument(sceneIndex, {
+      ...doc,
+      htmlStoredName,
+      htmlUrl: `/api/songs/${sceneIndex}/document/html`
+    });
+  };
 
   router.get("/api/health", (ctx) => {
     const status = typeof liveService.getConnectionStatus === "function"
@@ -79,7 +117,21 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
       return;
     }
 
-    const profile = await liveService.setSongNotes(result.data, notesResult.data.notes, notesResult.data.tags);
+    let profile = await liveService.setSongNotes(
+      result.data,
+      notesResult.data.notes,
+      notesResult.data.tags,
+      notesResult.data.useFixedDocFont
+    );
+
+    if (typeof notesResult.data.useFixedDocFont === "boolean" && profile?.doc?.storedName) {
+      try {
+        profile = await regenerateHtmlForProfile(result.data, profile);
+      } catch {
+        // Keep notes/tags updates working even when conversion refresh fails.
+      }
+    }
+
     ctx.body = { ok: true, profile };
   });
 
@@ -118,11 +170,35 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
     await fs.mkdir(storageConfig.songDocsDir, { recursive: true });
     await fs.writeFile(targetPath, file.buffer);
 
+    let htmlStoredName = "";
+    let htmlUrl = "";
+    try {
+      const profile = liveService.getSongProfile(result.data);
+      const html = await convertAttachmentToHtml({
+        buffer: file.buffer,
+        originalName: file.originalname,
+        forceMonospace: Boolean(profile?.useFixedDocFont)
+      });
+
+      if (typeof html === "string" && html.length > 0) {
+        htmlStoredName = `scene-${result.data}-${timestamp}-${safeBaseName}.html`;
+        const htmlPath = path.join(storageConfig.songDocsDir, htmlStoredName);
+        await fs.writeFile(htmlPath, html, "utf8");
+        htmlUrl = `/api/songs/${result.data}/document/html`;
+      }
+    } catch {
+      // Keep existing upload path working even if HTML conversion fails.
+      htmlStoredName = "";
+      htmlUrl = "";
+    }
+
     const profile = await liveService.setSongDocument(result.data, {
       fileName: file.originalname,
       mimeType: file.mimetype || "application/octet-stream",
       url: `/api/songs/${result.data}/document`,
+      htmlUrl,
       storedName,
+      htmlStoredName,
       uploadedAt: new Date().toISOString()
     });
 
@@ -160,6 +236,36 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
     ctx.body = await fs.readFile(targetPath);
   });
 
+  router.get("/api/songs/:sceneIndex/document/html", async (ctx) => {
+    const result = parseIndex(ctx.params.sceneIndex);
+    if (!result.success) {
+      ctx.status = 400;
+      ctx.body = { error: "sceneIndex must be a non-negative integer" };
+      return;
+    }
+
+    const profile = liveService.getSongProfile(result.data);
+    const htmlStoredName = profile?.doc?.htmlStoredName;
+    if (!htmlStoredName) {
+      ctx.status = 404;
+      ctx.body = { error: "html document not found" };
+      return;
+    }
+
+    const safeName = path.basename(htmlStoredName);
+    const targetPath = path.join(storageConfig.songDocsDir, safeName);
+    try {
+      await fs.access(targetPath);
+    } catch {
+      ctx.status = 404;
+      ctx.body = { error: "html document not found" };
+      return;
+    }
+
+    ctx.type = "text/html; charset=utf-8";
+    ctx.body = await fs.readFile(targetPath, "utf8");
+  });
+
   router.delete("/api/songs/:sceneIndex/document", async (ctx) => {
     const result = parseIndex(ctx.params.sceneIndex);
     if (!result.success) {
@@ -170,8 +276,13 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
 
     const profile = liveService.getSongProfile(result.data);
     const storedName = profile?.doc?.storedName;
+    const htmlStoredName = profile?.doc?.htmlStoredName;
     if (storedName) {
       const targetPath = path.join(storageConfig.songDocsDir, path.basename(storedName));
+      await fs.rm(targetPath, { force: true });
+    }
+    if (htmlStoredName) {
+      const targetPath = path.join(storageConfig.songDocsDir, path.basename(htmlStoredName));
       await fs.rm(targetPath, { force: true });
     }
 

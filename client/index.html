@@ -20,7 +20,6 @@
         </div>
         <div class="control-block">
           <button id="stop-song-button" class="danger-button" type="button">Stop</button>
-          <button id="recheck-defaults-button" class="menu-button" type="button">Recheck Defaults</button>
           <nav class="header-menu" aria-label="Drawer menu">
             <button id="open-songs" class="menu-button active" type="button">Songs</button>
             <button id="open-doc" class="menu-button hidden" type="button">Doc</button>
@@ -33,6 +32,7 @@
             <input id="scene-search" type="search" placeholder="Find a scene" />
             <button id="clear-scene-search" class="clear-search-button hidden" type="button" aria-label="Clear scene search">×</button>
           </div>
+          <button id="recheck-defaults-button" class="menu-button" type="button">Refresh Clip Defaults</button>
           <button id="ws-status" class="status-light status-red" type="button" aria-label="Connection status"></button>
           <span id="connection-address" class="meta hidden"></span>
         </div>
@@ -76,10 +76,6 @@
     <section id="song-meta-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="song-meta-title">
       <div class="modal-card">
         <h3 id="song-meta-title">Edit Song Notes and Tags</h3>
-        <div class="modal-attachment-row">
-          <button id="song-meta-attachment" type="button" class="menu-button">Attachment</button>
-          <a id="song-meta-attachment-open" class="song-doc-open hidden" target="_blank" rel="noreferrer">Open current attachment</a>
-        </div>
         <label class="modal-label" for="song-meta-notes">Notes</label>
         <textarea id="song-meta-notes" class="modal-notes" rows="5" maxlength="500"></textarea>
 
@@ -90,6 +86,18 @@
         </div>
         <datalist id="song-tag-suggestions"></datalist>
         <div id="song-selected-tags" class="modal-tag-list"></div>
+
+        <div class="modal-doc-controls">
+          <label class="modal-checkbox-row" for="song-fixed-doc-font">
+            <input id="song-fixed-doc-font" type="checkbox" />
+            <span>Force fixed font for HTML doc preview</span>
+          </label>
+
+          <div class="modal-attachment-row">
+            <button id="song-meta-attachment" type="button" class="menu-button">Attachment</button>
+            <a id="song-meta-attachment-open" class="song-doc-open hidden" target="_blank" rel="noreferrer">Open current attachment</a>
+          </div>
+        </div>
 
         <div class="modal-actions">
           <button id="song-meta-cancel" type="button" class="menu-button">Cancel</button>

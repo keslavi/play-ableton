@@ -47,7 +47,9 @@ const normalizeDoc = (doc) => {
   return {
     fileName: doc.fileName,
     url: doc.url,
+    htmlUrl: typeof doc.htmlUrl === "string" ? doc.htmlUrl : "",
     storedName: typeof doc.storedName === "string" ? doc.storedName : "",
+    htmlStoredName: typeof doc.htmlStoredName === "string" ? doc.htmlStoredName : "",
     mimeType: typeof doc.mimeType === "string" ? doc.mimeType : "application/octet-stream",
     uploadedAt: typeof doc.uploadedAt === "string" ? doc.uploadedAt : new Date().toISOString()
   };
@@ -126,6 +128,7 @@ export class SongProfileStore {
         mutes: normalizedMutes(profile?.mutes),
         notes: typeof profile?.notes === "string" ? profile.notes : "",
         tags: normalizeTags(profile?.tags),
+        useFixedDocFont: Boolean(profile?.useFixedDocFont),
         doc: normalizeDoc(profile?.doc),
         updatedAt: typeof profile?.updatedAt === "string" ? profile.updatedAt : null
       };
@@ -185,6 +188,7 @@ export class SongProfileStore {
       mutes: { ...profile.mutes },
       notes: profile.notes,
       tags: [...(profile.tags ?? [])],
+      useFixedDocFont: Boolean(profile.useFixedDocFont),
       doc: profile.doc ? { ...profile.doc } : null,
       updatedAt: profile.updatedAt
     };
@@ -197,6 +201,7 @@ export class SongProfileStore {
       mutes: { ...profile.mutes },
       notes: profile.notes,
       tags: [...(profile.tags ?? [])],
+      useFixedDocFont: Boolean(profile.useFixedDocFont),
       doc: profile.doc ? { ...profile.doc } : null,
       updatedAt: profile.updatedAt
     }));
@@ -214,6 +219,7 @@ export class SongProfileStore {
         mutes: {},
         notes: "",
         tags: [],
+        useFixedDocFont: false,
         doc: null,
         updatedAt: new Date().toISOString()
       };
@@ -248,7 +254,7 @@ export class SongProfileStore {
     return this.getSongProfile(Number(normalizedSceneIndex));
   }
 
-  async upsertSongMeta(sceneIndex, { notes, tags }) {
+  async upsertSongMeta(sceneIndex, { notes, tags, useFixedDocFont }) {
     const { normalizedSceneIndex, profile } = this.#ensureProfile(sceneIndex);
 
     if (typeof notes === "string") {
@@ -257,6 +263,10 @@ export class SongProfileStore {
 
     if (tags !== undefined) {
       profile.tags = normalizeTags(tags);
+    }
+
+    if (typeof useFixedDocFont === "boolean") {
+      profile.useFixedDocFont = useFixedDocFont;
     }
 
     profile.updatedAt = new Date().toISOString();
