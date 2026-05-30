@@ -14,7 +14,16 @@ Koa server for AbletonOSC bridge on macOS.
 
 - Node.js 20+
 
-## Setup
+## Ableton Setup (osx paths, windows differs of course)
+1. review https://help.ableton.com/hc/en-us/articles/209072009-Installing-third-party-remote-scripts
+
+in /Users/<user>/Music/Ableton/User Library
+2. add  https://github.com/ideoforms/AbletonOSC
+3. add https://github.com/Ableton/m4l-connection-kit
+4. to view osc log, open /Users/<user>>/Music/Ableton/User Library/Remote Scripts/AbletonOSC/logs
+5. restart ableton.  if everything is correct, log messages should start appearing.
+
+## playAbleSetup
 
 1. Copy environment file:
 
