@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "defaults": {
+    "levels": {},
+    "mutes": {},
+    "updatedAt": "2026-05-30T17:18:37.716Z"
+  },
+  "songs": {
+    "0": {
+      "levels": {},
+      "mutes": {},
+      "notes": "I,  V,  vi,  IV.   (dropped 1/2 step, so they fingered in C)",
+      "tags": [
+        "00s",
+        "punk-pop"
+      ],
+      "doc": null,
+      "updatedAt": "2026-05-30T16:54:41.427Z"
+    },
+    "4": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "10s",
+        "80s",
+        "yacht rock"
+      ],
+      "doc": {
+        "fileName": "Africa-A 93bpm.pdf",
+        "url": "/api/songs/4/document",
+        "storedName": "scene-4-1780160216450-Africa-A_93bpm.pdf",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-05-30T16:56:56.451Z"
+      },
+      "updatedAt": "2026-05-30T16:58:05.765Z"
+    },
+    "9": {
+      "levels": {
+        "16": 0.6275193054321824
+      },
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "doc": null,
+      "updatedAt": "2026-05-30T16:40:22.594Z"
+    }
+  }
+}

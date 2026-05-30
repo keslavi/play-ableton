@@ -1,0 +1,36 @@
+{
+  "name": "playable",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Koa + WebSocket + OSC bridge for AbletonOSC",
+  "scripts": {
+    "start": "npm run dev",
+    "start-live": "node src/server.js",
+    "dev": "nodemon --watch src --watch client --watch .env src/server.js",
+    "server-restart": "pkill -f 'nodemon .*src/server.js' || true; pkill -f 'node src/server.js' || true; npm start",
+    "osc:fanout": "node scripts/osc-fanout.js",
+    "test": "node --test",
+    "lint": "eslint ."
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@koa/multer": "^4.0.0",
+    "@koa/router": "^15.1.0",
+    "dotenv": "^16.6.1",
+    "koa": "^2.16.2",
+    "koa-bodyparser": "^4.4.1",
+    "koa-static": "^5.0.0",
+    "osc": "^2.4.5",
+    "ws": "^8.18.3",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "eslint": "^9.28.0",
+    "globals": "^16.2.0",
+    "nodemon": "^3.1.10"
+  }
+}
