@@ -1,7 +1,15 @@
 import dotenv from "dotenv";
+import fs from "node:fs";
 import path from "node:path";
 
-dotenv.config();
+const envPath = path.resolve(process.cwd(), ".env");
+const envExamplePath = path.resolve(process.cwd(), ".env.example");
+
+if (!fs.existsSync(envPath) && fs.existsSync(envExamplePath)) {
+  fs.copyFileSync(envExamplePath, envPath);
+}
+
+dotenv.config({ path: envPath });
 
 const DEFAULT_OSC_REFRESH_INTERVAL_MS = 5000;
 const DEFAULT_PLAYING_SLOT_POLL_INTERVAL_MS = 1000;
