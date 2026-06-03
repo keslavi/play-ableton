@@ -319,21 +319,27 @@ const docForActiveScene = () => {
   return profileForScene(state.activeSceneIndex)?.doc ?? null;
 };
 
-const docEmbedUrl = (doc) => {
-  if (doc?.htmlUrl) {
-    return doc.htmlUrl;
+const cacheBustedDocUrl = (url, uploadedAt) => {
+  if (!url) {
+    return url;
   }
 
-  if (!doc?.url) {
+  if (!uploadedAt) {
+    return url;
+  }
+
+  const separator = url.includes("?") ? "&" : "?";
+  return `${url}${separator}v=${encodeURIComponent(uploadedAt)}`;
+};
+
+const docEmbedUrl = (doc, sceneIndex) => {
+  if (!doc?.url || !Number.isInteger(sceneIndex)) {
     return null;
   }
 
-  const isPdf = (doc.mimeType ?? "").toLowerCase().includes("pdf") || String(doc.fileName ?? "").toLowerCase().endsWith(".pdf");
-  if (!isPdf) {
-    return doc.url;
-  }
-
-  return `${doc.url}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`;
+  const previewUrl = `/api/songs/${sceneIndex}/document/preview`;
+  const baseUrl = cacheBustedDocUrl(previewUrl, doc.uploadedAt);
+  return `${baseUrl}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`;
 };
 
 const renderDocMenuButton = () => {
@@ -395,21 +401,17 @@ const renderActiveSongDocument = () => {
 
   activeSongDocPanel.classList.remove("hidden");
   activeSongDocTitle.textContent = scene?.name ? `Song Document: ${scene.name}` : "Song Document";
-  activeSongDocOpen.href = doc.url;
+  activeSongDocOpen.href = `/api/songs/${state.activeSceneIndex}/document/preferred`;
   activeSongDocOpen.textContent = doc.fileName ?? "Open in New Tab";
-  const embedUrl = docEmbedUrl(doc);
-  if (embedUrl !== state.activeDocEmbedUrl) {
-    activeSongDocFrame.src = embedUrl;
-    state.activeDocEmbedUrl = embedUrl;
+  const embedUrl = docEmbedUrl(doc, state.activeSceneIndex);
+  const nextEmbedUrl = embedUrl || "about:blank";
+  if (nextEmbedUrl !== state.activeDocEmbedUrl) {
+    activeSongDocFrame.src = nextEmbedUrl;
+    state.activeDocEmbedUrl = nextEmbedUrl;
   }
   state.activeDocUrl = doc.url;
 
-  const isPdf = (doc.mimeType ?? "").toLowerCase().includes("pdf") || String(doc.fileName ?? "").toLowerCase().endsWith(".pdf");
-  const hasHtmlPreview = Boolean(doc.htmlUrl);
-  activeSongDocFallback.classList.toggle("hidden", isPdf || hasHtmlPreview);
-  if (!isPdf && !hasHtmlPreview) {
-    activeSongDocFallback.textContent = "DOC/DOCX preview depends on browser support. Use Open in New Tab if embedded preview is unavailable.";
-  }
+  activeSongDocFallback.classList.add("hidden");
   renderDocMenuButton();
 };
 
@@ -661,7 +663,7 @@ const startScene = async (sceneIndex) => {
     state.activeSceneIndex = sceneIndex;
     renderActiveSongDocument();
     const sceneDoc = profileForScene(sceneIndex)?.doc;
-    if (sceneDoc?.url) {
+    if (docEmbedUrl(sceneDoc, sceneIndex)) {
       setActivePage("doc");
     }
     armSceneStopTimer(sceneIndex);
@@ -800,6 +802,7 @@ const renderScenes = () => {
     primary.append(button, label);
     meta.append(notesPreview);
 
+    const hasAttachment = Boolean(songProfile?.doc?.url);
     if (Array.isArray(songProfile?.tags) && songProfile.tags.length > 0) {
       const tagsPreview = document.createElement("div");
       tagsPreview.className = "scene-card-tags";
@@ -828,6 +831,23 @@ const renderScenes = () => {
     actions.addEventListener("click", (event) => {
       event.stopPropagation();
     });
+
+    if (hasAttachment) {
+      const attachmentButton = document.createElement("button");
+      attachmentButton.type = "button";
+      attachmentButton.className = "scene-card-attachment";
+      attachmentButton.textContent = "♪";
+      attachmentButton.title = songProfile?.doc?.htmlUrl
+        ? "Open attached HTML document"
+        : "Open attached document";
+      attachmentButton.setAttribute("aria-label", "Open attached document");
+      attachmentButton.addEventListener("click", () => {
+        state.activeSceneIndex = scene.index;
+        renderActiveSongDocument();
+        setActivePage("doc");
+      });
+      actions.append(attachmentButton);
+    }
 
     const notesButton = document.createElement("button");
     notesButton.type = "button";

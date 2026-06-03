@@ -3,7 +3,7 @@
   "defaults": {
     "levels": {},
     "mutes": {},
-    "updatedAt": "2026-05-30T17:18:37.716Z"
+    "updatedAt": "2026-06-03T02:00:02.008Z"
   },
   "songs": {
     "0": {
@@ -14,36 +14,2048 @@
         "00s",
         "punk-pop"
       ],
-      "doc": null,
-      "updatedAt": "2026-05-30T16:54:41.427Z"
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "1985-B-120bpm.pdf",
+        "url": "/api/songs/0/document",
+        "htmlUrl": "/api/songs/0/document/html",
+        "storedName": "1985-_B.pdf",
+        "htmlStoredName": "1985-_B.html",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T02:09:09.984Z"
+      },
+      "updatedAt": "2026-06-03T02:09:12.710Z"
+    },
+    "1": {
+      "levels": {
+        "21": 1
+      },
+      "mutes": {
+        "15": false,
+        "16": false
+      },
+      "notes": "",
+      "tags": [
+        "00s",
+        "pop"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "A_Thousand_Miles-B.pdf",
+        "url": "/api/songs/1/document",
+        "htmlUrl": "/api/songs/1/document/html",
+        "storedName": "A_Thousand_Miles-B.pdf",
+        "htmlStoredName": "A_Thousand_Miles-B.html",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T02:16:35.295Z"
+      },
+      "updatedAt": "2026-06-03T02:16:37.343Z"
     },
     "4": {
       "levels": {},
-      "mutes": {},
+      "mutes": {
+        "16": false
+      },
       "notes": "",
       "tags": [
         "10s",
         "80s",
         "yacht rock"
       ],
+      "useFixedDocFont": false,
       "doc": {
-        "fileName": "Africa-A 93bpm.pdf",
+        "fileName": "Africa_-_Toto_-_A.pdf",
         "url": "/api/songs/4/document",
-        "storedName": "scene-4-1780160216450-Africa-A_93bpm.pdf",
+        "htmlUrl": "",
+        "storedName": "Africa_-_Toto_-_A.pdf",
+        "htmlStoredName": "",
         "mimeType": "application/pdf",
-        "uploadedAt": "2026-05-30T16:56:56.451Z"
+        "uploadedAt": "2026-06-03T01:57:02.816Z"
       },
-      "updatedAt": "2026-05-30T16:58:05.765Z"
+      "updatedAt": "2026-06-03T01:57:02.816Z"
+    },
+    "5": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "60s",
+        "oldies",
+        "r&b"
+      ],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Ain't_Too_Proud_To_Beg_-_The_Temptations_-_C.pdf",
+        "url": "/api/songs/5/document",
+        "htmlUrl": "/api/songs/5/document/html",
+        "storedName": "Ain't_Too_Proud_To_Beg_-_The_Temptations_-_C.pdf",
+        "htmlStoredName": "Ain't_Too_Proud_To_Beg_-_The_Temptations_-_C.html",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.821Z"
+      },
+      "updatedAt": "2026-06-03T02:17:43.455Z"
+    },
+    "6": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "American_Girl_-_Tom_Petty_-_D_-_around.pdf",
+        "url": "/api/songs/6/document",
+        "htmlUrl": "",
+        "storedName": "American_Girl_-_Tom_Petty_-_D_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.826Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.826Z"
+    },
+    "7": {
+      "levels": {},
+      "mutes": {
+        "16": false
+      },
+      "notes": "",
+      "tags": [
+        "90s",
+        "punk-pop"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "All_The_Small_Things-C.pdf",
+        "url": "/api/songs/7/document",
+        "htmlUrl": "",
+        "storedName": "All_The_Small_Things-C.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.830Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.830Z"
+    },
+    "8": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "80s",
+        "rap"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Baby_Got_Back_Cm.pdf",
+        "url": "/api/songs/8/document",
+        "htmlUrl": "",
+        "storedName": "Baby_Got_Back_Cm.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.835Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.835Z"
     },
     "9": {
       "levels": {
         "16": 0.6275193054321824
       },
       "mutes": {},
+      "notes": "(minor key, 3b) i,  V,  iii,   iv,   Vsus - V",
+      "tags": [
+        "90s",
+        "pop",
+        "upbeat"
+      ],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Baby_One_More_Time_-_Britney_Spears_Cm.pdf",
+        "url": "/api/songs/9/document",
+        "htmlUrl": "",
+        "storedName": "Baby_One_More_Time_-_Britney_Spears_Cm.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.840Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.840Z"
+    },
+    "10": {
+      "levels": {},
+      "mutes": {},
       "notes": "",
       "tags": [],
-      "doc": null,
-      "updatedAt": "2026-05-30T16:40:22.594Z"
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Billie_Jean_-_M_Jackson_Em.pdf",
+        "url": "/api/songs/10/document",
+        "htmlUrl": "",
+        "storedName": "Billie_Jean_-_M_Jackson_Em.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.843Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.843Z"
+    },
+    "11": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "rock classic"
+      ],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Bohemian Rhapsody-Bb.pdf",
+        "url": "/api/songs/11/document",
+        "htmlUrl": "/api/songs/11/document/html",
+        "storedName": "Bohemian_Rhapsody_Bb_108.10_bpm.pdf",
+        "htmlStoredName": "Bohemian_Rhapsody_Bb_108.10_bpm.html",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T02:21:49.728Z"
+      },
+      "updatedAt": "2026-06-03T02:21:51.742Z"
+    },
+    "12": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Boogie_Shoes_B.pdf",
+        "url": "/api/songs/12/document",
+        "htmlUrl": "",
+        "storedName": "Boogie_Shoes_B.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.851Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.852Z"
+    },
+    "13": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "rock classic"
+      ],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Black Magic Woman-Dm.pdf",
+        "url": "/api/songs/13/document",
+        "htmlUrl": "/api/songs/13/document/html",
+        "storedName": "Black_Magic_Woman_G-_107bpm.pdf",
+        "htmlStoredName": "Black_Magic_Woman_G-_107bpm.html",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T02:26:48.551Z"
+      },
+      "updatedAt": "2026-06-03T02:26:50.054Z"
+    },
+    "14": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "10s",
+        "disco",
+        "pop"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Blurred_Lines-G.pdf",
+        "url": "/api/songs/14/document",
+        "htmlUrl": "",
+        "storedName": "Blurred_Lines-G.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.859Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.859Z"
+    },
+    "15": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "10s",
+        "disco",
+        "pop"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Cake by the Ocean-Em.pdf",
+        "url": "/api/songs/15/document",
+        "htmlUrl": "/api/songs/15/document/html",
+        "storedName": "Cake_by_the_Ocean_-_Em.pdf",
+        "htmlStoredName": "Cake_by_the_Ocean_-_Em.html",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T02:34:03.948Z"
+      },
+      "updatedAt": "2026-06-03T02:34:05.525Z"
+    },
+    "16": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "disco",
+        "pop"
+      ],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Celebration-G#121.65.pdf",
+        "url": "/api/songs/16/document",
+        "htmlUrl": "/api/songs/16/document/html",
+        "storedName": "Celebration_-_Kool_And_The_Gang_A♭.pdf",
+        "htmlStoredName": "Celebration_-_Kool_And_The_Gang_A♭.html",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T02:35:59.157Z"
+      },
+      "updatedAt": "2026-06-03T02:36:01.092Z"
+    },
+    "17": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "10s"
+      ],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Closer-C#.pdf",
+        "url": "/api/songs/17/document",
+        "htmlUrl": "/api/songs/17/document/html",
+        "storedName": "Closer_Fm_C#.pdf",
+        "htmlStoredName": "Closer_Fm_C#.html",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T02:40:33.592Z"
+      },
+      "updatedAt": "2026-06-03T02:40:36.171Z"
+    },
+    "18": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Come_Together_-_The_Beatles_-_Dm.pdf",
+        "url": "/api/songs/18/document",
+        "htmlUrl": "",
+        "storedName": "Come_Together_-_The_Beatles_-_Dm.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.876Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.876Z"
+    },
+    "19": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Crazy_Little_Thing_Called_Love_-_Queen_-_D.pdf",
+        "url": "/api/songs/19/document",
+        "htmlUrl": "",
+        "storedName": "Crazy_Little_Thing_Called_Love_-_Queen_-_D.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.880Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.880Z"
+    },
+    "20": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Don't_Stop_Believin_E.pdf",
+        "url": "/api/songs/20/document",
+        "htmlUrl": "",
+        "storedName": "Don't_Stop_Believin_E.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.884Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.884Z"
+    },
+    "21": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "pop",
+        "r&b",
+        "soul"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Easy-G.pdf",
+        "url": "/api/songs/21/document",
+        "htmlUrl": "",
+        "storedName": "Easy-G.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.889Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.889Z"
+    },
+    "22": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "90s",
+        "pop"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Everybody_(Backstreet's_Back)_-_Backstreet_Boys_-_B♭m.pdf",
+        "url": "/api/songs/22/document",
+        "htmlUrl": "",
+        "storedName": "Everybody_(Backstreet's_Back)_-_Backstreet_Boys_-_B♭m.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.893Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.893Z"
+    },
+    "23": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Escape_The_Pina_Colada_Song-C.pdf",
+        "url": "/api/songs/23/document",
+        "htmlUrl": "",
+        "storedName": "Escape_The_Pina_Colada_Song-C.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.897Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.897Z"
+    },
+    "24": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "80s",
+        "pop"
+      ],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Faith_-_George_Michael_-_B.pdf",
+        "url": "/api/songs/24/document",
+        "htmlUrl": "",
+        "storedName": "Faith_-_George_Michael_-_B.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.901Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.901Z"
+    },
+    "25": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Footloose_-_Kenny_Loggins_-_A_around.pdf",
+        "url": "/api/songs/25/document",
+        "htmlUrl": "",
+        "storedName": "Footloose_-_Kenny_Loggins_-_A_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.905Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.905Z"
+    },
+    "26": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Forget_you_cee_lo_green_-_C.pdf",
+        "url": "/api/songs/26/document",
+        "htmlUrl": "",
+        "storedName": "Forget_you_cee_lo_green_-_C.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.910Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.910Z"
+    },
+    "27": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "10s",
+        "pop"
+      ],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Happy-F.pdf",
+        "url": "/api/songs/27/document",
+        "htmlUrl": "",
+        "storedName": "Happy-F.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:02.914Z"
+      },
+      "updatedAt": "2026-06-03T01:57:02.914Z"
+    },
+    "28": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Heart_And_Soul_-_Huey_Lewis_&_The_News_-.pdf",
+        "url": "/api/songs/28/document",
+        "htmlUrl": "",
+        "storedName": "Heart_And_Soul_-_Huey_Lewis_&_The_News_-.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.011Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.011Z"
+    },
+    "29": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "I_Saw_Her_Standing_There_-_The_Beatles_-_E.pdf",
+        "url": "/api/songs/29/document",
+        "htmlUrl": "",
+        "storedName": "I_Saw_Her_Standing_There_-_The_Beatles_-_E.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.020Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.020Z"
+    },
+    "30": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "I'm_A_Believer_-_The_Monkees_-_G.pdf",
+        "url": "/api/songs/30/document",
+        "htmlUrl": "",
+        "storedName": "I'm_A_Believer_-_The_Monkees_-_G.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.026Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.026Z"
+    },
+    "31": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "I'm_Alright_-_Kenny_Loggins_-_around.pdf",
+        "url": "/api/songs/31/document",
+        "htmlUrl": "",
+        "storedName": "I'm_Alright_-_Kenny_Loggins_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.031Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.031Z"
+    },
+    "32": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "In_the_Midnight_Hour_-_Wilson_Pickett_-.pdf",
+        "url": "/api/songs/32/document",
+        "htmlUrl": "",
+        "storedName": "In_the_Midnight_Hour_-_Wilson_Pickett_-.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.036Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.036Z"
+    },
+    "33": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Jessie’s_Girl-_Rick_Springfield_-_D.pdf",
+        "url": "/api/songs/33/document",
+        "htmlUrl": "",
+        "storedName": "Jessie’s_Girl-_Rick_Springfield_-_D.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.041Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.041Z"
+    },
+    "34": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Margaritaville_-_Jimmy_Buffett_-_D_around.pdf",
+        "url": "/api/songs/34/document",
+        "htmlUrl": "",
+        "storedName": "Margaritaville_-_Jimmy_Buffett_-_D_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.048Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.048Z"
+    },
+    "36": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Old_Time_Rock_&_Roll_-_Bob_Seger_-_Gb_-_around.pdf",
+        "url": "/api/songs/36/document",
+        "htmlUrl": "",
+        "storedName": "Old_Time_Rock_&_Roll_-_Bob_Seger_-_Gb_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.053Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.054Z"
+    },
+    "37": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Pony_C#m.pdf",
+        "url": "/api/songs/37/document",
+        "htmlUrl": "",
+        "storedName": "Pony_C#m.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.057Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.057Z"
+    },
+    "38": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Power_Of_Love_-_Huey_Lewis_-_C.pdf",
+        "url": "/api/songs/38/document",
+        "htmlUrl": "",
+        "storedName": "Power_Of_Love_-_Huey_Lewis_-_C.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.061Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.061Z"
+    },
+    "40": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Shake_it_off_F.pdf",
+        "url": "/api/songs/40/document",
+        "htmlUrl": "",
+        "storedName": "Shake_it_off_F.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.065Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.065Z"
+    },
+    "41": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Shut_Up_And_Dance_-_Walk_The_Moon_D♭.pdf",
+        "url": "/api/songs/41/document",
+        "htmlUrl": "",
+        "storedName": "Shut_Up_And_Dance_-_Walk_The_Moon_D♭.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.071Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.071Z"
+    },
+    "42": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Soul_Man_-_The_Blues_Brothers_-.pdf",
+        "url": "/api/songs/42/document",
+        "htmlUrl": "",
+        "storedName": "Soul_Man_-_The_Blues_Brothers_-.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.076Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.076Z"
+    },
+    "43": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Sweet_Caroline_-_Neil_Diamond_-_B_-_around.pdf",
+        "url": "/api/songs/43/document",
+        "htmlUrl": "",
+        "storedName": "Sweet_Caroline_-_Neil_Diamond_-_B_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.080Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.080Z"
+    },
+    "44": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Superstition_-_Stevie_Wonder_-_E♭m_around.pdf",
+        "url": "/api/songs/44/document",
+        "htmlUrl": "",
+        "storedName": "Superstition_-_Stevie_Wonder_-_E♭m_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.084Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.084Z"
+    },
+    "45": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Teenagers-E.pdf",
+        "url": "/api/songs/45/document",
+        "htmlUrl": "",
+        "storedName": "Teenagers-E.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.087Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.087Z"
+    },
+    "46": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "00s",
+        "punk-pop"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Teenage_Dirtbag-E.pdf",
+        "url": "/api/songs/46/document",
+        "htmlUrl": "",
+        "storedName": "Teenage_Dirtbag-E.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.090Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.090Z"
+    },
+    "47": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "That’s_The_Way_-_KC_-_sunshine_Cm.pdf",
+        "url": "/api/songs/47/document",
+        "htmlUrl": "",
+        "storedName": "That’s_The_Way_-_KC_-_sunshine_Cm.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.095Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.095Z"
+    },
+    "48": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Thinking_Out_Loud_-_Ed_Sheeran_-_D.pdf",
+        "url": "/api/songs/48/document",
+        "htmlUrl": "",
+        "storedName": "Thinking_Out_Loud_-_Ed_Sheeran_-_D.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.103Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.103Z"
+    },
+    "49": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "60s",
+        "oldies",
+        "rock classic"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Twist_And_Shout-D.pdf",
+        "url": "/api/songs/49/document",
+        "htmlUrl": "",
+        "storedName": "Twist_And_Shout-D.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.108Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.108Z"
+    },
+    "50": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Uptown_Funk_-_Bruno_Mars.pdf",
+        "url": "/api/songs/50/document",
+        "htmlUrl": "",
+        "storedName": "Uptown_Funk_-_Bruno_Mars.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.114Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.114Z"
+    },
+    "51": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Valerie_-_Amy_Winehouse_E♭_around.pdf",
+        "url": "/api/songs/51/document",
+        "htmlUrl": "",
+        "storedName": "Valerie_-_Amy_Winehouse_E♭_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.118Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.118Z"
+    },
+    "52": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Wonderful_Tonight_-_Eric_Clapton_-_G_around.pdf",
+        "url": "/api/songs/52/document",
+        "htmlUrl": "",
+        "storedName": "Wonderful_Tonight_-_Eric_Clapton_-_G_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.125Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.125Z"
+    },
+    "53": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "You_Can_Leave_Your_Hat_On_-_Joe_Cocker_-_C.pdf",
+        "url": "/api/songs/53/document",
+        "htmlUrl": "",
+        "storedName": "You_Can_Leave_Your_Hat_On_-_Joe_Cocker_-_C.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.130Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.130Z"
+    },
+    "60": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "i_want_to_dance_with_somebody_F#.pdf",
+        "url": "/api/songs/60/document",
+        "htmlUrl": "",
+        "storedName": "i_want_to_dance_with_somebody_F#.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.135Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.135Z"
+    },
+    "61": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "I_Gotta_Feeling_-_Black_Eyed_Peas_-_G.pdf",
+        "url": "/api/songs/61/document",
+        "htmlUrl": "",
+        "storedName": "I_Gotta_Feeling_-_Black_Eyed_Peas_-_G.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.139Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.139Z"
+    },
+    "62": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Let's_Get_it_On_-_Marvin_Gaye_-_Eb.pdf",
+        "url": "/api/songs/62/document",
+        "htmlUrl": "",
+        "storedName": "Let's_Get_it_On_-_Marvin_Gaye_-_Eb.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.144Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.144Z"
+    },
+    "64": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "24K_Magic_Fm_around.pdf",
+        "url": "/api/songs/64/document",
+        "htmlUrl": "",
+        "storedName": "24K_Magic_Fm_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.148Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.148Z"
+    },
+    "65": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Ain't_No_Mountain_High_Enough_-_Marvin_Gaye_&_Tammi_Terrell_-_around.pdf",
+        "url": "/api/songs/65/document",
+        "htmlUrl": "",
+        "storedName": "Ain't_No_Mountain_High_Enough_-_Marvin_Gaye_&_Tammi_Terrell_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.155Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.155Z"
+    },
+    "66": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "All_Night_Long_-_Lionel_Richie_-_A♭around.pdf",
+        "url": "/api/songs/66/document",
+        "htmlUrl": "",
+        "storedName": "All_Night_Long_-_Lionel_Richie_-_A♭around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.159Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.159Z"
+    },
+    "67": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Baby_Come_Back_-_Player_-_Cm_around.pdf",
+        "url": "/api/songs/67/document",
+        "htmlUrl": "",
+        "storedName": "Baby_Come_Back_-_Player_-_Cm_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.163Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.163Z"
+    },
+    "68": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "10s",
+        "pop"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Bang_Bang-C.pdf",
+        "url": "/api/songs/68/document",
+        "htmlUrl": "",
+        "storedName": "Bang_Bang-C.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.167Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.167Z"
+    },
+    "69": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Baker_Street-D.pdf",
+        "url": "/api/songs/69/document",
+        "htmlUrl": "",
+        "storedName": "Baker_Street-D.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.172Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.172Z"
+    },
+    "70": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "disco",
+        "pop"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Blame_It_On_The_Boogie-C#.pdf",
+        "url": "/api/songs/70/document",
+        "htmlUrl": "",
+        "storedName": "Blame_It_On_The_Boogie-C#.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.214Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.214Z"
+    },
+    "71": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Brown_Sugar_-_The_Rolling_Stones_-_C_-_around.pdf",
+        "url": "/api/songs/71/document",
+        "htmlUrl": "",
+        "storedName": "Brown_Sugar_-_The_Rolling_Stones_-_C_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.237Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.237Z"
+    },
+    "72": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Cant_Stop_the_Feeling_C.pdf",
+        "url": "/api/songs/72/document",
+        "htmlUrl": "",
+        "storedName": "Cant_Stop_the_Feeling_C.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.244Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.244Z"
+    },
+    "73": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "rock classic"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "China_Grove-E.pdf",
+        "url": "/api/songs/73/document",
+        "htmlUrl": "",
+        "storedName": "China_Grove-E.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.254Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.254Z"
+    },
+    "74": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Crazy_in_Love_-_Beyoncé_D.pdf",
+        "url": "/api/songs/74/document",
+        "htmlUrl": "",
+        "storedName": "Crazy_in_Love_-_Beyoncé_D.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.266Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.266Z"
+    },
+    "75": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Dreams_-_Fleetwood_Mac_-_A_-.pdf",
+        "url": "/api/songs/75/document",
+        "htmlUrl": "",
+        "storedName": "Dreams_-_Fleetwood_Mac_-_A_-.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.273Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.273Z"
+    },
+    "76": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "20s",
+        "pop"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Dynamite-E.pdf",
+        "url": "/api/songs/76/document",
+        "htmlUrl": "",
+        "storedName": "Dynamite-E.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.279Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.279Z"
+    },
+    "77": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Feeling_Good_-_Michael_Bublé_-_E♭m,_Em,_Fm_around.pdf",
+        "url": "/api/songs/77/document",
+        "htmlUrl": "",
+        "storedName": "Feeling_Good_-_Michael_Bublé_-_E♭m,_Em,_Fm_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.290Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.290Z"
+    },
+    "78": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Fooled_Around_And_Fell_In_Love_-_Elvin_Bishop_-_F_around.pdf",
+        "url": "/api/songs/78/document",
+        "htmlUrl": "",
+        "storedName": "Fooled_Around_And_Fell_In_Love_-_Elvin_Bishop_-_F_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.302Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.302Z"
+    },
+    "79": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Get_Back_-_The_Beatles_&_Billy_Preston_-_A_around.pdf",
+        "url": "/api/songs/79/document",
+        "htmlUrl": "",
+        "storedName": "Get_Back_-_The_Beatles_&_Billy_Preston_-_A_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.314Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.314Z"
+    },
+    "80": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Get_Down_Tonight_-_KC_&_The_Sunshine_Band_F.pdf",
+        "url": "/api/songs/80/document",
+        "htmlUrl": "",
+        "storedName": "Get_Down_Tonight_-_KC_&_The_Sunshine_Band_F.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.322Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.322Z"
+    },
+    "81": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Get_lucky_Bm.pdf",
+        "url": "/api/songs/81/document",
+        "htmlUrl": "",
+        "storedName": "Get_lucky_Bm.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.331Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.331Z"
+    },
+    "82": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Green-Eyed_Lady_-_Sugarloaf_-.pdf",
+        "url": "/api/songs/82/document",
+        "htmlUrl": "",
+        "storedName": "Green-Eyed_Lady_-_Sugarloaf_-.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.342Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.342Z"
+    },
+    "83": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Happy_Together-F#m.pdf",
+        "url": "/api/songs/83/document",
+        "htmlUrl": "",
+        "storedName": "Happy_Together-F#m.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.356Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.356Z"
+    },
+    "84": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Hey_Jude_-_The_Beatles_-_F_-_around.pdf",
+        "url": "/api/songs/84/document",
+        "htmlUrl": "",
+        "storedName": "Hey_Jude_-_The_Beatles_-_F_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.361Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.361Z"
+    },
+    "85": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Hound_Dog_-_Elvis_Presley_-_C.pdf",
+        "url": "/api/songs/85/document",
+        "htmlUrl": "",
+        "storedName": "Hound_Dog_-_Elvis_Presley_-_C.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.365Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.365Z"
+    },
+    "86": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "I_Can't_Go_for_That_-_Hall_&_Oates_Fm_around.pdf",
+        "url": "/api/songs/86/document",
+        "htmlUrl": "",
+        "storedName": "I_Can't_Go_for_That_-_Hall_&_Oates_Fm_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.371Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.371Z"
+    },
+    "87": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "60s",
+        "oldies",
+        "r&b"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "I_Heard_It_Through_The_Grapevine-Eb.pdf",
+        "url": "/api/songs/87/document",
+        "htmlUrl": "",
+        "storedName": "I_Heard_It_Through_The_Grapevine-Eb.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.374Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.374Z"
+    },
+    "88": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "I_Think_We're_Alone_Now_-_Tommy_James_and_The_Shondells_-_A_around.pdf",
+        "url": "/api/songs/88/document",
+        "htmlUrl": "",
+        "storedName": "I_Think_We're_Alone_Now_-_Tommy_James_and_The_Shondells_-_A_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.379Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.379Z"
+    },
+    "89": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "I_Will_Survive_Am.pdf",
+        "url": "/api/songs/89/document",
+        "htmlUrl": "",
+        "storedName": "I_Will_Survive_Am.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.383Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.383Z"
+    },
+    "90": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "I'd_Really_Love_To_See_You_Tonight_-_England_Dan_&_John_Ford_Coley_-_around.pdf",
+        "url": "/api/songs/90/document",
+        "htmlUrl": "",
+        "storedName": "I'd_Really_Love_To_See_You_Tonight_-_England_Dan_&_John_Ford_Coley_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.388Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.388Z"
+    },
+    "91": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "I'll_Be_Around_-_The_Spinners_-_around.pdf",
+        "url": "/api/songs/91/document",
+        "htmlUrl": "",
+        "storedName": "I'll_Be_Around_-_The_Spinners_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.392Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.392Z"
+    },
+    "92": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "It's_Not_Unusual_-_Tom_Jones_-_C_around.pdf",
+        "url": "/api/songs/92/document",
+        "htmlUrl": "",
+        "storedName": "It's_Not_Unusual_-_Tom_Jones_-_C_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.396Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.396Z"
+    },
+    "93": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Let's_Stay_Together_-_Al_Green_-_F.pdf",
+        "url": "/api/songs/93/document",
+        "htmlUrl": "",
+        "storedName": "Let's_Stay_Together_-_Al_Green_-_F.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.406Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.406Z"
+    },
+    "94": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Let_It_Be_-_The_Beatles_-_C_around.pdf",
+        "url": "/api/songs/94/document",
+        "htmlUrl": "",
+        "storedName": "Let_It_Be_-_The_Beatles_-_C_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.412Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.412Z"
+    },
+    "95": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Listen_to_Her_Heart_-_Tom_Petty_-_around.pdf",
+        "url": "/api/songs/95/document",
+        "htmlUrl": "",
+        "storedName": "Listen_to_Her_Heart_-_Tom_Petty_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.422Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.422Z"
+    },
+    "96": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Locked_out_of_heaven_Dm.pdf",
+        "url": "/api/songs/96/document",
+        "htmlUrl": "",
+        "storedName": "Locked_out_of_heaven_Dm.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.427Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.427Z"
+    },
+    "97": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Long_Train_Runnin'_-_The_Doobie_Brothers_-_Gm_around.pdf",
+        "url": "/api/songs/97/document",
+        "htmlUrl": "",
+        "storedName": "Long_Train_Runnin'_-_The_Doobie_Brothers_-_Gm_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.433Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.433Z"
+    },
+    "98": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "r&b",
+        "soul"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Mercy_Mercy_Me-E.pdf",
+        "url": "/api/songs/98/document",
+        "htmlUrl": "",
+        "storedName": "Mercy_Mercy_Me-E.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.438Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.438Z"
+    },
+    "99": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Moondance-Am.pdf",
+        "url": "/api/songs/99/document",
+        "htmlUrl": "",
+        "storedName": "Moondance-Am.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.444Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.444Z"
+    },
+    "100": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Moves_Like_Jagger_-_Maroon_5_-_Bm.pdf",
+        "url": "/api/songs/100/document",
+        "htmlUrl": "",
+        "storedName": "Moves_Like_Jagger_-_Maroon_5_-_Bm.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.448Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.448Z"
+    },
+    "101": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "My_Girl_-_The_Temptations_-_C_around.pdf",
+        "url": "/api/songs/101/document",
+        "htmlUrl": "",
+        "storedName": "My_Girl_-_The_Temptations_-_C_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.455Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.455Z"
+    },
+    "102": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "My_Old_School_-_Steely_Dan_-_around.pdf",
+        "url": "/api/songs/102/document",
+        "htmlUrl": "",
+        "storedName": "My_Old_School_-_Steely_Dan_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.460Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.460Z"
+    },
+    "103": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Nights_Are_Forever_Without_You_-_England_Dan_&_John_Ford_Coley_-_around.pdf",
+        "url": "/api/songs/103/document",
+        "htmlUrl": "",
+        "storedName": "Nights_Are_Forever_Without_You_-_England_Dan_&_John_Ford_Coley_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.480Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.480Z"
+    },
+    "104": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "No_Diggity_-_Blackstreet_feat_F♯m.pdf",
+        "url": "/api/songs/104/document",
+        "htmlUrl": "",
+        "storedName": "No_Diggity_-_Blackstreet_feat_F♯m.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.494Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.494Z"
+    },
+    "105": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Papa_Was_A_Rolling_Stone_(45_edit)_-_The_Temptations_-.pdf",
+        "url": "/api/songs/105/document",
+        "htmlUrl": "",
+        "storedName": "Papa_Was_A_Rolling_Stone_(45_edit)_-_The_Temptations_-.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.509Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.509Z"
+    },
+    "106": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Ride_Captain_Ride-D.pdf",
+        "url": "/api/songs/106/document",
+        "htmlUrl": "",
+        "storedName": "Ride_Captain_Ride-D.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.514Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.514Z"
+    },
+    "107": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Sailing-D.pdf",
+        "url": "/api/songs/107/document",
+        "htmlUrl": "",
+        "storedName": "Sailing-D.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.525Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.525Z"
+    },
+    "108": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Saturday_In_The_Park-CG.pdf",
+        "url": "/api/songs/108/document",
+        "htmlUrl": "",
+        "storedName": "Saturday_In_The_Park-CG.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.532Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.532Z"
+    },
+    "109": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Save_The_Last_Dance_For_Me_-_Michael_Bublé_-_E♭,_E.pdf",
+        "url": "/api/songs/109/document",
+        "htmlUrl": "",
+        "storedName": "Save_The_Last_Dance_For_Me_-_Michael_Bublé_-_E♭,_E.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.540Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.540Z"
+    },
+    "110": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "disco",
+        "r&b",
+        "yacht rock"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "September-F#m.pdf",
+        "url": "/api/songs/110/document",
+        "htmlUrl": "",
+        "storedName": "September-F#m.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.543Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.543Z"
+    },
+    "111": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Shape_of_You_-_Ed_Sheeran_-_C♯m.pdf",
+        "url": "/api/songs/111/document",
+        "htmlUrl": "",
+        "storedName": "Shape_of_You_-_Ed_Sheeran_-_C♯m.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.547Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.547Z"
+    },
+    "112": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "She's_Gone_(Album_Version)_-_Hall_&_Oates_-_B,_G_around.pdf",
+        "url": "/api/songs/112/document",
+        "htmlUrl": "",
+        "storedName": "She's_Gone_(Album_Version)_-_Hall_&_Oates_-_B,_G_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.555Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.555Z"
+    },
+    "113": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "rock soft",
+        "yacht rock"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Somebodys_Baby-D.pdf",
+        "url": "/api/songs/113/document",
+        "htmlUrl": "",
+        "storedName": "Somebodys_Baby-D.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.573Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.573Z"
+    },
+    "114": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Steal_Away_-_Robbie_Dupree_-_around.pdf",
+        "url": "/api/songs/114/document",
+        "htmlUrl": "",
+        "storedName": "Steal_Away_-_Robbie_Dupree_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.577Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.577Z"
+    },
+    "115": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Still_The_One_-_Orleans_-_E_around.pdf",
+        "url": "/api/songs/115/document",
+        "htmlUrl": "",
+        "storedName": "Still_The_One_-_Orleans_-_E_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.582Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.582Z"
+    },
+    "116": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "Summer_Breeze_-_Seals_&_Crofts_-_around.pdf",
+        "url": "/api/songs/116/document",
+        "htmlUrl": "",
+        "storedName": "Summer_Breeze_-_Seals_&_Crofts_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.587Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.587Z"
+    },
+    "117": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "That's_The_Way_Of_The_World_-_Earth_Wind_&_Fire_D.pdf",
+        "url": "/api/songs/117/document",
+        "htmlUrl": "",
+        "storedName": "That's_The_Way_Of_The_World_-_Earth_Wind_&_Fire_D.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.595Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.595Z"
+    },
+    "118": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "The_Way_You_Make_Me_Feel_F.pdf",
+        "url": "/api/songs/118/document",
+        "htmlUrl": "",
+        "storedName": "The_Way_You_Make_Me_Feel_F.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.599Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.599Z"
+    },
+    "119": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Thunder_Island-F.pdf",
+        "url": "/api/songs/119/document",
+        "htmlUrl": "",
+        "storedName": "Thunder_Island-F.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.606Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.606Z"
+    },
+    "120": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "20s",
+        "pop"
+      ],
+      "useFixedDocFont": true,
+      "doc": {
+        "fileName": "Treasure-Cm.pdf",
+        "url": "/api/songs/120/document",
+        "htmlUrl": "",
+        "storedName": "Treasure-Cm.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.610Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.610Z"
+    },
+    "121": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "What's_Going_On_-_Marvin_Gaye_-_around.pdf",
+        "url": "/api/songs/121/document",
+        "htmlUrl": "",
+        "storedName": "What's_Going_On_-_Marvin_Gaye_-_around.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.616Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.616Z"
+    },
+    "122": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "You_Should_Be_Dancing_-_Bee_Gees_-.pdf",
+        "url": "/api/songs/122/document",
+        "htmlUrl": "",
+        "storedName": "You_Should_Be_Dancing_-_Bee_Gees_-.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.620Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.620Z"
+    },
+    "123": {
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [],
+      "useFixedDocFont": false,
+      "doc": {
+        "fileName": "You've_Lost_That_Lovin'_Feelin'_-_The_Righteous_Brothers_-.pdf",
+        "url": "/api/songs/123/document",
+        "htmlUrl": "",
+        "storedName": "You've_Lost_That_Lovin'_Feelin'_-_The_Righteous_Brothers_-.pdf",
+        "htmlStoredName": "",
+        "mimeType": "application/pdf",
+        "uploadedAt": "2026-06-03T01:57:03.627Z"
+      },
+      "updatedAt": "2026-06-03T01:57:03.627Z"
     }
   }
 }

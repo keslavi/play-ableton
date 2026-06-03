@@ -15,15 +15,232 @@ const notesSchema = z.object({
 
 const parseIndex = (value) => indexSchema.safeParse(value);
 
+const normalizeLookupName = (value) => String(value ?? "")
+  .normalize("NFKD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .toLowerCase()
+  .replace(/&/g, " and ")
+  .replace(/[_-]+/g, " ")
+  .replace(/\s+/g, " ")
+  .replace(/[^a-z0-9 ]+/g, "")
+  .trim();
+
+const tokenSet = (value) => new Set(normalizeLookupName(value).split(" ").filter(Boolean));
+
+const tokenOverlapScore = (left, right) => {
+  const leftTokens = tokenSet(left);
+  const rightTokens = tokenSet(right);
+  if (leftTokens.size === 0 || rightTokens.size === 0) {
+    return 0;
+  }
+
+  let overlap = 0;
+  for (const token of leftTokens) {
+    if (rightTokens.has(token)) {
+      overlap += 1;
+    }
+  }
+
+  return overlap;
+};
+
 export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
   const router = new Router();
   const upload = multer({ storage: multer.memoryStorage() });
 
+  const sanitizeSceneTitle = (value) => String(value ?? "")
+    .normalize("NFKC")
+    .trim()
+    .replace(/\s+/g, " ")
+    .replace(/[\\/:*?"<>|]/g, "")
+    .replace(/\.$/, "")
+    .replace(/ /g, "_")
+    .slice(0, 120);
+
+  const sceneTitleForIndex = (sceneIndex) => {
+    const scenes = typeof liveService.getScenes === "function" ? liveService.getScenes() : [];
+    const scene = scenes.find((item) => item?.index === sceneIndex);
+    return sanitizeSceneTitle(scene?.name);
+  };
+
+  const fileExists = async (targetPath) => {
+    try {
+      await fs.access(targetPath);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const resolvePreviewTarget = async (sceneIndex, profile) => {
+    const doc = profile?.doc;
+    if (!doc?.storedName) {
+      return null;
+    }
+
+    const docStoredSafe = path.basename(doc.storedName);
+    const docExt = path.extname(docStoredSafe).toLowerCase();
+    const pdfCandidates = [];
+
+    if (docExt === ".pdf") {
+      pdfCandidates.push(docStoredSafe);
+    }
+
+    if (docExt === ".doc" || docExt === ".docx") {
+      pdfCandidates.push(`${path.basename(docStoredSafe, docExt)}.pdf`);
+    }
+
+    const sceneTitle = sceneTitleForIndex(sceneIndex);
+    if (sceneTitle) {
+      pdfCandidates.push(`${sceneTitle}.pdf`);
+    }
+
+    for (const candidate of new Set(pdfCandidates.map((value) => path.basename(value)))) {
+      const candidatePath = path.join(storageConfig.songDocsDir, candidate);
+      if (await fileExists(candidatePath)) {
+        return {
+          kind: "pdf",
+          filePath: candidatePath,
+          mimeType: "application/pdf"
+        };
+      }
+    }
+
+    if (doc.htmlStoredName) {
+      const safeHtml = path.basename(doc.htmlStoredName);
+      const htmlPath = path.join(storageConfig.songDocsDir, safeHtml);
+      if (await fileExists(htmlPath)) {
+        return {
+          kind: "html",
+          filePath: htmlPath,
+          mimeType: "text/html; charset=utf-8"
+        };
+      }
+    }
+
+    return null;
+  };
+
+  const resolvePreferredTarget = async (sceneIndex, profile) => {
+    const previewTarget = await resolvePreviewTarget(sceneIndex, profile);
+    if (previewTarget) {
+      return previewTarget;
+    }
+
+    const doc = profile?.doc;
+    if (!doc?.storedName) {
+      return null;
+    }
+
+    const safeName = path.basename(doc.storedName);
+    const filePath = path.join(storageConfig.songDocsDir, safeName);
+    if (!await fileExists(filePath)) {
+      return null;
+    }
+
+    return {
+      kind: "file",
+      filePath,
+      mimeType: doc.mimeType || "application/octet-stream",
+      fileName: doc.fileName || safeName
+    };
+  };
+
+  const findOnSongPdfMatch = async ({ sceneIndex, originalName }) => {
+    const defaultRoot = String(storageConfig?.songDocsDefaultRoot ?? "").trim();
+    if (!defaultRoot) {
+      return null;
+    }
+
+    const sceneBase = sceneTitleForIndex(sceneIndex).replaceAll("_", " ");
+    const uploadBase = path.basename(originalName || "", path.extname(originalName || ""));
+    const preferredCandidates = [sceneBase, uploadBase].map((value) => normalizeLookupName(value)).filter(Boolean);
+
+    const candidateDirs = [
+      path.join(defaultRoot, "OnSong"),
+      path.join(defaultRoot, "Dropbox", "OnSong"),
+      defaultRoot
+    ];
+
+    const seen = new Set();
+    const files = [];
+
+    for (const dir of candidateDirs) {
+      if (seen.has(dir)) {
+        continue;
+      }
+      seen.add(dir);
+
+      let entries;
+      try {
+        entries = await fs.readdir(dir, { withFileTypes: true });
+      } catch {
+        continue;
+      }
+
+      for (const entry of entries) {
+        if (!entry.isFile() || path.extname(entry.name).toLowerCase() !== ".pdf") {
+          continue;
+        }
+
+        files.push({
+          fileName: entry.name,
+          fullPath: path.join(dir, entry.name),
+          normalized: normalizeLookupName(path.basename(entry.name, ".pdf"))
+        });
+      }
+    }
+
+    if (files.length === 0) {
+      return null;
+    }
+
+    let best = null;
+    for (const file of files) {
+      let score = 0;
+      for (const candidate of preferredCandidates) {
+        if (!candidate) {
+          continue;
+        }
+
+        if (file.normalized === candidate) {
+          score += 100;
+          continue;
+        }
+
+        if (file.normalized.includes(candidate) || candidate.includes(file.normalized)) {
+          score += 25;
+        }
+
+        score += tokenOverlapScore(file.normalized, candidate) * 5;
+      }
+
+      if (!best || score > best.score) {
+        best = { ...file, score };
+      }
+    }
+
+    if (!best || best.score < 10) {
+      return null;
+    }
+
+    return { fileName: best.fileName, fullPath: best.fullPath };
+  };
+
+  const resolveStoredNames = ({ sceneIndex, ext, fallbackBase = "song_doc" }) => {
+    const sceneBase = sceneTitleForIndex(sceneIndex);
+    const baseName = sceneBase || sanitizeSceneTitle(fallbackBase) || "song_doc";
+    return {
+      storedName: `${baseName}${ext}`,
+      htmlStoredName: `${baseName}.html`
+    };
+  };
+
   const buildHtmlStoredName = ({ sceneIndex, storedName }) => {
     const ext = path.extname(storedName || "");
     const baseName = path.basename(storedName || "", ext || undefined);
-    const fallback = `scene-${sceneIndex}-${Date.now()}-song_doc`;
-    return `${baseName || fallback}.html`;
+    const resolved = resolveStoredNames({ sceneIndex, ext: ".docx", fallbackBase: baseName || "song_doc" });
+    return resolved.htmlStoredName;
   };
 
   const regenerateHtmlForProfile = async (sceneIndex, profile) => {
@@ -163,25 +380,45 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
       return;
     }
 
-    const timestamp = Date.now();
     const safeBaseName = path.basename(file.originalname, ext).replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 64) || "song_doc";
-    const storedName = `scene-${result.data}-${timestamp}-${safeBaseName}${ext}`;
+    let outputBuffer = file.buffer;
+    let outputExt = ext;
+    let outputFileName = file.originalname;
+    let outputMimeType = file.mimetype || "application/octet-stream";
+
+    if (ext === ".doc" || ext === ".docx") {
+      const onSongMatch = await findOnSongPdfMatch({ sceneIndex: result.data, originalName: file.originalname });
+      if (onSongMatch) {
+        try {
+          outputBuffer = await fs.readFile(onSongMatch.fullPath);
+          outputExt = ".pdf";
+          outputFileName = onSongMatch.fileName;
+          outputMimeType = "application/pdf";
+        } catch {
+          // Fall back to uploaded Word document when OnSong file cannot be read.
+        }
+      }
+    }
+
+    const outputSafeBaseName = path.basename(outputFileName, outputExt).replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 64) || safeBaseName;
+    const resolvedNames = resolveStoredNames({ sceneIndex: result.data, ext: outputExt, fallbackBase: outputSafeBaseName });
+    const storedName = resolvedNames.storedName;
     const targetPath = path.join(storageConfig.songDocsDir, storedName);
     await fs.mkdir(storageConfig.songDocsDir, { recursive: true });
-    await fs.writeFile(targetPath, file.buffer);
+    await fs.writeFile(targetPath, outputBuffer);
 
     let htmlStoredName = "";
     let htmlUrl = "";
     try {
       const profile = liveService.getSongProfile(result.data);
       const html = await convertAttachmentToHtml({
-        buffer: file.buffer,
-        originalName: file.originalname,
+        buffer: outputBuffer,
+        originalName: outputFileName,
         forceMonospace: Boolean(profile?.useFixedDocFont)
       });
 
       if (typeof html === "string" && html.length > 0) {
-        htmlStoredName = `scene-${result.data}-${timestamp}-${safeBaseName}.html`;
+        htmlStoredName = resolvedNames.htmlStoredName;
         const htmlPath = path.join(storageConfig.songDocsDir, htmlStoredName);
         await fs.writeFile(htmlPath, html, "utf8");
         htmlUrl = `/api/songs/${result.data}/document/html`;
@@ -193,8 +430,8 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
     }
 
     const profile = await liveService.setSongDocument(result.data, {
-      fileName: file.originalname,
-      mimeType: file.mimetype || "application/octet-stream",
+      fileName: outputFileName,
+      mimeType: outputMimeType,
       url: `/api/songs/${result.data}/document`,
       htmlUrl,
       storedName,
@@ -203,6 +440,61 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
     });
 
     ctx.body = { ok: true, profile };
+  });
+
+  router.get("/api/songs/:sceneIndex/document/preview", async (ctx) => {
+    const result = parseIndex(ctx.params.sceneIndex);
+    if (!result.success) {
+      ctx.status = 400;
+      ctx.body = { error: "sceneIndex must be a non-negative integer" };
+      return;
+    }
+
+    const profile = liveService.getSongProfile(result.data);
+    const previewTarget = await resolvePreviewTarget(result.data, profile);
+    if (!previewTarget) {
+      ctx.status = 404;
+      ctx.body = { error: "preview not found" };
+      return;
+    }
+
+    ctx.type = previewTarget.mimeType;
+    if (previewTarget.kind === "html") {
+      ctx.body = await fs.readFile(previewTarget.filePath, "utf8");
+      return;
+    }
+
+    ctx.body = await fs.readFile(previewTarget.filePath);
+  });
+
+  router.get("/api/songs/:sceneIndex/document/preferred", async (ctx) => {
+    const result = parseIndex(ctx.params.sceneIndex);
+    if (!result.success) {
+      ctx.status = 400;
+      ctx.body = { error: "sceneIndex must be a non-negative integer" };
+      return;
+    }
+
+    const profile = liveService.getSongProfile(result.data);
+    const preferred = await resolvePreferredTarget(result.data, profile);
+    if (!preferred) {
+      ctx.status = 404;
+      ctx.body = { error: "document not found" };
+      return;
+    }
+
+    ctx.type = preferred.mimeType;
+    if (preferred.kind === "html") {
+      ctx.body = await fs.readFile(preferred.filePath, "utf8");
+      return;
+    }
+
+    if (preferred.kind === "file") {
+      const fileName = path.basename(preferred.fileName || "document");
+      ctx.set("Content-Disposition", `inline; filename="${encodeURIComponent(fileName)}"`);
+    }
+
+    ctx.body = await fs.readFile(preferred.filePath);
   });
 
   router.get("/api/songs/:sceneIndex/document", async (ctx) => {
@@ -231,8 +523,12 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
       return;
     }
 
-    ctx.type = profile.doc.mimeType || "application/octet-stream";
-    ctx.set("Content-Disposition", `inline; filename="${encodeURIComponent(profile.doc.fileName || safeName)}"`);
+    const mimeType = profile.doc.mimeType || "application/octet-stream";
+    const isPdf = mimeType.toLowerCase().includes("pdf") || safeName.toLowerCase().endsWith(".pdf");
+    ctx.type = mimeType;
+    if (!isPdf) {
+      ctx.set("Content-Disposition", `inline; filename="${encodeURIComponent(profile.doc.fileName || safeName)}"`);
+    }
     ctx.body = await fs.readFile(targetPath);
   });
 
