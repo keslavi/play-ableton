@@ -115,3 +115,31 @@ test("POST /api/scenes/:sceneIndex/start forwards to Ableton client", async (t) 
   assert.equal(response.status, 200);
   assert.deepEqual(fakeClient.startedScenes, [1]);
 });
+
+test("song documents are stored and listed by scene title", async (t) => {
+  const { runtime, baseUrl } = await createTestRuntime();
+  t.after(async () => {
+    await runtime.stop();
+  });
+
+  const formData = new FormData();
+  formData.append("file", new Blob(["%PDF-1.4 test\n"], { type: "application/pdf" }), "anything.pdf");
+
+  const uploadResponse = await fetch(`${baseUrl}/api/songs/1/document`, {
+    method: "POST",
+    body: formData
+  });
+  assert.equal(uploadResponse.status, 200);
+
+  const docsResponse = await fetch(`${baseUrl}/api/songs/available-docs`);
+  assert.equal(docsResponse.status, 200);
+  const docsPayload = await docsResponse.json();
+  assert.deepEqual(docsPayload.pdfs, ["Verse"]);
+
+  const documentResponse = await fetch(`${baseUrl}/api/songs/1/document`);
+  assert.equal(documentResponse.status, 200);
+  assert.equal(documentResponse.headers.get("content-type"), "application/pdf");
+
+  const documentBody = await documentResponse.text();
+  assert.match(documentBody, /%PDF-1.4/);
+});

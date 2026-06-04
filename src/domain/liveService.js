@@ -195,6 +195,42 @@ export class LiveService extends EventEmitter {
     }
   }
 
+  #sceneForIndex(sceneIndex) {
+    if (!Number.isInteger(sceneIndex) || sceneIndex < 0) {
+      return null;
+    }
+
+    return this.#cacheStore.getScenes().find((scene) => scene.index === sceneIndex) ?? null;
+  }
+
+  #songPathFromSceneTitle(sceneTitle) {
+    return String(sceneTitle ?? "")
+      .normalize("NFKC")
+      .trim()
+      .replace(/\s+/g, " ")
+      .replace(/[\\/:*?"<>|]/g, "")
+      .replace(/\.$/, "")
+      .replace(/ /g, "_")
+      .slice(0, 120);
+  }
+
+  #songIdentityFromSceneIndex(sceneIndex) {
+    const scene = this.#sceneForIndex(sceneIndex);
+    if (!scene?.name) {
+      return null;
+    }
+
+    const sceneTitle = String(scene.name).trim();
+    if (!sceneTitle) {
+      return null;
+    }
+
+    return {
+      sceneTitle,
+      songPath: this.#songPathFromSceneTitle(sceneTitle)
+    };
+  }
+
   #clearSceneStopTimer() {
     if (!this.#sceneStopTimer) {
       return;
@@ -349,7 +385,10 @@ export class LiveService extends EventEmitter {
     }
 
     const defaults = this.#songProfileStore.getDefaults();
-    const profile = this.#songProfileStore.getSongProfile(sceneIndex);
+    const songIdentity = this.#songIdentityFromSceneIndex(sceneIndex);
+    const profile = songIdentity
+      ? this.#songProfileStore.getSongProfile(songIdentity.sceneTitle)
+      : null;
     const tracks = this.#cacheStore.getTracks();
 
     const operations = [];
@@ -418,36 +457,35 @@ export class LiveService extends EventEmitter {
     return this.#songProfileStore.getSongProfiles();
   }
 
-  getSongProfile(sceneIndex) {
+  getSongProfileForScene(sceneIndex) {
     if (!this.#songProfileStore) {
       return null;
     }
 
-    return this.#songProfileStore.getSongProfile(sceneIndex);
+    const songIdentity = this.#songIdentityFromSceneIndex(sceneIndex);
+    if (!songIdentity) {
+      return null;
+    }
+
+    return this.#songProfileStore.getSongProfile(songIdentity.sceneTitle);
   }
 
-  async setSongNotes(sceneIndex, notes, tags, useFixedDocFont) {
+  async setSongNotesForScene(sceneIndex, notes, tags, useFixedDocFont) {
     if (!this.#songProfileStore) {
       return null;
     }
 
-    return this.#songProfileStore.upsertSongMeta(sceneIndex, { notes, tags, useFixedDocFont });
-  }
-
-  async setSongDocument(sceneIndex, doc) {
-    if (!this.#songProfileStore) {
+    const songIdentity = this.#songIdentityFromSceneIndex(sceneIndex);
+    if (!songIdentity) {
       return null;
     }
 
-    return this.#songProfileStore.setSongDocument(sceneIndex, doc);
-  }
-
-  async clearSongDocument(sceneIndex) {
-    if (!this.#songProfileStore) {
-      return null;
-    }
-
-    return this.#songProfileStore.clearSongDocument(sceneIndex);
+    return this.#songProfileStore.upsertSongMeta(songIdentity.sceneTitle, {
+      notes,
+      tags,
+      useFixedDocFont,
+      songPath: songIdentity.songPath
+    });
   }
 
   async recheckTrackDefaults() {
@@ -616,7 +654,15 @@ export class LiveService extends EventEmitter {
     await this.#setTrackMuteInternal(trackIndex, mute);
 
     if (this.#songProfileStore && Number.isInteger(this.#activeSceneIndex)) {
-      await this.#songProfileStore.setSongTrackMute(this.#activeSceneIndex, trackIndex, mute);
+      const songIdentity = this.#songIdentityFromSceneIndex(this.#activeSceneIndex);
+      if (songIdentity) {
+        await this.#songProfileStore.setSongTrackMute(
+          songIdentity.sceneTitle,
+          trackIndex,
+          mute,
+          songIdentity.songPath
+        );
+      }
     }
 
     return {
@@ -632,7 +678,15 @@ export class LiveService extends EventEmitter {
     await this.#setTrackVolumeInternal(trackIndex, normalizedLevel);
 
     if (this.#songProfileStore && Number.isInteger(this.#activeSceneIndex)) {
-      await this.#songProfileStore.setSongTrackLevel(this.#activeSceneIndex, trackIndex, normalizedLevel);
+      const songIdentity = this.#songIdentityFromSceneIndex(this.#activeSceneIndex);
+      if (songIdentity) {
+        await this.#songProfileStore.setSongTrackLevel(
+          songIdentity.sceneTitle,
+          trackIndex,
+          normalizedLevel,
+          songIdentity.songPath
+        );
+      }
     }
 
     return {

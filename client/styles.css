@@ -234,6 +234,24 @@ body.mixer-lock-scroll {
   font-size: 0.76rem;
 }
 
+.doc-not-found-toast {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  left: auto;
+  z-index: 41;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(255, 210, 120, 0.4);
+  background: rgba(43, 32, 8, 0.96);
+  color: #ffe3a3;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.76rem;
+  text-transform: lowercase;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
 .page-stack {
   flex: 1;
   min-height: 0;
@@ -252,10 +270,6 @@ body.mixer-lock-scroll {
 }
 
 .songs-page {
-  min-height: 0;
-}
-
-.doc-page {
   min-height: 0;
 }
 
@@ -427,8 +441,9 @@ body.mixer-lock-scroll {
   background: rgba(0, 0, 0, 0.2);
 }
 
-.doc-page .song-doc-panel {
+.doc-modal-card .song-doc-panel {
   margin-bottom: 0;
+  height: 100%;
   flex: 1;
   min-height: 0;
   display: flex;
@@ -457,7 +472,7 @@ body.mixer-lock-scroll {
   background: rgba(0, 0, 0, 0.32);
 }
 
-.doc-page .song-doc-frame {
+.doc-modal-card .song-doc-frame {
   min-height: 0;
   flex: 1;
 }
@@ -480,6 +495,41 @@ body.mixer-lock-scroll {
 
 .modal-overlay.hidden {
   display: none;
+}
+
+.doc-modal-card {
+  width: min(1120px, 96vw);
+  height: min(88vh, 940px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  background: rgba(18, 28, 37, 0.98);
+  padding: 2.5rem 0.9rem 0.9rem;
+  position: relative;
+  display: flex;
+}
+
+.doc-modal-close {
+  position: absolute;
+  right: 0.65rem;
+  top: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  width: 1.8rem;
+  height: 1.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.doc-modal-close:hover {
+  border-color: rgba(77, 212, 166, 0.6);
+  color: #ffffff;
 }
 
 .modal-card {

@@ -39,22 +39,12 @@
       </header>
 
       <div id="timer-stop-toast" class="timer-stop-toast hidden" role="status" aria-live="polite"></div>
+      <div id="doc-not-found-toast" class="doc-not-found-toast hidden" role="status" aria-live="polite"></div>
 
       <section class="page-stack">
         <section id="page-songs" class="panel page songs-page active">
           <ul id="scene-list" class="scene-grid"></ul>
-          <input id="song-doc-input" class="hidden" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
-        </section>
-
-        <section id="page-doc" class="panel page doc-page">
-          <section id="active-song-doc" class="song-doc-panel hidden">
-            <div class="song-doc-header">
-              <strong id="active-song-doc-title">Song Document</strong>
-              <a id="active-song-doc-open" class="song-doc-open" target="_blank" rel="noreferrer">Open in New Tab</a>
-            </div>
-            <iframe id="active-song-doc-frame" class="song-doc-frame" title="Song document preview"></iframe>
-            <div id="active-song-doc-fallback" class="song-doc-fallback hidden"></div>
-          </section>
+          <input id="song-doc-input" class="hidden" type="file" accept=".pdf,application/pdf" />
         </section>
 
         <section id="page-mixer" class="panel page mixer-page">
@@ -72,6 +62,20 @@
         </section>
       </section>
     </main>
+
+    <section id="doc-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="active-song-doc-title">
+      <div class="doc-modal-card">
+        <button id="close-doc-modal" class="doc-modal-close" type="button" aria-label="Close document">×</button>
+        <section id="active-song-doc" class="song-doc-panel hidden">
+          <div class="song-doc-header">
+            <strong id="active-song-doc-title">Song Document</strong>
+            <a id="active-song-doc-open" class="song-doc-open" target="_blank" rel="noreferrer">Open in New Tab</a>
+          </div>
+          <iframe id="active-song-doc-frame" class="song-doc-frame" title="Song document preview"></iframe>
+          <div id="active-song-doc-fallback" class="song-doc-fallback hidden"></div>
+        </section>
+      </div>
+    </section>
 
     <section id="song-meta-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="song-meta-title">
       <div class="modal-card">

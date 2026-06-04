@@ -11,13 +11,26 @@ const emptyState = () => ({
   songs: {}
 });
 
-const normalizeSceneIndex = (sceneIndex) => {
-  const value = Number(sceneIndex);
-  if (!Number.isInteger(value) || value < 0) {
-    return null;
-  }
-  return String(value);
-};
+const normalizeSceneTitle = (sceneTitle) => String(sceneTitle ?? "")
+  .normalize("NFKC")
+  .trim()
+  .replace(/\s+/g, " ");
+
+const sceneTitleKey = (sceneTitle) => normalizeSceneTitle(sceneTitle)
+  .normalize("NFKD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .toLowerCase()
+  .replace(/&/g, " and ")
+  .replace(/[_-]+/g, " ")
+  .replace(/\s+/g, " ")
+  .replace(/[^a-z0-9 ]+/g, "")
+  .trim();
+
+const songPathFromTitle = (sceneTitle) => normalizeSceneTitle(sceneTitle)
+  .replace(/[\\/:*?"<>|]/g, "")
+  .replace(/\.$/, "")
+  .replace(/ /g, "_")
+  .slice(0, 120);
 
 const normalizedLevels = (levels = {}) => {
   const entries = Object.entries(levels)
@@ -33,26 +46,6 @@ const normalizedMutes = (mutes = {}) => {
     .filter(([trackIndex]) => Number.isInteger(trackIndex) && trackIndex >= 0);
 
   return Object.fromEntries(entries.map(([trackIndex, mute]) => [String(trackIndex), Boolean(mute)]));
-};
-
-const normalizeDoc = (doc) => {
-  if (!doc || typeof doc !== "object") {
-    return null;
-  }
-
-  if (typeof doc.fileName !== "string" || typeof doc.url !== "string") {
-    return null;
-  }
-
-  return {
-    fileName: doc.fileName,
-    url: doc.url,
-    htmlUrl: typeof doc.htmlUrl === "string" ? doc.htmlUrl : "",
-    storedName: typeof doc.storedName === "string" ? doc.storedName : "",
-    htmlStoredName: typeof doc.htmlStoredName === "string" ? doc.htmlStoredName : "",
-    mimeType: typeof doc.mimeType === "string" ? doc.mimeType : "application/octet-stream",
-    uploadedAt: typeof doc.uploadedAt === "string" ? doc.uploadedAt : new Date().toISOString()
-  };
 };
 
 const normalizeTags = (tags) => {
@@ -75,6 +68,19 @@ const normalizeTags = (tags) => {
   }
 
   return Array.from(deduped);
+};
+
+const titleFromLegacyKey = (key) => {
+  if (typeof key !== "string" || !key) {
+    return "";
+  }
+
+  const numeric = Number(key);
+  if (Number.isInteger(numeric) && numeric >= 0) {
+    return "";
+  }
+
+  return normalizeSceneTitle(key.replace(/[_-]+/g, " "));
 };
 
 export class SongProfileStore {
@@ -103,6 +109,7 @@ export class SongProfileStore {
         },
         songs: this.#normalizedSongs(parsed?.songs)
       };
+      await this.#persist();
     } catch (error) {
       if (error && error.code !== "ENOENT") {
         this.#logger.warn("Failed to load song profiles; using empty state", error);
@@ -117,19 +124,27 @@ export class SongProfileStore {
     }
 
     const normalized = {};
-    for (const [sceneIndex, profile] of Object.entries(songs)) {
-      const normalizedSceneIndex = normalizeSceneIndex(sceneIndex);
-      if (!normalizedSceneIndex) {
+    for (const [legacyKey, profile] of Object.entries(songs)) {
+      const sceneTitle = normalizeSceneTitle(
+        profile?.sceneTitle
+        || profile?.songMasterTitle
+        || profile?.songPath?.replaceAll("_", " ")
+        || titleFromLegacyKey(legacyKey)
+      );
+      const normalizedSceneTitleKey = sceneTitleKey(sceneTitle);
+      if (!normalizedSceneTitleKey) {
         continue;
       }
 
-      normalized[normalizedSceneIndex] = {
+      normalized[normalizedSceneTitleKey] = {
+        sceneTitle,
+        sceneTitleKey: normalizedSceneTitleKey,
+        songPath: normalizeSceneTitle(profile?.songPath || songPathFromTitle(sceneTitle)),
         levels: normalizedLevels(profile?.levels),
         mutes: normalizedMutes(profile?.mutes),
         notes: typeof profile?.notes === "string" ? profile.notes : "",
         tags: normalizeTags(profile?.tags),
         useFixedDocFont: Boolean(profile?.useFixedDocFont),
-        doc: normalizeDoc(profile?.doc),
         updatedAt: typeof profile?.updatedAt === "string" ? profile.updatedAt : null
       };
     }
@@ -172,90 +187,104 @@ export class SongProfileStore {
   }
 
   getSongProfile(sceneIndex) {
-    const normalizedSceneIndex = normalizeSceneIndex(sceneIndex);
-    if (!normalizedSceneIndex) {
+    const normalizedSceneTitle = normalizeSceneTitle(sceneIndex);
+    const normalizedSceneTitleKey = sceneTitleKey(normalizedSceneTitle);
+    if (!normalizedSceneTitleKey) {
       return null;
     }
 
-    const profile = this.#state.songs[normalizedSceneIndex];
+    const profile = this.#state.songs[normalizedSceneTitleKey];
     if (!profile) {
       return null;
     }
 
     return {
-      sceneIndex: Number(normalizedSceneIndex),
+      sceneTitle: profile.sceneTitle,
+      sceneTitleKey: profile.sceneTitleKey,
+      songPath: profile.songPath,
       levels: { ...profile.levels },
       mutes: { ...profile.mutes },
       notes: profile.notes,
       tags: [...(profile.tags ?? [])],
       useFixedDocFont: Boolean(profile.useFixedDocFont),
-      doc: profile.doc ? { ...profile.doc } : null,
       updatedAt: profile.updatedAt
     };
   }
 
   getSongProfiles() {
-    return Object.entries(this.#state.songs).map(([sceneIndex, profile]) => ({
-      sceneIndex: Number(sceneIndex),
+    return Object.values(this.#state.songs).map((profile) => ({
+      sceneTitle: profile.sceneTitle,
+      sceneTitleKey: profile.sceneTitleKey,
+      songPath: profile.songPath,
       levels: { ...profile.levels },
       mutes: { ...profile.mutes },
       notes: profile.notes,
       tags: [...(profile.tags ?? [])],
       useFixedDocFont: Boolean(profile.useFixedDocFont),
-      doc: profile.doc ? { ...profile.doc } : null,
       updatedAt: profile.updatedAt
     }));
   }
 
-  #ensureProfile(sceneIndex) {
-    const normalizedSceneIndex = normalizeSceneIndex(sceneIndex);
-    if (!normalizedSceneIndex) {
-      throw new Error("sceneIndex must be a non-negative integer");
+  #ensureProfile(sceneTitle, songPath = "") {
+    const normalizedSceneTitle = normalizeSceneTitle(sceneTitle);
+    const normalizedSceneTitleKey = sceneTitleKey(normalizedSceneTitle);
+    if (!normalizedSceneTitleKey) {
+      throw new Error("sceneTitle must be a non-empty string");
     }
 
-    if (!this.#state.songs[normalizedSceneIndex]) {
-      this.#state.songs[normalizedSceneIndex] = {
+    if (!this.#state.songs[normalizedSceneTitleKey]) {
+      this.#state.songs[normalizedSceneTitleKey] = {
+        sceneTitle: normalizedSceneTitle,
+        sceneTitleKey: normalizedSceneTitleKey,
+        songPath: normalizeSceneTitle(songPath || songPathFromTitle(normalizedSceneTitle)),
         levels: {},
         mutes: {},
         notes: "",
         tags: [],
         useFixedDocFont: false,
-        doc: null,
         updatedAt: new Date().toISOString()
       };
     }
 
-    return { normalizedSceneIndex, profile: this.#state.songs[normalizedSceneIndex] };
+    if (normalizedSceneTitle && this.#state.songs[normalizedSceneTitleKey].sceneTitle !== normalizedSceneTitle) {
+      this.#state.songs[normalizedSceneTitleKey].sceneTitle = normalizedSceneTitle;
+    }
+
+    if (songPath) {
+      this.#state.songs[normalizedSceneTitleKey].songPath = normalizeSceneTitle(songPath);
+    }
+
+    return { normalizedSceneTitle, normalizedSceneTitleKey, profile: this.#state.songs[normalizedSceneTitleKey] };
   }
 
-  async setSongTrackLevel(sceneIndex, trackIndex, level) {
+  async setSongTrackLevel(sceneTitle, trackIndex, level, songPath = "") {
     const normalizedTrackIndex = Number(trackIndex);
     if (!Number.isInteger(normalizedTrackIndex) || normalizedTrackIndex < 0) {
       return null;
     }
 
-    const { normalizedSceneIndex, profile } = this.#ensureProfile(sceneIndex);
+    const { normalizedSceneTitle, profile } = this.#ensureProfile(sceneTitle, songPath);
     profile.levels[String(normalizedTrackIndex)] = Math.max(0, Math.min(1, Number(level)));
     profile.updatedAt = new Date().toISOString();
     await this.#enqueuePersist();
-    return this.getSongProfile(Number(normalizedSceneIndex));
+    return this.getSongProfile(normalizedSceneTitle);
   }
 
-  async setSongTrackMute(sceneIndex, trackIndex, mute) {
+  async setSongTrackMute(sceneTitle, trackIndex, mute, songPath = "") {
     const normalizedTrackIndex = Number(trackIndex);
     if (!Number.isInteger(normalizedTrackIndex) || normalizedTrackIndex < 0) {
       return null;
     }
 
-    const { normalizedSceneIndex, profile } = this.#ensureProfile(sceneIndex);
+    const { normalizedSceneTitle, profile } = this.#ensureProfile(sceneTitle, songPath);
     profile.mutes[String(normalizedTrackIndex)] = Boolean(mute);
     profile.updatedAt = new Date().toISOString();
     await this.#enqueuePersist();
-    return this.getSongProfile(Number(normalizedSceneIndex));
+    return this.getSongProfile(normalizedSceneTitle);
   }
 
-  async upsertSongMeta(sceneIndex, { notes, tags, useFixedDocFont }) {
-    const { normalizedSceneIndex, profile } = this.#ensureProfile(sceneIndex);
+  async upsertSongMeta(sceneTitle, { notes, tags, useFixedDocFont, songPath }) {
+    const { normalizedSceneTitle, profile } = this.#ensureProfile(sceneTitle, songPath);
 
     if (typeof notes === "string") {
       profile.notes = notes.trim();
@@ -271,22 +300,7 @@ export class SongProfileStore {
 
     profile.updatedAt = new Date().toISOString();
     await this.#enqueuePersist();
-    return this.getSongProfile(Number(normalizedSceneIndex));
+    return this.getSongProfile(normalizedSceneTitle);
   }
 
-  async setSongDocument(sceneIndex, doc) {
-    const { normalizedSceneIndex, profile } = this.#ensureProfile(sceneIndex);
-    profile.doc = normalizeDoc(doc);
-    profile.updatedAt = new Date().toISOString();
-    await this.#enqueuePersist();
-    return this.getSongProfile(Number(normalizedSceneIndex));
-  }
-
-  async clearSongDocument(sceneIndex) {
-    const { normalizedSceneIndex, profile } = this.#ensureProfile(sceneIndex);
-    profile.doc = null;
-    profile.updatedAt = new Date().toISOString();
-    await this.#enqueuePersist();
-    return this.getSongProfile(Number(normalizedSceneIndex));
-  }
 }

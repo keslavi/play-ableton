@@ -3,10 +3,13 @@
   "defaults": {
     "levels": {},
     "mutes": {},
-    "updatedAt": "2026-06-03T02:00:02.008Z"
+    "updatedAt": "2026-06-04T01:12:24.075Z"
   },
   "songs": {
-    "0": {
+    "1985 b": {
+      "sceneTitle": "1985 B",
+      "sceneTitleKey": "1985 b",
+      "songPath": "1985_B",
       "levels": {},
       "mutes": {},
       "notes": "I,  V,  vi,  IV.   (dropped 1/2 step, so they fingered in C)",
@@ -15,18 +18,12 @@
         "punk-pop"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "1985-B-120bpm.pdf",
-        "url": "/api/songs/0/document",
-        "htmlUrl": "/api/songs/0/document/html",
-        "storedName": "1985-_B.pdf",
-        "htmlStoredName": "1985-_B.html",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T02:09:09.984Z"
-      },
       "updatedAt": "2026-06-03T02:09:12.710Z"
     },
-    "1": {
+    "a thousand miles b": {
+      "sceneTitle": "A Thousand Miles B",
+      "sceneTitleKey": "a thousand miles b",
+      "songPath": "A_Thousand_Miles_B",
       "levels": {
         "21": 1
       },
@@ -40,18 +37,12 @@
         "pop"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "A_Thousand_Miles-B.pdf",
-        "url": "/api/songs/1/document",
-        "htmlUrl": "/api/songs/1/document/html",
-        "storedName": "A_Thousand_Miles-B.pdf",
-        "htmlStoredName": "A_Thousand_Miles-B.html",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T02:16:35.295Z"
-      },
       "updatedAt": "2026-06-03T02:16:37.343Z"
     },
-    "4": {
+    "africa toto a": {
+      "sceneTitle": "Africa Toto A",
+      "sceneTitleKey": "africa toto a",
+      "songPath": "Africa_Toto_A",
       "levels": {},
       "mutes": {
         "16": false
@@ -63,18 +54,12 @@
         "yacht rock"
       ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Africa_-_Toto_-_A.pdf",
-        "url": "/api/songs/4/document",
-        "htmlUrl": "",
-        "storedName": "Africa_-_Toto_-_A.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.816Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.816Z"
     },
-    "5": {
+    "aint too proud to beg the temptations c": {
+      "sceneTitle": "Ain't Too Proud To Beg The Temptations C",
+      "sceneTitleKey": "aint too proud to beg the temptations c",
+      "songPath": "Ain't_Too_Proud_To_Beg_The_Temptations_C",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -84,35 +69,23 @@
         "r&b"
       ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Ain't_Too_Proud_To_Beg_-_The_Temptations_-_C.pdf",
-        "url": "/api/songs/5/document",
-        "htmlUrl": "/api/songs/5/document/html",
-        "storedName": "Ain't_Too_Proud_To_Beg_-_The_Temptations_-_C.pdf",
-        "htmlStoredName": "Ain't_Too_Proud_To_Beg_-_The_Temptations_-_C.html",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.821Z"
-      },
       "updatedAt": "2026-06-03T02:17:43.455Z"
     },
-    "6": {
+    "american girl tom petty d around": {
+      "sceneTitle": "American Girl Tom Petty D around",
+      "sceneTitleKey": "american girl tom petty d around",
+      "songPath": "American_Girl_Tom_Petty_D_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "American_Girl_-_Tom_Petty_-_D_-_around.pdf",
-        "url": "/api/songs/6/document",
-        "htmlUrl": "",
-        "storedName": "American_Girl_-_Tom_Petty_-_D_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.826Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.826Z"
     },
-    "7": {
+    "all the small things c": {
+      "sceneTitle": "All The Small Things C",
+      "sceneTitleKey": "all the small things c",
+      "songPath": "All_The_Small_Things_C",
       "levels": {},
       "mutes": {
         "16": false
@@ -123,18 +96,12 @@
         "punk-pop"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "All_The_Small_Things-C.pdf",
-        "url": "/api/songs/7/document",
-        "htmlUrl": "",
-        "storedName": "All_The_Small_Things-C.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.830Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.830Z"
     },
-    "8": {
+    "baby got back cm": {
+      "sceneTitle": "Baby Got Back Cm",
+      "sceneTitleKey": "baby got back cm",
+      "songPath": "Baby_Got_Back_Cm",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -143,18 +110,12 @@
         "rap"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Baby_Got_Back_Cm.pdf",
-        "url": "/api/songs/8/document",
-        "htmlUrl": "",
-        "storedName": "Baby_Got_Back_Cm.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.835Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.835Z"
     },
-    "9": {
+    "baby one more time britney spears cm": {
+      "sceneTitle": "Baby One More Time Britney Spears Cm",
+      "sceneTitleKey": "baby one more time britney spears cm",
+      "songPath": "Baby_One_More_Time_Britney_Spears_Cm",
       "levels": {
         "16": 0.6275193054321824
       },
@@ -166,35 +127,23 @@
         "upbeat"
       ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Baby_One_More_Time_-_Britney_Spears_Cm.pdf",
-        "url": "/api/songs/9/document",
-        "htmlUrl": "",
-        "storedName": "Baby_One_More_Time_-_Britney_Spears_Cm.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.840Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.840Z"
     },
-    "10": {
+    "billie jean m jackson em": {
+      "sceneTitle": "Billie Jean M Jackson Em",
+      "sceneTitleKey": "billie jean m jackson em",
+      "songPath": "Billie_Jean_M_Jackson_Em",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Billie_Jean_-_M_Jackson_Em.pdf",
-        "url": "/api/songs/10/document",
-        "htmlUrl": "",
-        "storedName": "Billie_Jean_-_M_Jackson_Em.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.843Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.843Z"
     },
-    "11": {
+    "bohemian rhapsody bb 10810 bpm": {
+      "sceneTitle": "Bohemian Rhapsody Bb 108.10 bpm",
+      "sceneTitleKey": "bohemian rhapsody bb 10810 bpm",
+      "songPath": "Bohemian_Rhapsody_Bb_108.10_bpm",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -203,35 +152,23 @@
         "rock classic"
       ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Bohemian Rhapsody-Bb.pdf",
-        "url": "/api/songs/11/document",
-        "htmlUrl": "/api/songs/11/document/html",
-        "storedName": "Bohemian_Rhapsody_Bb_108.10_bpm.pdf",
-        "htmlStoredName": "Bohemian_Rhapsody_Bb_108.10_bpm.html",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T02:21:49.728Z"
-      },
       "updatedAt": "2026-06-03T02:21:51.742Z"
     },
-    "12": {
+    "boogie shoes b": {
+      "sceneTitle": "Boogie Shoes B",
+      "sceneTitleKey": "boogie shoes b",
+      "songPath": "Boogie_Shoes_B",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Boogie_Shoes_B.pdf",
-        "url": "/api/songs/12/document",
-        "htmlUrl": "",
-        "storedName": "Boogie_Shoes_B.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.851Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.852Z"
     },
-    "13": {
+    "black magic woman g 107bpm": {
+      "sceneTitle": "Black Magic Woman G 107bpm",
+      "sceneTitleKey": "black magic woman g 107bpm",
+      "songPath": "Black_Magic_Woman_G_107bpm",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -240,18 +177,12 @@
         "rock classic"
       ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Black Magic Woman-Dm.pdf",
-        "url": "/api/songs/13/document",
-        "htmlUrl": "/api/songs/13/document/html",
-        "storedName": "Black_Magic_Woman_G-_107bpm.pdf",
-        "htmlStoredName": "Black_Magic_Woman_G-_107bpm.html",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T02:26:48.551Z"
-      },
       "updatedAt": "2026-06-03T02:26:50.054Z"
     },
-    "14": {
+    "blurred lines g": {
+      "sceneTitle": "Blurred Lines G",
+      "sceneTitleKey": "blurred lines g",
+      "songPath": "Blurred_Lines_G",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -261,18 +192,12 @@
         "pop"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Blurred_Lines-G.pdf",
-        "url": "/api/songs/14/document",
-        "htmlUrl": "",
-        "storedName": "Blurred_Lines-G.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.859Z"
-      },
-      "updatedAt": "2026-06-03T01:57:02.859Z"
+      "updatedAt": "2026-06-04T01:13:50.260Z"
     },
-    "15": {
+    "cake by the ocean em": {
+      "sceneTitle": "Cake by the Ocean Em",
+      "sceneTitleKey": "cake by the ocean em",
+      "songPath": "Cake_by_the_Ocean_Em",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -282,18 +207,12 @@
         "pop"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Cake by the Ocean-Em.pdf",
-        "url": "/api/songs/15/document",
-        "htmlUrl": "/api/songs/15/document/html",
-        "storedName": "Cake_by_the_Ocean_-_Em.pdf",
-        "htmlStoredName": "Cake_by_the_Ocean_-_Em.html",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T02:34:03.948Z"
-      },
       "updatedAt": "2026-06-03T02:34:05.525Z"
     },
-    "16": {
+    "celebration kool and the gang a": {
+      "sceneTitle": "Celebration Kool And The Gang A♭",
+      "sceneTitleKey": "celebration kool and the gang a",
+      "songPath": "Celebration_Kool_And_The_Gang_A♭",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -303,18 +222,12 @@
         "pop"
       ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Celebration-G#121.65.pdf",
-        "url": "/api/songs/16/document",
-        "htmlUrl": "/api/songs/16/document/html",
-        "storedName": "Celebration_-_Kool_And_The_Gang_A♭.pdf",
-        "htmlStoredName": "Celebration_-_Kool_And_The_Gang_A♭.html",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T02:35:59.157Z"
-      },
       "updatedAt": "2026-06-03T02:36:01.092Z"
     },
-    "17": {
+    "closer fm c": {
+      "sceneTitle": "Closer Fm C#",
+      "sceneTitleKey": "closer fm c",
+      "songPath": "Closer_Fm_C#",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -322,69 +235,45 @@
         "10s"
       ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Closer-C#.pdf",
-        "url": "/api/songs/17/document",
-        "htmlUrl": "/api/songs/17/document/html",
-        "storedName": "Closer_Fm_C#.pdf",
-        "htmlStoredName": "Closer_Fm_C#.html",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T02:40:33.592Z"
-      },
       "updatedAt": "2026-06-03T02:40:36.171Z"
     },
-    "18": {
+    "come together the beatles dm": {
+      "sceneTitle": "Come Together The Beatles Dm",
+      "sceneTitleKey": "come together the beatles dm",
+      "songPath": "Come_Together_The_Beatles_Dm",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Come_Together_-_The_Beatles_-_Dm.pdf",
-        "url": "/api/songs/18/document",
-        "htmlUrl": "",
-        "storedName": "Come_Together_-_The_Beatles_-_Dm.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.876Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.876Z"
     },
-    "19": {
+    "crazy little thing called love queen d": {
+      "sceneTitle": "Crazy Little Thing Called Love Queen D",
+      "sceneTitleKey": "crazy little thing called love queen d",
+      "songPath": "Crazy_Little_Thing_Called_Love_Queen_D",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Crazy_Little_Thing_Called_Love_-_Queen_-_D.pdf",
-        "url": "/api/songs/19/document",
-        "htmlUrl": "",
-        "storedName": "Crazy_Little_Thing_Called_Love_-_Queen_-_D.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.880Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.880Z"
     },
-    "20": {
+    "dont stop believin e": {
+      "sceneTitle": "Don't Stop Believin E",
+      "sceneTitleKey": "dont stop believin e",
+      "songPath": "Don't_Stop_Believin_E",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Don't_Stop_Believin_E.pdf",
-        "url": "/api/songs/20/document",
-        "htmlUrl": "",
-        "storedName": "Don't_Stop_Believin_E.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.884Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.884Z"
     },
-    "21": {
+    "easy g": {
+      "sceneTitle": "Easy G",
+      "sceneTitleKey": "easy g",
+      "songPath": "Easy_G",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -395,18 +284,12 @@
         "soul"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Easy-G.pdf",
-        "url": "/api/songs/21/document",
-        "htmlUrl": "",
-        "storedName": "Easy-G.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.889Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.889Z"
     },
-    "22": {
+    "everybody backstreets back backstreet boys bm": {
+      "sceneTitle": "Everybody (Backstreet's Back) - Backstreet Boys - B♭m",
+      "sceneTitleKey": "everybody backstreets back backstreet boys bm",
+      "songPath": "Everybody_(Backstreet's_Back)_-_Backstreet_Boys_-_B♭m",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -415,18 +298,12 @@
         "pop"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Everybody_(Backstreet's_Back)_-_Backstreet_Boys_-_B♭m.pdf",
-        "url": "/api/songs/22/document",
-        "htmlUrl": "",
-        "storedName": "Everybody_(Backstreet's_Back)_-_Backstreet_Boys_-_B♭m.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.893Z"
-      },
-      "updatedAt": "2026-06-03T01:57:02.893Z"
+      "updatedAt": "2026-06-04T01:19:50.632Z"
     },
-    "23": {
+    "escape the pina colada song c": {
+      "sceneTitle": "Escape The Pina Colada Song C",
+      "sceneTitleKey": "escape the pina colada song c",
+      "songPath": "Escape_The_Pina_Colada_Song_C",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -435,18 +312,12 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Escape_The_Pina_Colada_Song-C.pdf",
-        "url": "/api/songs/23/document",
-        "htmlUrl": "",
-        "storedName": "Escape_The_Pina_Colada_Song-C.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.897Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.897Z"
     },
-    "24": {
+    "faith george michael b": {
+      "sceneTitle": "Faith George Michael B",
+      "sceneTitleKey": "faith george michael b",
+      "songPath": "Faith_George_Michael_B",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -455,52 +326,23 @@
         "pop"
       ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Faith_-_George_Michael_-_B.pdf",
-        "url": "/api/songs/24/document",
-        "htmlUrl": "",
-        "storedName": "Faith_-_George_Michael_-_B.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.901Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.901Z"
     },
-    "25": {
+    "footloose kenny loggins a around": {
+      "sceneTitle": "Footloose Kenny Loggins A around",
+      "sceneTitleKey": "footloose kenny loggins a around",
+      "songPath": "Footloose_Kenny_Loggins_A_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Footloose_-_Kenny_Loggins_-_A_around.pdf",
-        "url": "/api/songs/25/document",
-        "htmlUrl": "",
-        "storedName": "Footloose_-_Kenny_Loggins_-_A_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.905Z"
-      },
       "updatedAt": "2026-06-03T01:57:02.905Z"
     },
-    "26": {
-      "levels": {},
-      "mutes": {},
-      "notes": "",
-      "tags": [],
-      "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Forget_you_cee_lo_green_-_C.pdf",
-        "url": "/api/songs/26/document",
-        "htmlUrl": "",
-        "storedName": "Forget_you_cee_lo_green_-_C.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.910Z"
-      },
-      "updatedAt": "2026-06-03T01:57:02.910Z"
-    },
-    "27": {
+    "forget you cee lo green c": {
+      "sceneTitle": "Forget you cee lo green - C",
+      "sceneTitleKey": "forget you cee lo green c",
+      "songPath": "Forget_you_cee_lo_green_-_C",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -509,290 +351,223 @@
         "pop"
       ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Happy-F.pdf",
-        "url": "/api/songs/27/document",
-        "htmlUrl": "",
-        "storedName": "Happy-F.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:02.914Z"
-      },
-      "updatedAt": "2026-06-03T01:57:02.914Z"
+      "updatedAt": "2026-06-04T01:24:33.600Z"
     },
-    "28": {
+    "happy f": {
+      "sceneTitle": "Happy F",
+      "sceneTitleKey": "happy f",
+      "songPath": "Happy_F",
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "10s",
+        "pop"
+      ],
+      "useFixedDocFont": false,
+      "updatedAt": "2026-06-04T01:25:57.151Z"
+    },
+    "heart and soul huey lewis and the news": {
+      "sceneTitle": "Heart And Soul Huey Lewis & The News",
+      "sceneTitleKey": "heart and soul huey lewis and the news",
+      "songPath": "Heart_And_Soul_Huey_Lewis_&_The_News",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Heart_And_Soul_-_Huey_Lewis_&_The_News_-.pdf",
-        "url": "/api/songs/28/document",
-        "htmlUrl": "",
-        "storedName": "Heart_And_Soul_-_Huey_Lewis_&_The_News_-.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.011Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.011Z"
     },
-    "29": {
+    "i saw her standing there the beatles e": {
+      "sceneTitle": "I Saw Her Standing There The Beatles E",
+      "sceneTitleKey": "i saw her standing there the beatles e",
+      "songPath": "I_Saw_Her_Standing_There_The_Beatles_E",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "I_Saw_Her_Standing_There_-_The_Beatles_-_E.pdf",
-        "url": "/api/songs/29/document",
-        "htmlUrl": "",
-        "storedName": "I_Saw_Her_Standing_There_-_The_Beatles_-_E.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.020Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.020Z"
     },
-    "30": {
+    "im a believer the monkees g": {
+      "sceneTitle": "I'm A Believer The Monkees G",
+      "sceneTitleKey": "im a believer the monkees g",
+      "songPath": "I'm_A_Believer_The_Monkees_G",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "I'm_A_Believer_-_The_Monkees_-_G.pdf",
-        "url": "/api/songs/30/document",
-        "htmlUrl": "",
-        "storedName": "I'm_A_Believer_-_The_Monkees_-_G.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.026Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.026Z"
     },
-    "31": {
+    "im alright kenny loggins around": {
+      "sceneTitle": "I'm Alright - Kenny Loggins - around",
+      "sceneTitleKey": "im alright kenny loggins around",
+      "songPath": "I'm_Alright_-_Kenny_Loggins_-_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "I'm_Alright_-_Kenny_Loggins_-_around.pdf",
-        "url": "/api/songs/31/document",
-        "htmlUrl": "",
-        "storedName": "I'm_Alright_-_Kenny_Loggins_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.031Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.031Z"
+      "updatedAt": "2026-06-04T01:33:20.463Z"
     },
-    "32": {
+    "in the midnight hour wilson pickett": {
+      "sceneTitle": "In the Midnight Hour - Wilson Pickett -",
+      "sceneTitleKey": "in the midnight hour wilson pickett",
+      "songPath": "In_the_Midnight_Hour_-_Wilson_Pickett_-",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "60s",
+        "oldies",
+        "r&b"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "In_the_Midnight_Hour_-_Wilson_Pickett_-.pdf",
-        "url": "/api/songs/32/document",
-        "htmlUrl": "",
-        "storedName": "In_the_Midnight_Hour_-_Wilson_Pickett_-.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.036Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.036Z"
+      "updatedAt": "2026-06-04T01:35:19.736Z"
     },
-    "33": {
+    "jessies girl rick springfield d": {
+      "sceneTitle": "Jessie’s Girl Rick Springfield D",
+      "sceneTitleKey": "jessies girl rick springfield d",
+      "songPath": "Jessie’s_Girl_Rick_Springfield_D",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Jessie’s_Girl-_Rick_Springfield_-_D.pdf",
-        "url": "/api/songs/33/document",
-        "htmlUrl": "",
-        "storedName": "Jessie’s_Girl-_Rick_Springfield_-_D.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.041Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.041Z"
     },
-    "34": {
+    "margaritaville jimmy buffett d around": {
+      "sceneTitle": "Margaritaville - Jimmy Buffett - D around",
+      "sceneTitleKey": "margaritaville jimmy buffett d around",
+      "songPath": "Margaritaville_-_Jimmy_Buffett_-_D_around",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Margaritaville_-_Jimmy_Buffett_-_D_around.pdf",
-        "url": "/api/songs/34/document",
-        "htmlUrl": "",
-        "storedName": "Margaritaville_-_Jimmy_Buffett_-_D_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.048Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.048Z"
+      "updatedAt": "2026-06-04T01:36:28.872Z"
     },
-    "36": {
+    "old time rock and roll bob seger gb around": {
+      "sceneTitle": "Old Time Rock & Roll - Bob Seger - Gb - around",
+      "sceneTitleKey": "old time rock and roll bob seger gb around",
+      "songPath": "Old_Time_Rock_&_Roll_-_Bob_Seger_-_Gb_-_around",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "rock classic",
+        "yacht rock"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Old_Time_Rock_&_Roll_-_Bob_Seger_-_Gb_-_around.pdf",
-        "url": "/api/songs/36/document",
-        "htmlUrl": "",
-        "storedName": "Old_Time_Rock_&_Roll_-_Bob_Seger_-_Gb_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.053Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.054Z"
+      "updatedAt": "2026-06-04T01:38:28.489Z"
     },
-    "37": {
+    "pony cm": {
+      "sceneTitle": "Pony C#m",
+      "sceneTitleKey": "pony cm",
+      "songPath": "Pony_C#m",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "20s",
+        "pop",
+        "r&b"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Pony_C#m.pdf",
-        "url": "/api/songs/37/document",
-        "htmlUrl": "",
-        "storedName": "Pony_C#m.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.057Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.057Z"
+      "updatedAt": "2026-06-04T01:40:23.385Z"
     },
-    "38": {
+    "power of love huey lewis c": {
+      "sceneTitle": "Power Of Love - Huey Lewis - C",
+      "sceneTitleKey": "power of love huey lewis c",
+      "songPath": "Power_Of_Love_-_Huey_Lewis_-_C",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "80s",
+        "pop"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Power_Of_Love_-_Huey_Lewis_-_C.pdf",
-        "url": "/api/songs/38/document",
-        "htmlUrl": "",
-        "storedName": "Power_Of_Love_-_Huey_Lewis_-_C.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.061Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.061Z"
+      "updatedAt": "2026-06-04T01:51:47.968Z"
     },
-    "40": {
+    "shake it off f": {
+      "sceneTitle": "Shake it off F",
+      "sceneTitleKey": "shake it off f",
+      "songPath": "Shake_it_off_F",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Shake_it_off_F.pdf",
-        "url": "/api/songs/40/document",
-        "htmlUrl": "",
-        "storedName": "Shake_it_off_F.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.065Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.065Z"
     },
-    "41": {
+    "shut up and dance walk the moon d": {
+      "sceneTitle": "Shut Up And Dance Walk The Moon D♭",
+      "sceneTitleKey": "shut up and dance walk the moon d",
+      "songPath": "Shut_Up_And_Dance_Walk_The_Moon_D♭",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Shut_Up_And_Dance_-_Walk_The_Moon_D♭.pdf",
-        "url": "/api/songs/41/document",
-        "htmlUrl": "",
-        "storedName": "Shut_Up_And_Dance_-_Walk_The_Moon_D♭.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.071Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.071Z"
     },
-    "42": {
+    "soul man the blues brothers": {
+      "sceneTitle": "Soul Man The Blues Brothers",
+      "sceneTitleKey": "soul man the blues brothers",
+      "songPath": "Soul_Man_The_Blues_Brothers",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Soul_Man_-_The_Blues_Brothers_-.pdf",
-        "url": "/api/songs/42/document",
-        "htmlUrl": "",
-        "storedName": "Soul_Man_-_The_Blues_Brothers_-.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.076Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.076Z"
     },
-    "43": {
+    "sweet caroline neil diamond b around": {
+      "sceneTitle": "Sweet Caroline Neil Diamond B around",
+      "sceneTitleKey": "sweet caroline neil diamond b around",
+      "songPath": "Sweet_Caroline_Neil_Diamond_B_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Sweet_Caroline_-_Neil_Diamond_-_B_-_around.pdf",
-        "url": "/api/songs/43/document",
-        "htmlUrl": "",
-        "storedName": "Sweet_Caroline_-_Neil_Diamond_-_B_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.080Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.080Z"
     },
-    "44": {
+    "superstition stevie wonder em around": {
+      "sceneTitle": "Superstition Stevie Wonder E♭m around",
+      "sceneTitleKey": "superstition stevie wonder em around",
+      "songPath": "Superstition_Stevie_Wonder_E♭m_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Superstition_-_Stevie_Wonder_-_E♭m_around.pdf",
-        "url": "/api/songs/44/document",
-        "htmlUrl": "",
-        "storedName": "Superstition_-_Stevie_Wonder_-_E♭m_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.084Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.084Z"
     },
-    "45": {
+    "teenagers e": {
+      "sceneTitle": "Teenagers-E",
+      "sceneTitleKey": "teenagers e",
+      "songPath": "Teenagers-E",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "00s",
+        "alt rock"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Teenagers-E.pdf",
-        "url": "/api/songs/45/document",
-        "htmlUrl": "",
-        "storedName": "Teenagers-E.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.087Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.087Z"
+      "updatedAt": "2026-06-04T01:54:20.214Z"
     },
-    "46": {
+    "teenage dirtbag e": {
+      "sceneTitle": "Teenage Dirtbag-E",
+      "sceneTitleKey": "teenage dirtbag e",
+      "songPath": "Teenage_Dirtbag-E",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -801,52 +576,37 @@
         "punk-pop"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Teenage_Dirtbag-E.pdf",
-        "url": "/api/songs/46/document",
-        "htmlUrl": "",
-        "storedName": "Teenage_Dirtbag-E.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.090Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.090Z"
+      "updatedAt": "2026-06-04T01:55:36.047Z"
     },
-    "47": {
+    "thats the way kc sunshine cm": {
+      "sceneTitle": "That’s The Way - KC - sunshine Cm",
+      "sceneTitleKey": "thats the way kc sunshine cm",
+      "songPath": "That’s_The_Way_-_KC_-_sunshine_Cm",
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "disco"
+      ],
+      "useFixedDocFont": false,
+      "updatedAt": "2026-06-04T02:00:47.516Z"
+    },
+    "thinking out loud ed sheeran d": {
+      "sceneTitle": "Thinking Out Loud Ed Sheeran D",
+      "sceneTitleKey": "thinking out loud ed sheeran d",
+      "songPath": "Thinking_Out_Loud_Ed_Sheeran_D",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "That’s_The_Way_-_KC_-_sunshine_Cm.pdf",
-        "url": "/api/songs/47/document",
-        "htmlUrl": "",
-        "storedName": "That’s_The_Way_-_KC_-_sunshine_Cm.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.095Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.095Z"
-    },
-    "48": {
-      "levels": {},
-      "mutes": {},
-      "notes": "",
-      "tags": [],
-      "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Thinking_Out_Loud_-_Ed_Sheeran_-_D.pdf",
-        "url": "/api/songs/48/document",
-        "htmlUrl": "",
-        "storedName": "Thinking_Out_Loud_-_Ed_Sheeran_-_D.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.103Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.103Z"
     },
-    "49": {
+    "twist and shout d": {
+      "sceneTitle": "Twist And Shout D",
+      "sceneTitleKey": "twist and shout d",
+      "songPath": "Twist_And_Shout_D",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -856,205 +616,147 @@
         "rock classic"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Twist_And_Shout-D.pdf",
-        "url": "/api/songs/49/document",
-        "htmlUrl": "",
-        "storedName": "Twist_And_Shout-D.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.108Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.108Z"
     },
-    "50": {
+    "uptown funk bruno mars": {
+      "sceneTitle": "Uptown Funk Bruno Mars",
+      "sceneTitleKey": "uptown funk bruno mars",
+      "songPath": "Uptown_Funk_Bruno_Mars",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Uptown_Funk_-_Bruno_Mars.pdf",
-        "url": "/api/songs/50/document",
-        "htmlUrl": "",
-        "storedName": "Uptown_Funk_-_Bruno_Mars.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.114Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.114Z"
     },
-    "51": {
+    "valerie amy winehouse e around": {
+      "sceneTitle": "Valerie - Amy Winehouse E♭ around",
+      "sceneTitleKey": "valerie amy winehouse e around",
+      "songPath": "Valerie_-_Amy_Winehouse_E♭_around",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "00s",
+        "80s",
+        "pop rock"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Valerie_-_Amy_Winehouse_E♭_around.pdf",
-        "url": "/api/songs/51/document",
-        "htmlUrl": "",
-        "storedName": "Valerie_-_Amy_Winehouse_E♭_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.118Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.118Z"
+      "updatedAt": "2026-06-04T02:03:48.846Z"
     },
-    "52": {
+    "wonderful tonight eric clapton g around": {
+      "sceneTitle": "Wonderful Tonight Eric Clapton G around",
+      "sceneTitleKey": "wonderful tonight eric clapton g around",
+      "songPath": "Wonderful_Tonight_Eric_Clapton_G_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Wonderful_Tonight_-_Eric_Clapton_-_G_around.pdf",
-        "url": "/api/songs/52/document",
-        "htmlUrl": "",
-        "storedName": "Wonderful_Tonight_-_Eric_Clapton_-_G_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.125Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.125Z"
     },
-    "53": {
+    "you can leave your hat on joe cocker c": {
+      "sceneTitle": "You Can Leave Your Hat On Joe Cocker C",
+      "sceneTitleKey": "you can leave your hat on joe cocker c",
+      "songPath": "You_Can_Leave_Your_Hat_On_Joe_Cocker_C",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "You_Can_Leave_Your_Hat_On_-_Joe_Cocker_-_C.pdf",
-        "url": "/api/songs/53/document",
-        "htmlUrl": "",
-        "storedName": "You_Can_Leave_Your_Hat_On_-_Joe_Cocker_-_C.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.130Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.130Z"
     },
-    "60": {
+    "i want to dance with somebody f": {
+      "sceneTitle": "i want to dance with somebody F#",
+      "sceneTitleKey": "i want to dance with somebody f",
+      "songPath": "i_want_to_dance_with_somebody_F#",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "80s",
+        "pop"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "i_want_to_dance_with_somebody_F#.pdf",
-        "url": "/api/songs/60/document",
-        "htmlUrl": "",
-        "storedName": "i_want_to_dance_with_somebody_F#.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.135Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.135Z"
+      "updatedAt": "2026-06-04T02:12:25.327Z"
     },
-    "61": {
+    "i gotta feeling black eyed peas g": {
+      "sceneTitle": "I Gotta Feeling - Black Eyed Peas - G",
+      "sceneTitleKey": "i gotta feeling black eyed peas g",
+      "songPath": "I_Gotta_Feeling_-_Black_Eyed_Peas_-_G",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "00s",
+        "pop"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "I_Gotta_Feeling_-_Black_Eyed_Peas_-_G.pdf",
-        "url": "/api/songs/61/document",
-        "htmlUrl": "",
-        "storedName": "I_Gotta_Feeling_-_Black_Eyed_Peas_-_G.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.139Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.139Z"
+      "updatedAt": "2026-06-04T02:20:03.641Z"
     },
-    "62": {
+    "lets get it on marvin gaye eb": {
+      "sceneTitle": "Let's Get it On Marvin Gaye Eb",
+      "sceneTitleKey": "lets get it on marvin gaye eb",
+      "songPath": "Let's_Get_it_On_Marvin_Gaye_Eb",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Let's_Get_it_On_-_Marvin_Gaye_-_Eb.pdf",
-        "url": "/api/songs/62/document",
-        "htmlUrl": "",
-        "storedName": "Let's_Get_it_On_-_Marvin_Gaye_-_Eb.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.144Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.144Z"
     },
-    "64": {
+    "24k magic fm around": {
+      "sceneTitle": "24K Magic Fm around",
+      "sceneTitleKey": "24k magic fm around",
+      "songPath": "24K_Magic_Fm_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "24K_Magic_Fm_around.pdf",
-        "url": "/api/songs/64/document",
-        "htmlUrl": "",
-        "storedName": "24K_Magic_Fm_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.148Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.148Z"
     },
-    "65": {
+    "aint no mountain high enough marvin gaye and tammi terrell around": {
+      "sceneTitle": "Ain't No Mountain High Enough - Marvin Gaye & Tammi Terrell - around",
+      "sceneTitleKey": "aint no mountain high enough marvin gaye and tammi terrell around",
+      "songPath": "Ain't_No_Mountain_High_Enough_-_Marvin_Gaye_&_Tammi_Terrell_-_around",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "60s",
+        "motown",
+        "oldies"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Ain't_No_Mountain_High_Enough_-_Marvin_Gaye_&_Tammi_Terrell_-_around.pdf",
-        "url": "/api/songs/65/document",
-        "htmlUrl": "",
-        "storedName": "Ain't_No_Mountain_High_Enough_-_Marvin_Gaye_&_Tammi_Terrell_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.155Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.155Z"
+      "updatedAt": "2026-06-04T02:30:04.073Z"
     },
-    "66": {
+    "all night long lionel richie aaround": {
+      "sceneTitle": "All Night Long Lionel Richie A♭around",
+      "sceneTitleKey": "all night long lionel richie aaround",
+      "songPath": "All_Night_Long_Lionel_Richie_A♭around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "All_Night_Long_-_Lionel_Richie_-_A♭around.pdf",
-        "url": "/api/songs/66/document",
-        "htmlUrl": "",
-        "storedName": "All_Night_Long_-_Lionel_Richie_-_A♭around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.159Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.159Z"
     },
-    "67": {
+    "baby come back player cm around": {
+      "sceneTitle": "Baby Come Back Player Cm around",
+      "sceneTitleKey": "baby come back player cm around",
+      "songPath": "Baby_Come_Back_Player_Cm_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Baby_Come_Back_-_Player_-_Cm_around.pdf",
-        "url": "/api/songs/67/document",
-        "htmlUrl": "",
-        "storedName": "Baby_Come_Back_-_Player_-_Cm_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.163Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.163Z"
     },
-    "68": {
+    "bang bang c": {
+      "sceneTitle": "Bang Bang C",
+      "sceneTitleKey": "bang bang c",
+      "songPath": "Bang_Bang_C",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1063,18 +765,12 @@
         "pop"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Bang_Bang-C.pdf",
-        "url": "/api/songs/68/document",
-        "htmlUrl": "",
-        "storedName": "Bang_Bang-C.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.167Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.167Z"
     },
-    "69": {
+    "baker street d": {
+      "sceneTitle": "Baker Street D",
+      "sceneTitleKey": "baker street d",
+      "songPath": "Baker_Street_D",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1083,18 +779,12 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Baker_Street-D.pdf",
-        "url": "/api/songs/69/document",
-        "htmlUrl": "",
-        "storedName": "Baker_Street-D.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.172Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.172Z"
     },
-    "70": {
+    "blame it on the boogie c": {
+      "sceneTitle": "Blame It On The Boogie C#",
+      "sceneTitleKey": "blame it on the boogie c",
+      "songPath": "Blame_It_On_The_Boogie_C#",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1104,52 +794,37 @@
         "pop"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Blame_It_On_The_Boogie-C#.pdf",
-        "url": "/api/songs/70/document",
-        "htmlUrl": "",
-        "storedName": "Blame_It_On_The_Boogie-C#.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.214Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.214Z"
+      "updatedAt": "2026-06-04T02:34:53.058Z"
     },
-    "71": {
+    "brown sugar the rolling stones c around": {
+      "sceneTitle": "Brown Sugar The Rolling Stones C around",
+      "sceneTitleKey": "brown sugar the rolling stones c around",
+      "songPath": "Brown_Sugar_The_Rolling_Stones_C_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Brown_Sugar_-_The_Rolling_Stones_-_C_-_around.pdf",
-        "url": "/api/songs/71/document",
-        "htmlUrl": "",
-        "storedName": "Brown_Sugar_-_The_Rolling_Stones_-_C_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.237Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.237Z"
     },
-    "72": {
+    "cant stop the feeling c": {
+      "sceneTitle": "Cant Stop the Feeling C",
+      "sceneTitleKey": "cant stop the feeling c",
+      "songPath": "Cant_Stop_the_Feeling_C",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "10s",
+        "pop"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Cant_Stop_the_Feeling_C.pdf",
-        "url": "/api/songs/72/document",
-        "htmlUrl": "",
-        "storedName": "Cant_Stop_the_Feeling_C.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.244Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.244Z"
+      "updatedAt": "2026-06-04T02:39:17.255Z"
     },
-    "73": {
+    "china grove e": {
+      "sceneTitle": "China Grove E",
+      "sceneTitleKey": "china grove e",
+      "songPath": "China_Grove_E",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1158,52 +833,42 @@
         "rock classic"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "China_Grove-E.pdf",
-        "url": "/api/songs/73/document",
-        "htmlUrl": "",
-        "storedName": "China_Grove-E.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.254Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.254Z"
     },
-    "74": {
+    "crazy in love beyonce d": {
+      "sceneTitle": "Crazy in Love - Beyoncé D",
+      "sceneTitleKey": "crazy in love beyonce d",
+      "songPath": "Crazy_in_Love_-_Beyoncé_D",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
-      "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Crazy_in_Love_-_Beyoncé_D.pdf",
-        "url": "/api/songs/74/document",
-        "htmlUrl": "",
-        "storedName": "Crazy_in_Love_-_Beyoncé_D.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.266Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.266Z"
+      "tags": [
+        "00s",
+        "funk",
+        "pop",
+        "r&b"
+      ],
+      "useFixedDocFont": true,
+      "updatedAt": "2026-06-04T11:09:04.772Z"
     },
-    "75": {
+    "dreams fleetwood mac a": {
+      "sceneTitle": "Dreams - Fleetwood Mac - A -",
+      "sceneTitleKey": "dreams fleetwood mac a",
+      "songPath": "Dreams_-_Fleetwood_Mac_-_A_-",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "classic rock"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Dreams_-_Fleetwood_Mac_-_A_-.pdf",
-        "url": "/api/songs/75/document",
-        "htmlUrl": "",
-        "storedName": "Dreams_-_Fleetwood_Mac_-_A_-.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.273Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.273Z"
+      "updatedAt": "2026-06-04T11:11:11.938Z"
     },
-    "76": {
+    "dynamite e": {
+      "sceneTitle": "Dynamite E",
+      "sceneTitleKey": "dynamite e",
+      "songPath": "Dynamite_E",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1212,188 +877,127 @@
         "pop"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Dynamite-E.pdf",
-        "url": "/api/songs/76/document",
-        "htmlUrl": "",
-        "storedName": "Dynamite-E.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.279Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.279Z"
     },
-    "77": {
+    "feeling good michael buble em em fm around": {
+      "sceneTitle": "Feeling Good - Michael Bublé - E♭m, Em, Fm around",
+      "sceneTitleKey": "feeling good michael buble em em fm around",
+      "songPath": "Feeling_Good_-_Michael_Bublé_-_E♭m,_Em,_Fm_around",
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "00s",
+        "60s",
+        "blues",
+        "jazz"
+      ],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Feeling_Good_-_Michael_Bublé_-_E♭m,_Em,_Fm_around.pdf",
-        "url": "/api/songs/77/document",
-        "htmlUrl": "",
-        "storedName": "Feeling_Good_-_Michael_Bublé_-_E♭m,_Em,_Fm_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.290Z"
-      },
-      "updatedAt": "2026-06-03T01:57:03.290Z"
+      "updatedAt": "2026-06-04T11:20:45.920Z"
     },
-    "78": {
+    "fooled around and fell in love elvin bishop f around": {
+      "sceneTitle": "Fooled Around And Fell In Love Elvin Bishop F around",
+      "sceneTitleKey": "fooled around and fell in love elvin bishop f around",
+      "songPath": "Fooled_Around_And_Fell_In_Love_Elvin_Bishop_F_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Fooled_Around_And_Fell_In_Love_-_Elvin_Bishop_-_F_around.pdf",
-        "url": "/api/songs/78/document",
-        "htmlUrl": "",
-        "storedName": "Fooled_Around_And_Fell_In_Love_-_Elvin_Bishop_-_F_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.302Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.302Z"
     },
-    "79": {
+    "get back the beatles and billy preston a around": {
+      "sceneTitle": "Get Back The Beatles & Billy Preston A around",
+      "sceneTitleKey": "get back the beatles and billy preston a around",
+      "songPath": "Get_Back_The_Beatles_&_Billy_Preston_A_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Get_Back_-_The_Beatles_&_Billy_Preston_-_A_around.pdf",
-        "url": "/api/songs/79/document",
-        "htmlUrl": "",
-        "storedName": "Get_Back_-_The_Beatles_&_Billy_Preston_-_A_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.314Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.314Z"
     },
-    "80": {
+    "get down tonight kc and the sunshine band f": {
+      "sceneTitle": "Get Down Tonight KC & The Sunshine Band F",
+      "sceneTitleKey": "get down tonight kc and the sunshine band f",
+      "songPath": "Get_Down_Tonight_KC_&_The_Sunshine_Band_F",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Get_Down_Tonight_-_KC_&_The_Sunshine_Band_F.pdf",
-        "url": "/api/songs/80/document",
-        "htmlUrl": "",
-        "storedName": "Get_Down_Tonight_-_KC_&_The_Sunshine_Band_F.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.322Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.322Z"
     },
-    "81": {
+    "get lucky bm": {
+      "sceneTitle": "Get lucky Bm",
+      "sceneTitleKey": "get lucky bm",
+      "songPath": "Get_lucky_Bm",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Get_lucky_Bm.pdf",
-        "url": "/api/songs/81/document",
-        "htmlUrl": "",
-        "storedName": "Get_lucky_Bm.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.331Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.331Z"
     },
-    "82": {
+    "green eyed lady sugarloaf": {
+      "sceneTitle": "Green Eyed Lady Sugarloaf",
+      "sceneTitleKey": "green eyed lady sugarloaf",
+      "songPath": "Green_Eyed_Lady_Sugarloaf",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Green-Eyed_Lady_-_Sugarloaf_-.pdf",
-        "url": "/api/songs/82/document",
-        "htmlUrl": "",
-        "storedName": "Green-Eyed_Lady_-_Sugarloaf_-.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.342Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.342Z"
     },
-    "83": {
+    "happy together fm": {
+      "sceneTitle": "Happy Together F#m",
+      "sceneTitleKey": "happy together fm",
+      "songPath": "Happy_Together_F#m",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Happy_Together-F#m.pdf",
-        "url": "/api/songs/83/document",
-        "htmlUrl": "",
-        "storedName": "Happy_Together-F#m.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.356Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.356Z"
     },
-    "84": {
+    "hey jude the beatles f around": {
+      "sceneTitle": "Hey Jude The Beatles F around",
+      "sceneTitleKey": "hey jude the beatles f around",
+      "songPath": "Hey_Jude_The_Beatles_F_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Hey_Jude_-_The_Beatles_-_F_-_around.pdf",
-        "url": "/api/songs/84/document",
-        "htmlUrl": "",
-        "storedName": "Hey_Jude_-_The_Beatles_-_F_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.361Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.361Z"
     },
-    "85": {
+    "hound dog elvis presley c": {
+      "sceneTitle": "Hound Dog Elvis Presley C",
+      "sceneTitleKey": "hound dog elvis presley c",
+      "songPath": "Hound_Dog_Elvis_Presley_C",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Hound_Dog_-_Elvis_Presley_-_C.pdf",
-        "url": "/api/songs/85/document",
-        "htmlUrl": "",
-        "storedName": "Hound_Dog_-_Elvis_Presley_-_C.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.365Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.365Z"
     },
-    "86": {
+    "i cant go for that hall and oates fm around": {
+      "sceneTitle": "I Can't Go for That Hall & Oates Fm around",
+      "sceneTitleKey": "i cant go for that hall and oates fm around",
+      "songPath": "I_Can't_Go_for_That_Hall_&_Oates_Fm_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "I_Can't_Go_for_That_-_Hall_&_Oates_Fm_around.pdf",
-        "url": "/api/songs/86/document",
-        "htmlUrl": "",
-        "storedName": "I_Can't_Go_for_That_-_Hall_&_Oates_Fm_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.371Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.371Z"
     },
-    "87": {
+    "i heard it through the grapevine eb": {
+      "sceneTitle": "I Heard It Through The Grapevine Eb",
+      "sceneTitleKey": "i heard it through the grapevine eb",
+      "songPath": "I_Heard_It_Through_The_Grapevine_Eb",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1403,188 +1007,122 @@
         "r&b"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "I_Heard_It_Through_The_Grapevine-Eb.pdf",
-        "url": "/api/songs/87/document",
-        "htmlUrl": "",
-        "storedName": "I_Heard_It_Through_The_Grapevine-Eb.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.374Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.374Z"
     },
-    "88": {
+    "i think were alone now tommy james and the shondells a around": {
+      "sceneTitle": "I Think We're Alone Now Tommy James and The Shondells A around",
+      "sceneTitleKey": "i think were alone now tommy james and the shondells a around",
+      "songPath": "I_Think_We're_Alone_Now_Tommy_James_and_The_Shondells_A_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "I_Think_We're_Alone_Now_-_Tommy_James_and_The_Shondells_-_A_around.pdf",
-        "url": "/api/songs/88/document",
-        "htmlUrl": "",
-        "storedName": "I_Think_We're_Alone_Now_-_Tommy_James_and_The_Shondells_-_A_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.379Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.379Z"
     },
-    "89": {
+    "i will survive am": {
+      "sceneTitle": "I Will Survive Am",
+      "sceneTitleKey": "i will survive am",
+      "songPath": "I_Will_Survive_Am",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "I_Will_Survive_Am.pdf",
-        "url": "/api/songs/89/document",
-        "htmlUrl": "",
-        "storedName": "I_Will_Survive_Am.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.383Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.383Z"
     },
-    "90": {
+    "id really love to see you tonight england dan and john ford coley around": {
+      "sceneTitle": "I'd Really Love To See You Tonight England Dan & John Ford Coley around",
+      "sceneTitleKey": "id really love to see you tonight england dan and john ford coley around",
+      "songPath": "I'd_Really_Love_To_See_You_Tonight_England_Dan_&_John_Ford_Coley_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "I'd_Really_Love_To_See_You_Tonight_-_England_Dan_&_John_Ford_Coley_-_around.pdf",
-        "url": "/api/songs/90/document",
-        "htmlUrl": "",
-        "storedName": "I'd_Really_Love_To_See_You_Tonight_-_England_Dan_&_John_Ford_Coley_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.388Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.388Z"
     },
-    "91": {
+    "ill be around the spinners around": {
+      "sceneTitle": "I'll Be Around The Spinners around",
+      "sceneTitleKey": "ill be around the spinners around",
+      "songPath": "I'll_Be_Around_The_Spinners_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "I'll_Be_Around_-_The_Spinners_-_around.pdf",
-        "url": "/api/songs/91/document",
-        "htmlUrl": "",
-        "storedName": "I'll_Be_Around_-_The_Spinners_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.392Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.392Z"
     },
-    "92": {
+    "its not unusual tom jones c around": {
+      "sceneTitle": "It's Not Unusual Tom Jones C around",
+      "sceneTitleKey": "its not unusual tom jones c around",
+      "songPath": "It's_Not_Unusual_Tom_Jones_C_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "It's_Not_Unusual_-_Tom_Jones_-_C_around.pdf",
-        "url": "/api/songs/92/document",
-        "htmlUrl": "",
-        "storedName": "It's_Not_Unusual_-_Tom_Jones_-_C_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.396Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.396Z"
     },
-    "93": {
+    "lets stay together al green f": {
+      "sceneTitle": "Let's Stay Together Al Green F",
+      "sceneTitleKey": "lets stay together al green f",
+      "songPath": "Let's_Stay_Together_Al_Green_F",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Let's_Stay_Together_-_Al_Green_-_F.pdf",
-        "url": "/api/songs/93/document",
-        "htmlUrl": "",
-        "storedName": "Let's_Stay_Together_-_Al_Green_-_F.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.406Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.406Z"
     },
-    "94": {
+    "let it be the beatles c around": {
+      "sceneTitle": "Let It Be The Beatles C around",
+      "sceneTitleKey": "let it be the beatles c around",
+      "songPath": "Let_It_Be_The_Beatles_C_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Let_It_Be_-_The_Beatles_-_C_around.pdf",
-        "url": "/api/songs/94/document",
-        "htmlUrl": "",
-        "storedName": "Let_It_Be_-_The_Beatles_-_C_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.412Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.412Z"
     },
-    "95": {
+    "listen to her heart tom petty around": {
+      "sceneTitle": "Listen to Her Heart Tom Petty around",
+      "sceneTitleKey": "listen to her heart tom petty around",
+      "songPath": "Listen_to_Her_Heart_Tom_Petty_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Listen_to_Her_Heart_-_Tom_Petty_-_around.pdf",
-        "url": "/api/songs/95/document",
-        "htmlUrl": "",
-        "storedName": "Listen_to_Her_Heart_-_Tom_Petty_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.422Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.422Z"
     },
-    "96": {
+    "locked out of heaven dm": {
+      "sceneTitle": "Locked out of heaven Dm",
+      "sceneTitleKey": "locked out of heaven dm",
+      "songPath": "Locked_out_of_heaven_Dm",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Locked_out_of_heaven_Dm.pdf",
-        "url": "/api/songs/96/document",
-        "htmlUrl": "",
-        "storedName": "Locked_out_of_heaven_Dm.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.427Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.427Z"
     },
-    "97": {
+    "long train runnin the doobie brothers gm around": {
+      "sceneTitle": "Long Train Runnin' The Doobie Brothers Gm around",
+      "sceneTitleKey": "long train runnin the doobie brothers gm around",
+      "songPath": "Long_Train_Runnin'_The_Doobie_Brothers_Gm_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Long_Train_Runnin'_-_The_Doobie_Brothers_-_Gm_around.pdf",
-        "url": "/api/songs/97/document",
-        "htmlUrl": "",
-        "storedName": "Long_Train_Runnin'_-_The_Doobie_Brothers_-_Gm_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.433Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.433Z"
     },
-    "98": {
+    "mercy mercy me e": {
+      "sceneTitle": "Mercy Mercy Me E",
+      "sceneTitleKey": "mercy mercy me e",
+      "songPath": "Mercy_Mercy_Me_E",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1594,18 +1132,12 @@
         "soul"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Mercy_Mercy_Me-E.pdf",
-        "url": "/api/songs/98/document",
-        "htmlUrl": "",
-        "storedName": "Mercy_Mercy_Me-E.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.438Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.438Z"
     },
-    "99": {
+    "moondance am": {
+      "sceneTitle": "Moondance Am",
+      "sceneTitleKey": "moondance am",
+      "songPath": "Moondance_Am",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1614,120 +1146,78 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Moondance-Am.pdf",
-        "url": "/api/songs/99/document",
-        "htmlUrl": "",
-        "storedName": "Moondance-Am.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.444Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.444Z"
     },
-    "100": {
+    "moves like jagger maroon 5 bm": {
+      "sceneTitle": "Moves Like Jagger Maroon 5 Bm",
+      "sceneTitleKey": "moves like jagger maroon 5 bm",
+      "songPath": "Moves_Like_Jagger_Maroon_5_Bm",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Moves_Like_Jagger_-_Maroon_5_-_Bm.pdf",
-        "url": "/api/songs/100/document",
-        "htmlUrl": "",
-        "storedName": "Moves_Like_Jagger_-_Maroon_5_-_Bm.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.448Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.448Z"
     },
-    "101": {
+    "my girl the temptations c around": {
+      "sceneTitle": "My Girl The Temptations C around",
+      "sceneTitleKey": "my girl the temptations c around",
+      "songPath": "My_Girl_The_Temptations_C_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "My_Girl_-_The_Temptations_-_C_around.pdf",
-        "url": "/api/songs/101/document",
-        "htmlUrl": "",
-        "storedName": "My_Girl_-_The_Temptations_-_C_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.455Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.455Z"
     },
-    "102": {
+    "my old school steely dan around": {
+      "sceneTitle": "My Old School Steely Dan around",
+      "sceneTitleKey": "my old school steely dan around",
+      "songPath": "My_Old_School_Steely_Dan_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "My_Old_School_-_Steely_Dan_-_around.pdf",
-        "url": "/api/songs/102/document",
-        "htmlUrl": "",
-        "storedName": "My_Old_School_-_Steely_Dan_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.460Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.460Z"
     },
-    "103": {
+    "nights are forever without you england dan and john ford coley around": {
+      "sceneTitle": "Nights Are Forever Without You England Dan & John Ford Coley around",
+      "sceneTitleKey": "nights are forever without you england dan and john ford coley around",
+      "songPath": "Nights_Are_Forever_Without_You_England_Dan_&_John_Ford_Coley_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Nights_Are_Forever_Without_You_-_England_Dan_&_John_Ford_Coley_-_around.pdf",
-        "url": "/api/songs/103/document",
-        "htmlUrl": "",
-        "storedName": "Nights_Are_Forever_Without_You_-_England_Dan_&_John_Ford_Coley_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.480Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.480Z"
     },
-    "104": {
+    "no diggity blackstreet feat fm": {
+      "sceneTitle": "No Diggity Blackstreet feat F♯m",
+      "sceneTitleKey": "no diggity blackstreet feat fm",
+      "songPath": "No_Diggity_Blackstreet_feat_F♯m",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "No_Diggity_-_Blackstreet_feat_F♯m.pdf",
-        "url": "/api/songs/104/document",
-        "htmlUrl": "",
-        "storedName": "No_Diggity_-_Blackstreet_feat_F♯m.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.494Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.494Z"
     },
-    "105": {
+    "papa was a rolling stone 45 edit the temptations": {
+      "sceneTitle": "Papa Was A Rolling Stone (45 edit) The Temptations",
+      "sceneTitleKey": "papa was a rolling stone 45 edit the temptations",
+      "songPath": "Papa_Was_A_Rolling_Stone_(45_edit)_The_Temptations",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Papa_Was_A_Rolling_Stone_(45_edit)_-_The_Temptations_-.pdf",
-        "url": "/api/songs/105/document",
-        "htmlUrl": "",
-        "storedName": "Papa_Was_A_Rolling_Stone_(45_edit)_-_The_Temptations_-.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.509Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.509Z"
     },
-    "106": {
+    "ride captain ride d": {
+      "sceneTitle": "Ride Captain Ride D",
+      "sceneTitleKey": "ride captain ride d",
+      "songPath": "Ride_Captain_Ride_D",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1736,18 +1226,12 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Ride_Captain_Ride-D.pdf",
-        "url": "/api/songs/106/document",
-        "htmlUrl": "",
-        "storedName": "Ride_Captain_Ride-D.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.514Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.514Z"
     },
-    "107": {
+    "sailing d": {
+      "sceneTitle": "Sailing D",
+      "sceneTitleKey": "sailing d",
+      "songPath": "Sailing_D",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1756,18 +1240,12 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Sailing-D.pdf",
-        "url": "/api/songs/107/document",
-        "htmlUrl": "",
-        "storedName": "Sailing-D.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.525Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.525Z"
     },
-    "108": {
+    "saturday in the park cg": {
+      "sceneTitle": "Saturday In The Park CG",
+      "sceneTitleKey": "saturday in the park cg",
+      "songPath": "Saturday_In_The_Park_CG",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1776,35 +1254,23 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Saturday_In_The_Park-CG.pdf",
-        "url": "/api/songs/108/document",
-        "htmlUrl": "",
-        "storedName": "Saturday_In_The_Park-CG.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.532Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.532Z"
     },
-    "109": {
+    "save the last dance for me michael buble e e": {
+      "sceneTitle": "Save The Last Dance For Me Michael Bublé E♭, E",
+      "sceneTitleKey": "save the last dance for me michael buble e e",
+      "songPath": "Save_The_Last_Dance_For_Me_Michael_Bublé_E♭,_E",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Save_The_Last_Dance_For_Me_-_Michael_Bublé_-_E♭,_E.pdf",
-        "url": "/api/songs/109/document",
-        "htmlUrl": "",
-        "storedName": "Save_The_Last_Dance_For_Me_-_Michael_Bublé_-_E♭,_E.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.540Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.540Z"
     },
-    "110": {
+    "september fm": {
+      "sceneTitle": "September F#m",
+      "sceneTitleKey": "september fm",
+      "songPath": "September_F#m",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1815,52 +1281,34 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "September-F#m.pdf",
-        "url": "/api/songs/110/document",
-        "htmlUrl": "",
-        "storedName": "September-F#m.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.543Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.543Z"
     },
-    "111": {
+    "shape of you ed sheeran cm": {
+      "sceneTitle": "Shape of You Ed Sheeran C♯m",
+      "sceneTitleKey": "shape of you ed sheeran cm",
+      "songPath": "Shape_of_You_Ed_Sheeran_C♯m",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Shape_of_You_-_Ed_Sheeran_-_C♯m.pdf",
-        "url": "/api/songs/111/document",
-        "htmlUrl": "",
-        "storedName": "Shape_of_You_-_Ed_Sheeran_-_C♯m.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.547Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.547Z"
     },
-    "112": {
+    "shes gone album version hall and oates b g around": {
+      "sceneTitle": "She's Gone (Album Version) Hall & Oates B, G around",
+      "sceneTitleKey": "shes gone album version hall and oates b g around",
+      "songPath": "She's_Gone_(Album_Version)_Hall_&_Oates_B,_G_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "She's_Gone_(Album_Version)_-_Hall_&_Oates_-_B,_G_around.pdf",
-        "url": "/api/songs/112/document",
-        "htmlUrl": "",
-        "storedName": "She's_Gone_(Album_Version)_-_Hall_&_Oates_-_B,_G_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.555Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.555Z"
     },
-    "113": {
+    "somebodys baby d": {
+      "sceneTitle": "Somebodys Baby D",
+      "sceneTitleKey": "somebodys baby d",
+      "songPath": "Somebodys_Baby_D",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1870,103 +1318,67 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Somebodys_Baby-D.pdf",
-        "url": "/api/songs/113/document",
-        "htmlUrl": "",
-        "storedName": "Somebodys_Baby-D.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.573Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.573Z"
     },
-    "114": {
+    "steal away robbie dupree around": {
+      "sceneTitle": "Steal Away Robbie Dupree around",
+      "sceneTitleKey": "steal away robbie dupree around",
+      "songPath": "Steal_Away_Robbie_Dupree_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Steal_Away_-_Robbie_Dupree_-_around.pdf",
-        "url": "/api/songs/114/document",
-        "htmlUrl": "",
-        "storedName": "Steal_Away_-_Robbie_Dupree_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.577Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.577Z"
     },
-    "115": {
+    "still the one orleans e around": {
+      "sceneTitle": "Still The One Orleans E around",
+      "sceneTitleKey": "still the one orleans e around",
+      "songPath": "Still_The_One_Orleans_E_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Still_The_One_-_Orleans_-_E_around.pdf",
-        "url": "/api/songs/115/document",
-        "htmlUrl": "",
-        "storedName": "Still_The_One_-_Orleans_-_E_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.582Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.582Z"
     },
-    "116": {
+    "summer breeze seals and crofts around": {
+      "sceneTitle": "Summer Breeze Seals & Crofts around",
+      "sceneTitleKey": "summer breeze seals and crofts around",
+      "songPath": "Summer_Breeze_Seals_&_Crofts_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "Summer_Breeze_-_Seals_&_Crofts_-_around.pdf",
-        "url": "/api/songs/116/document",
-        "htmlUrl": "",
-        "storedName": "Summer_Breeze_-_Seals_&_Crofts_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.587Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.587Z"
     },
-    "117": {
+    "thats the way of the world earth wind and fire d": {
+      "sceneTitle": "That's The Way Of The World Earth Wind & Fire D",
+      "sceneTitleKey": "thats the way of the world earth wind and fire d",
+      "songPath": "That's_The_Way_Of_The_World_Earth_Wind_&_Fire_D",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "That's_The_Way_Of_The_World_-_Earth_Wind_&_Fire_D.pdf",
-        "url": "/api/songs/117/document",
-        "htmlUrl": "",
-        "storedName": "That's_The_Way_Of_The_World_-_Earth_Wind_&_Fire_D.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.595Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.595Z"
     },
-    "118": {
+    "the way you make me feel f": {
+      "sceneTitle": "The Way You Make Me Feel F",
+      "sceneTitleKey": "the way you make me feel f",
+      "songPath": "The_Way_You_Make_Me_Feel_F",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "The_Way_You_Make_Me_Feel_F.pdf",
-        "url": "/api/songs/118/document",
-        "htmlUrl": "",
-        "storedName": "The_Way_You_Make_Me_Feel_F.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.599Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.599Z"
     },
-    "119": {
+    "thunder island f": {
+      "sceneTitle": "Thunder Island F",
+      "sceneTitleKey": "thunder island f",
+      "songPath": "Thunder_Island_F",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1975,18 +1387,12 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Thunder_Island-F.pdf",
-        "url": "/api/songs/119/document",
-        "htmlUrl": "",
-        "storedName": "Thunder_Island-F.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.606Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.606Z"
     },
-    "120": {
+    "treasure cm": {
+      "sceneTitle": "Treasure Cm",
+      "sceneTitleKey": "treasure cm",
+      "songPath": "Treasure_Cm",
       "levels": {},
       "mutes": {},
       "notes": "",
@@ -1995,67 +1401,139 @@
         "pop"
       ],
       "useFixedDocFont": true,
-      "doc": {
-        "fileName": "Treasure-Cm.pdf",
-        "url": "/api/songs/120/document",
-        "htmlUrl": "",
-        "storedName": "Treasure-Cm.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.610Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.610Z"
     },
-    "121": {
+    "whats going on marvin gaye around": {
+      "sceneTitle": "What's Going On Marvin Gaye around",
+      "sceneTitleKey": "whats going on marvin gaye around",
+      "songPath": "What's_Going_On_Marvin_Gaye_around",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "What's_Going_On_-_Marvin_Gaye_-_around.pdf",
-        "url": "/api/songs/121/document",
-        "htmlUrl": "",
-        "storedName": "What's_Going_On_-_Marvin_Gaye_-_around.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.616Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.616Z"
     },
-    "122": {
+    "you should be dancing bee gees": {
+      "sceneTitle": "You Should Be Dancing Bee Gees",
+      "sceneTitleKey": "you should be dancing bee gees",
+      "songPath": "You_Should_Be_Dancing_Bee_Gees",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "You_Should_Be_Dancing_-_Bee_Gees_-.pdf",
-        "url": "/api/songs/122/document",
-        "htmlUrl": "",
-        "storedName": "You_Should_Be_Dancing_-_Bee_Gees_-.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.620Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.620Z"
     },
-    "123": {
+    "youve lost that lovin feelin the righteous brothers": {
+      "sceneTitle": "You've Lost That Lovin' Feelin' The Righteous Brothers",
+      "sceneTitleKey": "youve lost that lovin feelin the righteous brothers",
+      "songPath": "You've_Lost_That_Lovin'_Feelin'_The_Righteous_Brothers",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
       "useFixedDocFont": false,
-      "doc": {
-        "fileName": "You've_Lost_That_Lovin'_Feelin'_-_The_Righteous_Brothers_-.pdf",
-        "url": "/api/songs/123/document",
-        "htmlUrl": "",
-        "storedName": "You've_Lost_That_Lovin'_Feelin'_-_The_Righteous_Brothers_-.pdf",
-        "htmlStoredName": "",
-        "mimeType": "application/pdf",
-        "uploadedAt": "2026-06-03T01:57:03.627Z"
-      },
       "updatedAt": "2026-06-03T01:57:03.627Z"
+    },
+    "easy the commodores g": {
+      "sceneTitle": "Easy - The Commodores G",
+      "sceneTitleKey": "easy the commodores g",
+      "songPath": "Easy_-_The_Commodores_G",
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "r&b"
+      ],
+      "useFixedDocFont": true,
+      "updatedAt": "2026-06-04T01:18:18.938Z"
+    },
+    "escape the pina colada song rupert holmes c": {
+      "sceneTitle": "Escape (The Pina Colada Song) - Rupert Holmes - C",
+      "sceneTitleKey": "escape the pina colada song rupert holmes c",
+      "songPath": "Escape_(The_Pina_Colada_Song)_-_Rupert_Holmes_-_C",
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
+      "useFixedDocFont": false,
+      "updatedAt": "2026-06-04T01:22:17.682Z"
+    },
+    "twist and shout the beatles d around": {
+      "sceneTitle": "Twist And Shout - The Beatles - D around",
+      "sceneTitleKey": "twist and shout the beatles d around",
+      "songPath": "Twist_And_Shout_-_The_Beatles_-_D_around",
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "60s",
+        "oldies"
+      ],
+      "useFixedDocFont": false,
+      "updatedAt": "2026-06-04T02:02:00.748Z"
+    },
+    "bang bang ariana grande c": {
+      "sceneTitle": "Bang Bang - Ariana Grande C",
+      "sceneTitleKey": "bang bang ariana grande c",
+      "songPath": "Bang_Bang_-_Ariana_Grande_C",
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "10s",
+        "pop"
+      ],
+      "useFixedDocFont": false,
+      "updatedAt": "2026-06-04T02:32:35.327Z"
+    },
+    "baker street gerry rafferty d": {
+      "sceneTitle": "Baker Street - Gerry Rafferty - D",
+      "sceneTitleKey": "baker street gerry rafferty d",
+      "songPath": "Baker_Street_-_Gerry_Rafferty_-_D",
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
+      "useFixedDocFont": false,
+      "updatedAt": "2026-06-04T02:33:40.703Z"
+    },
+    "china grove the doobie brothers e around": {
+      "sceneTitle": "China Grove - The Doobie Brothers - E around",
+      "sceneTitleKey": "china grove the doobie brothers e around",
+      "songPath": "China_Grove_-_The_Doobie_Brothers_-_E_around",
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "70s",
+        "rock classic"
+      ],
+      "useFixedDocFont": false,
+      "updatedAt": "2026-06-04T11:06:19.360Z"
+    },
+    "dynamite taio cruz e": {
+      "sceneTitle": "Dynamite - Taio Cruz - E",
+      "sceneTitleKey": "dynamite taio cruz e",
+      "songPath": "Dynamite_-_Taio_Cruz_-_E",
+      "levels": {},
+      "mutes": {},
+      "notes": "",
+      "tags": [
+        "20s",
+        "disco",
+        "pop"
+      ],
+      "useFixedDocFont": false,
+      "updatedAt": "2026-06-04T11:13:11.870Z"
     }
   }
 }
