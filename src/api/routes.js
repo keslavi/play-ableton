@@ -11,6 +11,9 @@ const notesSchema = z.object({
   tags: z.array(z.string().max(40)).max(20).optional(),
   useFixedDocFont: z.boolean().optional()
 });
+const notesByTitleSchema = notesSchema.extend({
+  sceneTitle: z.string().min(1).max(200)
+});
 
 const parseIndex = (value) => indexSchema.safeParse(value);
 
@@ -140,6 +143,30 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
     ctx.body = { ok: true, profile };
   });
 
+  router.patch("/api/songs/profile/by-title", async (ctx) => {
+    const notesResult = notesByTitleSchema.safeParse(ctx.request.body ?? {});
+    if (!notesResult.success) {
+      ctx.status = 400;
+      ctx.body = { error: "sceneTitle is required; notes must be <= 500 chars and tags must be <= 20 values (<=40 chars each)" };
+      return;
+    }
+
+    const profile = await liveService.setSongNotesForTitle(
+      notesResult.data.sceneTitle,
+      notesResult.data.notes,
+      notesResult.data.tags,
+      notesResult.data.useFixedDocFont
+    );
+
+    if (!profile) {
+      ctx.status = 404;
+      ctx.body = { error: "song profile store unavailable" };
+      return;
+    }
+
+    ctx.body = { ok: true, profile };
+  });
+
   router.post("/api/tracks/recheck-defaults", async (ctx) => {
     const defaults = await liveService.recheckTrackDefaults();
     ctx.body = { ok: true, defaults };
@@ -182,6 +209,35 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
     ctx.body = { ok: true };
   });
 
+  router.post("/api/songs/document/by-title", upload.single("file"), async (ctx) => {
+    const file = ctx.file;
+    if (!file) {
+      ctx.status = 400;
+      ctx.body = { error: "file is required" };
+      return;
+    }
+
+    const ext = path.extname(file.originalname || "").toLowerCase();
+    if (ext !== ".pdf") {
+      ctx.status = 400;
+      ctx.body = { error: "only .pdf is supported" };
+      return;
+    }
+
+    const sceneTitle = sanitizeSceneTitle(ctx.request.body?.sceneTitle);
+    if (!sceneTitle) {
+      ctx.status = 400;
+      ctx.body = { error: "sceneTitle is required" };
+      return;
+    }
+
+    const targetPath = path.join(storageConfig.songDocsDir, `${sceneTitle}.pdf`);
+    await fs.mkdir(storageConfig.songDocsDir, { recursive: true });
+    await fs.writeFile(targetPath, file.buffer);
+
+    ctx.body = { ok: true, sceneTitle };
+  });
+
   router.get("/api/songs/:sceneIndex/document", async (ctx) => {
     const result = parseIndex(ctx.params.sceneIndex);
     if (!result.success) {
@@ -192,6 +248,25 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
 
     const filePath = pdfPathForScene(result.data);
     if (!filePath || !await fileExists(filePath)) {
+      ctx.status = 404;
+      ctx.body = { error: "document not found" };
+      return;
+    }
+
+    ctx.type = "application/pdf";
+    ctx.body = await fs.readFile(filePath);
+  });
+
+  router.get("/api/songs/document/by-title", async (ctx) => {
+    const sceneTitle = sanitizeSceneTitle(ctx.query?.sceneTitle);
+    if (!sceneTitle) {
+      ctx.status = 400;
+      ctx.body = { error: "sceneTitle is required" };
+      return;
+    }
+
+    const filePath = path.join(storageConfig.songDocsDir, `${sceneTitle}.pdf`);
+    if (!await fileExists(filePath)) {
       ctx.status = 404;
       ctx.body = { error: "document not found" };
       return;

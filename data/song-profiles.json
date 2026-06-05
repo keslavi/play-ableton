@@ -3,7 +3,7 @@
   "defaults": {
     "levels": {},
     "mutes": {},
-    "updatedAt": "2026-06-04T01:12:24.075Z"
+    "updatedAt": "2026-06-04T21:06:41.155Z"
   },
   "songs": {
     "1985 b": {
@@ -764,8 +764,8 @@
         "10s",
         "pop"
       ],
-      "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.167Z"
+      "useFixedDocFont": false,
+      "updatedAt": "2026-06-04T21:08:19.529Z"
     },
     "baker street d": {
       "sceneTitle": "Baker Street D",
@@ -779,7 +779,7 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.172Z"
+      "updatedAt": "2026-06-04T21:08:51.899Z"
     },
     "blame it on the boogie c": {
       "sceneTitle": "Blame It On The Boogie C#",
@@ -833,7 +833,7 @@
         "rock classic"
       ],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.254Z"
+      "updatedAt": "2026-06-04T21:09:39.558Z"
     },
     "crazy in love beyonce d": {
       "sceneTitle": "Crazy in Love - Beyoncé D",
@@ -877,7 +877,7 @@
         "pop"
       ],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.279Z"
+      "updatedAt": "2026-06-04T21:10:15.884Z"
     },
     "feeling good michael buble em em fm around": {
       "sceneTitle": "Feeling Good - Michael Bublé - E♭m, Em, Fm around",
@@ -902,9 +902,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.302Z"
+      "updatedAt": "2026-06-04T13:11:03.974Z"
     },
     "get back the beatles and billy preston a around": {
       "sceneTitle": "Get Back The Beatles & Billy Preston A around",
@@ -913,9 +916,13 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "60s",
+        "70s",
+        "oldies"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.314Z"
+      "updatedAt": "2026-06-04T13:36:17.464Z"
     },
     "get down tonight kc and the sunshine band f": {
       "sceneTitle": "Get Down Tonight KC & The Sunshine Band F",
@@ -924,9 +931,13 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "disco",
+        "funk"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.322Z"
+      "updatedAt": "2026-06-04T13:45:44.323Z"
     },
     "get lucky bm": {
       "sceneTitle": "Get lucky Bm",
@@ -935,9 +946,14 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "10s",
+        "disco",
+        "funk",
+        "pop"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.331Z"
+      "updatedAt": "2026-06-04T13:51:54.484Z"
     },
     "green eyed lady sugarloaf": {
       "sceneTitle": "Green Eyed Lady Sugarloaf",
@@ -946,9 +962,13 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "60s",
+        "70s",
+        "classic rock"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.342Z"
+      "updatedAt": "2026-06-04T13:56:30.391Z"
     },
     "happy together fm": {
       "sceneTitle": "Happy Together F#m",
@@ -957,9 +977,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "60s",
+        "classic rock"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.356Z"
+      "updatedAt": "2026-06-04T14:21:57.974Z"
     },
     "hey jude the beatles f around": {
       "sceneTitle": "Hey Jude The Beatles F around",
@@ -968,9 +991,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "60s",
+        "classic rock"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.361Z"
+      "updatedAt": "2026-06-04T14:03:27.941Z"
     },
     "hound dog elvis presley c": {
       "sceneTitle": "Hound Dog Elvis Presley C",
@@ -990,9 +1016,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "80s",
+        "pop"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.371Z"
+      "updatedAt": "2026-06-04T14:30:32.846Z"
     },
     "i heard it through the grapevine eb": {
       "sceneTitle": "I Heard It Through The Grapevine Eb",
@@ -1003,11 +1032,12 @@
       "notes": "",
       "tags": [
         "60s",
-        "oldies",
-        "r&b"
+        "70s",
+        "classic rock",
+        "oldies"
       ],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.374Z"
+      "updatedAt": "2026-06-04T14:36:49.053Z"
     },
     "i think were alone now tommy james and the shondells a around": {
       "sceneTitle": "I Think We're Alone Now Tommy James and The Shondells A around",
@@ -1016,9 +1046,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "60s",
+        "pop"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.379Z"
+      "updatedAt": "2026-06-04T14:57:15.623Z"
     },
     "i will survive am": {
       "sceneTitle": "I Will Survive Am",
@@ -1038,9 +1071,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.388Z"
+      "updatedAt": "2026-06-04T15:06:23.355Z"
     },
     "ill be around the spinners around": {
       "sceneTitle": "I'll Be Around The Spinners around",
@@ -1049,9 +1085,13 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "rock soft",
+        "yacht rock"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.392Z"
+      "updatedAt": "2026-06-04T21:17:11.558Z"
     },
     "its not unusual tom jones c around": {
       "sceneTitle": "It's Not Unusual Tom Jones C around",
@@ -1060,9 +1100,13 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "60s",
+        "oldies",
+        "pop"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.396Z"
+      "updatedAt": "2026-06-04T21:21:07.572Z"
     },
     "lets stay together al green f": {
       "sceneTitle": "Let's Stay Together Al Green F",
@@ -1071,9 +1115,13 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "r&b",
+        "soul"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.406Z"
+      "updatedAt": "2026-06-04T21:25:44.282Z"
     },
     "let it be the beatles c around": {
       "sceneTitle": "Let It Be The Beatles C around",
@@ -1082,9 +1130,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "rock"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.412Z"
+      "updatedAt": "2026-06-04T21:33:21.215Z"
     },
     "listen to her heart tom petty around": {
       "sceneTitle": "Listen to Her Heart Tom Petty around",
@@ -1093,9 +1144,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "rock"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.422Z"
+      "updatedAt": "2026-06-04T21:36:53.271Z"
     },
     "locked out of heaven dm": {
       "sceneTitle": "Locked out of heaven Dm",
@@ -1104,9 +1158,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "10s",
+        "pop"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.427Z"
+      "updatedAt": "2026-06-04T21:42:30.731Z"
     },
     "long train runnin the doobie brothers gm around": {
       "sceneTitle": "Long Train Runnin' The Doobie Brothers Gm around",
@@ -1115,9 +1172,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "rock classic"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.433Z"
+      "updatedAt": "2026-06-04T21:48:35.299Z"
     },
     "mercy mercy me e": {
       "sceneTitle": "Mercy Mercy Me E",
@@ -1132,7 +1192,7 @@
         "soul"
       ],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.438Z"
+      "updatedAt": "2026-06-04T21:50:32.332Z"
     },
     "moondance am": {
       "sceneTitle": "Moondance Am",
@@ -1146,7 +1206,7 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.444Z"
+      "updatedAt": "2026-06-04T21:51:41.790Z"
     },
     "moves like jagger maroon 5 bm": {
       "sceneTitle": "Moves Like Jagger Maroon 5 Bm",
@@ -1155,9 +1215,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
-      "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.448Z"
+      "tags": [
+        "10s",
+        "rock"
+      ],
+      "useFixedDocFont": true,
+      "updatedAt": "2026-06-04T21:56:54.783Z"
     },
     "my girl the temptations c around": {
       "sceneTitle": "My Girl The Temptations C around",
@@ -1199,9 +1262,13 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "90s",
+        "funk",
+        "r&b"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.494Z"
+      "updatedAt": "2026-06-04T23:42:48.312Z"
     },
     "papa was a rolling stone 45 edit the temptations": {
       "sceneTitle": "Papa Was A Rolling Stone (45 edit) The Temptations",
@@ -1210,9 +1277,13 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "funk",
+        "soul"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.509Z"
+      "updatedAt": "2026-06-04T23:48:08.712Z"
     },
     "ride captain ride d": {
       "sceneTitle": "Ride Captain Ride D",
@@ -1223,10 +1294,11 @@
       "notes": "",
       "tags": [
         "70s",
+        "rock soft",
         "yacht rock"
       ],
-      "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.514Z"
+      "useFixedDocFont": false,
+      "updatedAt": "2026-06-04T23:52:16.914Z"
     },
     "sailing d": {
       "sceneTitle": "Sailing D",
@@ -1240,7 +1312,7 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.525Z"
+      "updatedAt": "2026-06-04T23:59:40.804Z"
     },
     "saturday in the park cg": {
       "sceneTitle": "Saturday In The Park CG",
@@ -1254,7 +1326,7 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.532Z"
+      "updatedAt": "2026-06-05T00:01:20.221Z"
     },
     "save the last dance for me michael buble e e": {
       "sceneTitle": "Save The Last Dance For Me Michael Bublé E♭, E",
@@ -1281,7 +1353,7 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.543Z"
+      "updatedAt": "2026-06-05T00:02:31.337Z"
     },
     "shape of you ed sheeran cm": {
       "sceneTitle": "Shape of You Ed Sheeran C♯m",
@@ -1301,9 +1373,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "rock"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.555Z"
+      "updatedAt": "2026-06-05T00:09:20.814Z"
     },
     "somebodys baby d": {
       "sceneTitle": "Somebodys Baby D",
@@ -1318,7 +1393,7 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.573Z"
+      "updatedAt": "2026-06-05T00:10:37.411Z"
     },
     "steal away robbie dupree around": {
       "sceneTitle": "Steal Away Robbie Dupree around",
@@ -1327,9 +1402,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.577Z"
+      "updatedAt": "2026-06-05T00:13:25.220Z"
     },
     "still the one orleans e around": {
       "sceneTitle": "Still The One Orleans E around",
@@ -1338,9 +1416,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "yacht rock"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.582Z"
+      "updatedAt": "2026-06-05T00:16:43.471Z"
     },
     "summer breeze seals and crofts around": {
       "sceneTitle": "Summer Breeze Seals & Crofts around",
@@ -1349,9 +1430,13 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "rock",
+        "yacht rock"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.587Z"
+      "updatedAt": "2026-06-05T00:22:42.715Z"
     },
     "thats the way of the world earth wind and fire d": {
       "sceneTitle": "That's The Way Of The World Earth Wind & Fire D",
@@ -1360,9 +1445,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "rock soft"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.595Z"
+      "updatedAt": "2026-06-05T00:27:20.190Z"
     },
     "the way you make me feel f": {
       "sceneTitle": "The Way You Make Me Feel F",
@@ -1371,9 +1459,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "80s",
+        "pop"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.599Z"
+      "updatedAt": "2026-06-05T00:31:29.530Z"
     },
     "thunder island f": {
       "sceneTitle": "Thunder Island F",
@@ -1387,7 +1478,7 @@
         "yacht rock"
       ],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.606Z"
+      "updatedAt": "2026-06-05T00:32:47.044Z"
     },
     "treasure cm": {
       "sceneTitle": "Treasure Cm",
@@ -1401,7 +1492,7 @@
         "pop"
       ],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T01:57:03.610Z"
+      "updatedAt": "2026-06-05T00:33:44.902Z"
     },
     "whats going on marvin gaye around": {
       "sceneTitle": "What's Going On Marvin Gaye around",
@@ -1410,9 +1501,12 @@
       "levels": {},
       "mutes": {},
       "notes": "",
-      "tags": [],
+      "tags": [
+        "70s",
+        "disco"
+      ],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:03.616Z"
+      "updatedAt": "2026-06-05T00:41:50.546Z"
     },
     "you should be dancing bee gees": {
       "sceneTitle": "You Should Be Dancing Bee Gees",

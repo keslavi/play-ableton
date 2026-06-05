@@ -10,9 +10,11 @@ const recheckDefaultsButton = document.querySelector("#recheck-defaults-button")
 const sceneSearch = document.querySelector("#scene-search");
 const clearSceneSearch = document.querySelector("#clear-scene-search");
 const openSongsButton = document.querySelector("#open-songs");
+const openLibraryButton = document.querySelector("#open-library");
 const openDocButton = document.querySelector("#open-doc");
 const openMixerButton = document.querySelector("#open-mixer");
 const openLogButton = document.querySelector("#open-log");
+const librarySongList = document.querySelector("#library-song-list");
 const docModal = document.querySelector("#doc-modal");
 const closeDocModalButton = document.querySelector("#close-doc-modal");
 const songDocInput = document.querySelector("#song-doc-input");
@@ -34,6 +36,7 @@ const songMetaAttachment = document.querySelector("#song-meta-attachment");
 const songMetaAttachmentOpen = document.querySelector("#song-meta-attachment-open");
 const pages = {
   songs: document.querySelector("#page-songs"),
+  library: document.querySelector("#page-library"),
   mixer: document.querySelector("#page-mixer"),
   log: document.querySelector("#page-log")
 };
@@ -97,14 +100,19 @@ const state = {
   sceneStopTimerId: null,
   sceneStopToken: 0,
   pendingDocSceneIndex: null,
+  pendingDocSceneTitle: null,
   editingSongSceneIndex: null,
+  editingSongSceneTitle: null,
   editingSongTags: [],
   editingUseFixedDocFont: false,
   activeDocObjectUrl: null,
   activeDocEmbedUrl: null,
+  activeDocOpenHref: null,
+  activeDocTitle: null,
   docPreviewAutoCloseId: null,
   pageScrollTopByPage: {
     songs: 0,
+    library: 0,
     mixer: 0,
     log: 0
   }
@@ -117,6 +125,10 @@ const scrollContainerForPage = (page) => {
 
   if (page === "mixer") {
     return trackList;
+  }
+
+  if (page === "library") {
+    return librarySongList;
   }
 
   if (page === "log") {
@@ -172,6 +184,8 @@ const releaseActiveDocObjectUrl = () => {
 
 const clearActiveSongDocument = () => {
   releaseActiveDocObjectUrl();
+  state.activeDocOpenHref = null;
+  state.activeDocTitle = null;
   if (state.activeDocEmbedUrl !== "about:blank") {
     activeSongDocFrame.src = "about:blank";
     state.activeDocEmbedUrl = "about:blank";
@@ -206,6 +220,8 @@ const loadSceneDocument = async (sceneIndex, anchorElement = null) => {
     releaseActiveDocObjectUrl();
     state.activeDocObjectUrl = URL.createObjectURL(blob);
     state.activeSceneIndex = sceneIndex;
+    state.activeDocOpenHref = `/api/songs/${sceneIndex}/document`;
+    state.activeDocTitle = scene?.name ?? "Song Document";
     renderActiveSongDocument();
     return true;
   } catch (error) {
@@ -215,8 +231,51 @@ const loadSceneDocument = async (sceneIndex, anchorElement = null) => {
   }
 };
 
+const loadSongDocumentByTitle = async (sceneTitle, anchorElement = null) => {
+  const matchedDocBasename = findDocBasenameForTitle(sceneTitle);
+  if (!matchedDocBasename) {
+    showDocNotFoundToast("no attachment", anchorElement);
+    return false;
+  }
+
+  try {
+    const params = new URLSearchParams({ sceneTitle: matchedDocBasename });
+    const response = await fetch(`/api/songs/document/by-title?${params.toString()}`);
+    if (!response.ok) {
+      await markDocUnavailable(anchorElement);
+      return false;
+    }
+
+    const blob = await response.blob();
+    releaseActiveDocObjectUrl();
+    state.activeDocObjectUrl = URL.createObjectURL(blob);
+    state.activeSceneIndex = null;
+    state.activeDocOpenHref = `/api/songs/document/by-title?${params.toString()}`;
+    state.activeDocTitle = String(sceneTitle || "Song Document").trim() || "Song Document";
+    renderActiveSongDocument();
+    return true;
+  } catch (error) {
+    writeLog("song.doc.loadByTitle.error", { sceneTitle, message: error.message });
+    showDocNotFoundToast("no attachment", anchorElement);
+    return false;
+  }
+};
+
 const previewDocModalForScene = async (sceneIndex, durationMs = 2000, anchorElement = null) => {
   const didLoad = await loadSceneDocument(sceneIndex, anchorElement);
+  if (!didLoad) {
+    return;
+  }
+
+  openDocModal();
+  state.docPreviewAutoCloseId = setTimeout(() => {
+    state.docPreviewAutoCloseId = null;
+    closeDocModal();
+  }, durationMs);
+};
+
+const previewDocModalForTitle = async (sceneTitle, durationMs = 2000, anchorElement = null) => {
+  const didLoad = await loadSongDocumentByTitle(sceneTitle, anchorElement);
   if (!didLoad) {
     return;
   }
@@ -422,12 +481,42 @@ const sanitizeSceneTitle = (value) => String(value ?? "")
   .replace(/ /g, "_")
   .slice(0, 120);
 
+const findDocBasenameForTitle = (sceneTitle) => {
+  const exactSanitized = sanitizeSceneTitle(sceneTitle);
+  if (exactSanitized && state.availablePdfs.has(exactSanitized)) {
+    return exactSanitized;
+  }
+
+  const titleKey = normalizeSceneTitleKey(sceneTitle);
+  if (!titleKey) {
+    return null;
+  }
+
+  let prefixMatch = null;
+  for (const basename of state.availablePdfs) {
+    const docKey = normalizeSceneTitleKey(basename);
+    if (!docKey) {
+      continue;
+    }
+
+    if (docKey === titleKey) {
+      return basename;
+    }
+
+    if (!prefixMatch && (docKey.startsWith(titleKey) || titleKey.startsWith(docKey))) {
+      prefixMatch = basename;
+    }
+  }
+
+  return prefixMatch;
+};
+
 const sceneHasDoc = (scene) => {
   if (!scene?.name) {
     return false;
   }
 
-  return state.availablePdfs.has(sanitizeSceneTitle(scene.name));
+  return Boolean(findDocBasenameForTitle(scene.name));
 };
 
 const fetchAvailableDocs = async () => {
@@ -445,6 +534,16 @@ const fetchAvailableDocs = async () => {
 };
 
 const sceneForIndex = (sceneIndex) => state.scenes.find((item) => item.index === sceneIndex) ?? null;
+
+const sceneIndexForTitle = (sceneTitle) => {
+  const targetKey = normalizeSceneTitleKey(sceneTitle);
+  if (!targetKey) {
+    return null;
+  }
+
+  const scene = state.scenes.find((item) => normalizeSceneTitleKey(item?.name) === targetKey);
+  return Number.isInteger(scene?.index) ? scene.index : null;
+};
 
 const allKnownTags = () => {
   const tagSet = new Set();
@@ -492,9 +591,13 @@ const renderSongMetaModal = () => {
   }
 
   if (songMetaAttachmentOpen) {
-    const scene = Number.isInteger(state.editingSongSceneIndex) ? sceneForIndex(state.editingSongSceneIndex) : null;
+    const fallbackSceneIndex = sceneIndexForTitle(state.editingSongSceneTitle);
+    const editableSceneIndex = Number.isInteger(state.editingSongSceneIndex)
+      ? state.editingSongSceneIndex
+      : fallbackSceneIndex;
+    const scene = Number.isInteger(editableSceneIndex) ? sceneForIndex(editableSceneIndex) : null;
     if (sceneHasDoc(scene)) {
-      songMetaAttachmentOpen.href = `/api/songs/${state.editingSongSceneIndex}/document`;
+      songMetaAttachmentOpen.href = `/api/songs/${editableSceneIndex}/document`;
       songMetaAttachmentOpen.textContent = scene?.name
         ? `${sanitizeSceneTitle(scene.name)}.pdf`
         : "Open current attachment";
@@ -522,11 +625,7 @@ const profileForScene = (scene) => {
 
 const profileForSceneIndex = (sceneIndex) => profileForScene(sceneForIndex(sceneIndex));
 
-const docEmbedUrl = (sceneIndex) => {
-  if (!Number.isInteger(sceneIndex)) {
-    return null;
-  }
-
+const docEmbedUrl = () => {
   if (!state.activeDocObjectUrl) {
     return null;
   }
@@ -540,7 +639,7 @@ const renderDocMenuButton = () => {
   }
 
   const scene = sceneForIndex(state.activeSceneIndex);
-  const hasDoc = sceneHasDoc(scene);
+  const hasDoc = sceneHasDoc(scene) || Boolean(state.activeDocObjectUrl);
   openDocButton.classList.toggle("hidden", !hasDoc);
   if (!hasDoc) {
     closeDocModal();
@@ -565,7 +664,7 @@ const renderActiveSongDocument = () => {
     return;
   }
 
-  if (!Number.isInteger(state.activeSceneIndex)) {
+  if (!state.activeDocObjectUrl) {
     activeSongDocPanel.classList.add("hidden");
     clearActiveSongDocument();
     activeSongDocFallback.classList.add("hidden");
@@ -573,20 +672,21 @@ const renderActiveSongDocument = () => {
     return;
   }
 
-  const scene = sceneForIndex(state.activeSceneIndex);
-  if (!sceneHasDoc(scene) || !state.activeDocObjectUrl) {
-    activeSongDocPanel.classList.add("hidden");
-    clearActiveSongDocument();
-    activeSongDocFallback.classList.add("hidden");
-    renderDocMenuButton();
-    return;
-  }
+  const scene = Number.isInteger(state.activeSceneIndex) ? sceneForIndex(state.activeSceneIndex) : null;
+  const sceneTitle = scene?.name ?? state.activeDocTitle ?? "Song Document";
+  const openHref = Number.isInteger(state.activeSceneIndex)
+    ? `/api/songs/${state.activeSceneIndex}/document`
+    : state.activeDocOpenHref;
 
   activeSongDocPanel.classList.remove("hidden");
-  activeSongDocTitle.textContent = scene?.name ? `Song Document: ${scene.name}` : "Song Document";
-  activeSongDocOpen.href = `/api/songs/${state.activeSceneIndex}/document`;
-  activeSongDocOpen.textContent = scene?.name ?? "Open in New Tab";
-  const embedUrl = docEmbedUrl(state.activeSceneIndex);
+  activeSongDocTitle.textContent = sceneTitle ? `Song Document: ${sceneTitle}` : "Song Document";
+  if (openHref) {
+    activeSongDocOpen.href = openHref;
+  } else {
+    activeSongDocOpen.removeAttribute("href");
+  }
+  activeSongDocOpen.textContent = sceneTitle || "Open in New Tab";
+  const embedUrl = docEmbedUrl();
   const nextEmbedUrl = embedUrl || "about:blank";
   if (nextEmbedUrl !== state.activeDocEmbedUrl) {
     activeSongDocFrame.src = nextEmbedUrl;
@@ -613,12 +713,65 @@ const uploadSceneDocument = async (sceneIndex, file) => {
   await fetchAvailableDocs();
   renderSongMetaModal();
   renderScenes();
+  renderLibrarySongs();
+  renderActiveSongDocument();
+};
+
+const uploadSongDocumentByTitle = async (sceneTitle, file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("sceneTitle", sceneTitle);
+
+  const response = await fetch("/api/songs/document/by-title", {
+    method: "POST",
+    body: formData
+  });
+
+  const payload = await response.json();
+  if (!response.ok) {
+    throw new Error(payload.error ?? "Failed to upload song document");
+  }
+
+  await fetchAvailableDocs();
+  renderSongMetaModal();
+  renderScenes();
+  renderLibrarySongs();
   renderActiveSongDocument();
 };
 
 const openSongMetaEditor = (sceneIndex) => {
-  const profile = profileForSceneIndex(sceneIndex);
+  const scene = sceneForIndex(sceneIndex);
+  const sceneTitle = scene?.name ?? "";
+  const profile = profileForSceneIndex(sceneIndex) ?? state.songProfiles.get(normalizeSceneTitleKey(sceneTitle));
   state.editingSongSceneIndex = sceneIndex;
+  state.editingSongSceneTitle = sceneTitle || null;
+  state.editingSongTags = Array.isArray(profile?.tags)
+    ? profile.tags.map(normalizeTag).filter(Boolean)
+    : [];
+  state.editingUseFixedDocFont = Boolean(profile?.useFixedDocFont);
+
+  if (songMetaNotes) {
+    songMetaNotes.value = profile?.notes ?? "";
+  }
+
+  if (songTagInput) {
+    songTagInput.value = "";
+  }
+
+  renderSongMetaModal();
+  songMetaModal?.classList.remove("hidden");
+  songMetaNotes?.focus();
+};
+
+const openSongMetaEditorForTitle = (sceneTitle) => {
+  const normalizedTitle = String(sceneTitle ?? "").trim();
+  if (!normalizedTitle) {
+    return;
+  }
+
+  const profile = state.songProfiles.get(normalizeSceneTitleKey(normalizedTitle));
+  state.editingSongSceneIndex = sceneIndexForTitle(normalizedTitle);
+  state.editingSongSceneTitle = normalizedTitle;
   state.editingSongTags = Array.isArray(profile?.tags)
     ? profile.tags.map(normalizeTag).filter(Boolean)
     : [];
@@ -640,6 +793,7 @@ const openSongMetaEditor = (sceneIndex) => {
 const closeSongMetaEditor = () => {
   songMetaModal?.classList.add("hidden");
   state.editingSongSceneIndex = null;
+  state.editingSongSceneTitle = null;
   state.editingSongTags = [];
 };
 
@@ -662,16 +816,29 @@ const addEditingTagFromInput = () => {
 };
 
 const saveSongMetaEditor = async () => {
-  if (!Number.isInteger(state.editingSongSceneIndex)) {
+  const hasSceneIndex = Number.isInteger(state.editingSongSceneIndex);
+  const hasSceneTitle = typeof state.editingSongSceneTitle === "string" && state.editingSongSceneTitle.trim().length > 0;
+  if (!hasSceneIndex && !hasSceneTitle) {
     return;
   }
 
   const notes = songMetaNotes?.value ?? "";
-  const response = await fetch(`/api/songs/${state.editingSongSceneIndex}/profile`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ notes, tags: state.editingSongTags, useFixedDocFont: state.editingUseFixedDocFont })
-  });
+  const response = hasSceneIndex
+    ? await fetch(`/api/songs/${state.editingSongSceneIndex}/profile`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ notes, tags: state.editingSongTags, useFixedDocFont: state.editingUseFixedDocFont })
+    })
+    : await fetch("/api/songs/profile/by-title", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        sceneTitle: state.editingSongSceneTitle,
+        notes,
+        tags: state.editingSongTags,
+        useFixedDocFont: state.editingUseFixedDocFont
+      })
+    });
 
   const payload = await response.json();
   if (!response.ok) {
@@ -685,6 +852,7 @@ const saveSongMetaEditor = async () => {
 
   renderScenes();
   renderActiveSongDocument();
+  renderLibrarySongs();
   closeSongMetaEditor();
 };
 
@@ -807,6 +975,7 @@ const setActivePage = (page) => {
   }
 
   openSongsButton?.classList.toggle("active", page === "songs");
+  openLibraryButton?.classList.toggle("active", page === "library");
   openMixerButton?.classList.toggle("active", page === "mixer");
   openLogButton?.classList.toggle("active", page === "log");
   syncDocButtonState();
@@ -1072,6 +1241,107 @@ const renderScenes = () => {
   });
 };
 
+const orderedLibraryTitles = () => {
+  const profileTitles = Array.from(state.songProfiles.values())
+    .map((profile) => String(profile?.sceneTitle ?? "").trim())
+    .filter(Boolean);
+
+  if (profileTitles.length > 0) {
+    return profileTitles;
+  }
+
+  return state.scenes
+    .map((scene) => String(scene?.name ?? "").trim())
+    .filter(Boolean);
+};
+
+const renderLibrarySongs = () => {
+  if (!librarySongList) {
+    return;
+  }
+
+  const previousScrollTop = librarySongList.scrollTop;
+  librarySongList.innerHTML = "";
+
+  const titles = orderedLibraryTitles();
+  if (titles.length === 0) {
+    const empty = document.createElement("li");
+    empty.className = "library-empty";
+    empty.textContent = "No song titles yet.";
+    librarySongList.append(empty);
+    return;
+  }
+
+  for (const title of titles) {
+    const li = document.createElement("li");
+    li.className = "scene-card library-song-card";
+
+    const primary = document.createElement("div");
+    primary.className = "scene-card-primary";
+
+    const label = document.createElement("span");
+    label.className = "scene-card-name";
+    label.textContent = normalizeSceneDisplayName(title);
+    primary.append(label);
+
+    const meta = document.createElement("div");
+    meta.className = "scene-card-meta";
+
+    const profile = state.songProfiles.get(normalizeSceneTitleKey(title));
+    const notesPreview = document.createElement("span");
+    notesPreview.className = "scene-card-notes";
+    notesPreview.textContent = profile?.notes?.trim() || "";
+    meta.append(notesPreview);
+
+    const actions = document.createElement("div");
+    actions.className = "scene-card-actions";
+
+    const hasAttachment = Boolean(findDocBasenameForTitle(title));
+    if (hasAttachment) {
+      const attachmentButton = document.createElement("button");
+      attachmentButton.type = "button";
+      attachmentButton.className = "scene-card-attachment";
+      attachmentButton.textContent = "♪";
+      attachmentButton.title = "Open attached document";
+      attachmentButton.setAttribute("aria-label", "Open attached document");
+      attachmentButton.addEventListener("click", () => {
+        void previewDocModalForTitle(title, 1000, attachmentButton);
+      });
+      actions.append(attachmentButton);
+    }
+
+    const importButton = document.createElement("button");
+    importButton.type = "button";
+    importButton.className = "scene-card-notes-edit";
+    importButton.textContent = hasAttachment ? "Replace PDF" : "Import PDF";
+    importButton.title = "Import attachment";
+    importButton.addEventListener("click", () => {
+      state.pendingDocSceneIndex = null;
+      state.pendingDocSceneTitle = title;
+      songDocInput?.click();
+    });
+    actions.append(importButton);
+
+    const notesButton = document.createElement("button");
+    notesButton.type = "button";
+    notesButton.className = "scene-card-notes-edit";
+    notesButton.textContent = "Notes";
+    notesButton.title = "Edit song notes";
+    notesButton.addEventListener("click", () => {
+      openSongMetaEditorForTitle(title);
+    });
+    actions.append(notesButton);
+
+    li.append(primary, meta, actions);
+    librarySongList.append(li);
+  }
+
+  requestAnimationFrame(() => {
+    librarySongList.scrollTop = previousScrollTop;
+    state.pageScrollTopByPage.library = librarySongList.scrollTop;
+  });
+};
+
 const renderTracks = () => {
   trackList.innerHTML = "";
 
@@ -1221,6 +1491,7 @@ const refreshCache = async () => {
   state.availablePdfs = new Set(Array.isArray(docsPayload.pdfs) ? docsPayload.pdfs : []);
   renderTracks();
   renderScenes();
+  renderLibrarySongs();
   renderActiveSongDocument();
 };
 
@@ -1252,6 +1523,7 @@ const startWs = () => {
         state.scenes = payload.payload.scenes ?? state.scenes;
         renderTracks();
         renderScenes();
+        renderLibrarySongs();
         renderActiveSongDocument();
       }
 
@@ -1364,6 +1636,10 @@ openSongsButton?.addEventListener("click", () => {
   setActivePage("songs");
 });
 
+openLibraryButton?.addEventListener("click", () => {
+  setActivePage("library");
+});
+
 openDocButton?.addEventListener("click", () => {
   if (!Number.isInteger(state.activeSceneIndex)) {
     return;
@@ -1402,24 +1678,41 @@ recheckDefaultsButton?.addEventListener("click", () => {
 songDocInput?.addEventListener("change", (event) => {
   const [file] = event.target.files ?? [];
   const targetSceneIndex = state.pendingDocSceneIndex;
+  const targetSceneTitle = state.pendingDocSceneTitle;
   state.pendingDocSceneIndex = null;
+  state.pendingDocSceneTitle = null;
   event.target.value = "";
 
-  if (!file || !Number.isInteger(targetSceneIndex)) {
+  if (!file) {
     return;
   }
 
-  void uploadSceneDocument(targetSceneIndex, file).catch((error) => {
-    writeLog("song.doc.upload.error", { sceneIndex: targetSceneIndex, message: error.message });
-  });
+  if (Number.isInteger(targetSceneIndex)) {
+    void uploadSceneDocument(targetSceneIndex, file).catch((error) => {
+      writeLog("song.doc.upload.error", { sceneIndex: targetSceneIndex, message: error.message });
+    });
+    return;
+  }
+
+  if (typeof targetSceneTitle === "string" && targetSceneTitle.trim()) {
+    void uploadSongDocumentByTitle(targetSceneTitle, file).catch((error) => {
+      writeLog("song.doc.upload.error", { sceneTitle: targetSceneTitle, message: error.message });
+    });
+  }
 });
 
 songMetaAttachment?.addEventListener("click", () => {
-  if (!Number.isInteger(state.editingSongSceneIndex)) {
+  if (!Number.isInteger(state.editingSongSceneIndex) && !(typeof state.editingSongSceneTitle === "string" && state.editingSongSceneTitle.trim())) {
     return;
   }
 
   state.pendingDocSceneIndex = state.editingSongSceneIndex;
+  if (Number.isInteger(state.editingSongSceneIndex)) {
+    const scene = sceneForIndex(state.editingSongSceneIndex);
+    state.pendingDocSceneTitle = scene?.name ?? state.editingSongSceneTitle;
+  } else {
+    state.pendingDocSceneTitle = state.editingSongSceneTitle;
+  }
   songDocInput?.click();
 });
 
@@ -1477,4 +1770,5 @@ renderStopButton();
 renderSearchClear();
 closeSongMetaEditor();
 renderDocMenuButton();
+renderLibrarySongs();
 setActivePage(state.activePage);

@@ -22,6 +22,7 @@
           <button id="stop-song-button" class="danger-button" type="button">Stop</button>
           <nav class="header-menu" aria-label="Drawer menu">
             <button id="open-songs" class="menu-button active" type="button">Songs</button>
+            <button id="open-library" class="menu-button" type="button">Library</button>
             <button id="open-doc" class="menu-button hidden" type="button">Doc</button>
             <button id="open-mixer" class="menu-button" type="button">Mixer</button>
             <button id="open-log" class="menu-button" type="button">Log</button>
@@ -45,6 +46,13 @@
         <section id="page-songs" class="panel page songs-page active">
           <ul id="scene-list" class="scene-grid"></ul>
           <input id="song-doc-input" class="hidden" type="file" accept=".pdf,application/pdf" />
+        </section>
+
+        <section id="page-library" class="panel page library-page">
+          <div class="page-caption">
+            <h2>Song Library</h2>
+          </div>
+          <ul id="library-song-list" class="scene-grid"></ul>
         </section>
 
         <section id="page-mixer" class="panel page mixer-page">

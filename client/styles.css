@@ -273,6 +273,10 @@ body.mixer-lock-scroll {
   min-height: 0;
 }
 
+.library-page {
+  min-height: 0;
+}
+
 .page-caption h2 {
   margin: 0 0 0.7rem;
   font-size: 1.1rem;
@@ -407,6 +411,30 @@ body.mixer-lock-scroll {
   color: var(--ink-soft);
   cursor: pointer;
   text-decoration: none;
+}
+
+.library-song-card {
+  grid-template-columns: minmax(200px, 8fr) minmax(160px, 4fr) auto;
+}
+
+.library-attachment-state {
+  border: 1px solid rgba(77, 212, 166, 0.45);
+  border-radius: 999px;
+  padding: 0.2rem 0.45rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  color: var(--ink-soft);
+  background: rgba(77, 212, 166, 0.13);
+}
+
+.library-empty {
+  list-style: none;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 0.75rem;
+  color: var(--ink-soft);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
 }
 
 .scene-card-notes-edit:hover {

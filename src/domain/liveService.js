@@ -488,6 +488,22 @@ export class LiveService extends EventEmitter {
     });
   }
 
+  async setSongNotesForTitle(sceneTitle, notes, tags, useFixedDocFont) {
+    if (!this.#songProfileStore) {
+      return null;
+    }
+
+    if (typeof sceneTitle !== "string" || !sceneTitle.trim()) {
+      return null;
+    }
+
+    return this.#songProfileStore.upsertSongMeta(sceneTitle, {
+      notes,
+      tags,
+      useFixedDocFont
+    });
+  }
+
   async recheckTrackDefaults() {
     if (!this.#songProfileStore) {
       return null;
