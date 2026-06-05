@@ -7,6 +7,8 @@ const trackList = document.querySelector("#track-list");
 const eventLog = document.querySelector("#event-log");
 const stopSongButton = document.querySelector("#stop-song-button");
 const recheckDefaultsButton = document.querySelector("#recheck-defaults-button");
+const addGlobalDefaultsButton = document.querySelector("#add-global-defaults-button");
+const clearGlobalDefaultsButton = document.querySelector("#clear-global-defaults-button");
 const sceneSearch = document.querySelector("#scene-search");
 const clearSceneSearch = document.querySelector("#clear-scene-search");
 const openSongsButton = document.querySelector("#open-songs");
@@ -212,6 +214,13 @@ const loadSceneDocument = async (sceneIndex, anchorElement = null) => {
   try {
     const response = await fetch(`/api/songs/${sceneIndex}/document`);
     if (!response.ok) {
+      if (scene?.name) {
+        const loadedByTitle = await loadSongDocumentByTitle(scene.name, anchorElement);
+        if (loadedByTitle) {
+          return true;
+        }
+      }
+
       await markDocUnavailable(anchorElement);
       return false;
     }
@@ -261,19 +270,6 @@ const loadSongDocumentByTitle = async (sceneTitle, anchorElement = null) => {
   }
 };
 
-const previewDocModalForScene = async (sceneIndex, durationMs = 2000, anchorElement = null) => {
-  const didLoad = await loadSceneDocument(sceneIndex, anchorElement);
-  if (!didLoad) {
-    return;
-  }
-
-  openDocModal();
-  state.docPreviewAutoCloseId = setTimeout(() => {
-    state.docPreviewAutoCloseId = null;
-    closeDocModal();
-  }, durationMs);
-};
-
 const previewDocModalForTitle = async (sceneTitle, durationMs = 2000, anchorElement = null) => {
   const didLoad = await loadSongDocumentByTitle(sceneTitle, anchorElement);
   if (!didLoad) {
@@ -281,6 +277,10 @@ const previewDocModalForTitle = async (sceneTitle, durationMs = 2000, anchorElem
   }
 
   openDocModal();
+  if (!Number.isFinite(durationMs) || durationMs <= 0) {
+    return;
+  }
+
   state.docPreviewAutoCloseId = setTimeout(() => {
     state.docPreviewAutoCloseId = null;
     closeDocModal();
@@ -481,6 +481,36 @@ const sanitizeSceneTitle = (value) => String(value ?? "")
   .replace(/ /g, "_")
   .slice(0, 120);
 
+const isMusicalKeyToken = (token) => /^[a-g](?:b|#|♭|♯)?m?$/i.test(token);
+
+const isDescriptorToken = (token) => {
+  if (!token) {
+    return false;
+  }
+
+  if (token === "around" || token === "bpm") {
+    return true;
+  }
+
+  if (/^\d+(?:\.\d+)?$/.test(token)) {
+    return true;
+  }
+
+  return isMusicalKeyToken(token);
+};
+
+const trimTrailingDescriptors = (normalizedTitleKey) => {
+  const words = String(normalizedTitleKey ?? "")
+    .split(" ")
+    .filter(Boolean);
+
+  while (words.length > 0 && isDescriptorToken(words[words.length - 1])) {
+    words.pop();
+  }
+
+  return words.join(" ");
+};
+
 const findDocBasenameForTitle = (sceneTitle) => {
   const exactSanitized = sanitizeSceneTitle(sceneTitle);
   if (exactSanitized && state.availablePdfs.has(exactSanitized)) {
@@ -492,15 +522,31 @@ const findDocBasenameForTitle = (sceneTitle) => {
     return null;
   }
 
+  const trimmedTitleKey = trimTrailingDescriptors(titleKey);
+
   let prefixMatch = null;
+  let trimmedMatch = null;
   for (const basename of state.availablePdfs) {
     const docKey = normalizeSceneTitleKey(basename);
     if (!docKey) {
       continue;
     }
 
+    const trimmedDocKey = trimTrailingDescriptors(docKey);
+
     if (docKey === titleKey) {
       return basename;
+    }
+
+    if (trimmedTitleKey && trimmedDocKey && trimmedDocKey === trimmedTitleKey) {
+      return basename;
+    }
+
+    if (!trimmedMatch && trimmedTitleKey && trimmedDocKey && (
+      trimmedDocKey.startsWith(trimmedTitleKey) ||
+      trimmedTitleKey.startsWith(trimmedDocKey)
+    )) {
+      trimmedMatch = basename;
     }
 
     if (!prefixMatch && (docKey.startsWith(titleKey) || titleKey.startsWith(docKey))) {
@@ -508,7 +554,7 @@ const findDocBasenameForTitle = (sceneTitle) => {
     }
   }
 
-  return prefixMatch;
+  return trimmedMatch ?? prefixMatch;
 };
 
 const sceneHasDoc = (scene) => {
@@ -1019,8 +1065,36 @@ const applySceneMixToUiState = (mix) => {
   }
 };
 
-// Kept for quick restore after doc-link verification mode.
-// eslint-disable-next-line no-unused-vars
+const applyDefaultsToUiState = (defaults) => {
+  if (!defaults || typeof defaults !== "object") {
+    return;
+  }
+
+  const levelEntries = Object.entries(defaults.levels ?? {});
+  for (const [trackKey, level] of levelEntries) {
+    const trackIndex = Number(trackKey);
+    if (!Number.isInteger(trackIndex) || !Number.isFinite(level)) {
+      continue;
+    }
+
+    state.trackLevels.set(trackIndex, Math.max(0, Math.min(1, Number(level))));
+  }
+
+  const muteEntries = Object.entries(defaults.mutes ?? {});
+  for (const [trackKey, mute] of muteEntries) {
+    const trackIndex = Number(trackKey);
+    if (!Number.isInteger(trackIndex)) {
+      continue;
+    }
+
+    state.trackMutes.set(trackIndex, Boolean(mute));
+  }
+
+  if (levelEntries.length > 0 || muteEntries.length > 0) {
+    renderTracks();
+  }
+};
+
 const startScene = async (sceneIndex) => {
   clearSceneStopTimer("scene-start");
   console.info("[scene] start requested", { sceneIndex });
@@ -1162,7 +1236,7 @@ const renderScenes = () => {
     button.textContent = "Play";
     button.addEventListener("click", (event) => {
       event.stopPropagation();
-      void previewDocModalForScene(scene.index, 2000, button);
+      void startScene(scene.index);
     });
 
     const notesPreview = document.createElement("span");
@@ -1495,6 +1569,27 @@ const refreshCache = async () => {
   renderActiveSongDocument();
 };
 
+const addGlobalDefaults = async () => {
+  const response = await fetch("/api/tracks/defaults/add", { method: "POST" });
+  const payload = await response.json();
+  if (!response.ok) {
+    throw new Error(payload.error ?? "Failed to add global defaults");
+  }
+
+  applyDefaultsToUiState(payload.defaults);
+  writeLog("track.defaults.add", payload);
+};
+
+const clearGlobalDefaults = async () => {
+  const response = await fetch("/api/tracks/defaults/clear", { method: "POST" });
+  const payload = await response.json();
+  if (!response.ok) {
+    throw new Error(payload.error ?? "Failed to clear global defaults");
+  }
+
+  writeLog("track.defaults.clear", payload);
+};
+
 const startWs = () => {
   const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
   const socket = new WebSocket(`${wsProtocol}://${window.location.host}/ws`);
@@ -1581,6 +1676,17 @@ const startWs = () => {
   renderStopButton();
   try {
     await Promise.all([refreshCache(), fetchConnectionInfo()]);
+    try {
+      const defaultsResponse = await fetch("/api/tracks/defaults");
+      if (defaultsResponse.ok) {
+        const defaultsPayload = await defaultsResponse.json();
+        applyDefaultsToUiState(defaultsPayload.defaults);
+        writeLog("track.defaults.load", defaultsPayload);
+      }
+    } catch (error) {
+      writeLog("track.defaults.load.error", { message: error.message });
+    }
+
     if (state.connectionInfo?.status) {
       state.abletonOnline = Boolean(state.connectionInfo.status.abletonOnline);
       state.isPlaying = Boolean(state.connectionInfo.status.isPlaying);
@@ -1625,18 +1731,22 @@ clearSceneSearch?.addEventListener("click", () => {
 });
 
 openMixerButton?.addEventListener("click", () => {
+  closeDocModal();
   setActivePage("mixer");
 });
 
 openLogButton?.addEventListener("click", () => {
+  closeDocModal();
   setActivePage("log");
 });
 
 openSongsButton?.addEventListener("click", () => {
+  closeDocModal();
   setActivePage("songs");
 });
 
 openLibraryButton?.addEventListener("click", () => {
+  closeDocModal();
   setActivePage("library");
 });
 
@@ -1668,11 +1778,24 @@ recheckDefaultsButton?.addEventListener("click", () => {
       if (!response.ok) {
         throw new Error(payload.error ?? "Failed to recheck defaults");
       }
+      applyDefaultsToUiState(payload.defaults);
       writeLog("track.defaults.recheck", payload);
     })
     .catch((error) => {
       writeLog("track.defaults.recheck.error", { message: error.message });
     });
+});
+
+addGlobalDefaultsButton?.addEventListener("click", () => {
+  void addGlobalDefaults().catch((error) => {
+    writeLog("track.defaults.add.error", { message: error.message });
+  });
+});
+
+clearGlobalDefaultsButton?.addEventListener("click", () => {
+  void clearGlobalDefaults().catch((error) => {
+    writeLog("track.defaults.clear.error", { message: error.message });
+  });
 });
 
 songDocInput?.addEventListener("change", (event) => {

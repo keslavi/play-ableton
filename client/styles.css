@@ -80,7 +80,7 @@ body.mixer-lock-scroll {
 .right-block {
   justify-content: flex-end;
   gap: 0.7rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .brand-name {
@@ -282,6 +282,28 @@ body.mixer-lock-scroll {
   font-size: 1.1rem;
 }
 
+.page-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.mixer-default-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.mixer-default-label {
+  color: var(--ink-soft);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+}
+
 .scene-grid {
   list-style: none;
   margin: 0;
@@ -476,6 +498,14 @@ body.mixer-lock-scroll {
   min-height: 0;
   display: flex;
   flex-direction: column;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.doc-modal-card .song-doc-header {
+  padding: 0 0.65rem 0.4rem;
 }
 
 .song-doc-header {
@@ -503,6 +533,7 @@ body.mixer-lock-scroll {
 .doc-modal-card .song-doc-frame {
   min-height: 0;
   flex: 1;
+  border-radius: 0;
 }
 
 .song-doc-fallback {
@@ -521,17 +552,23 @@ body.mixer-lock-scroll {
   padding: 1rem;
 }
 
+#doc-modal {
+  top: 3.8rem;
+  padding: 0;
+  align-items: stretch;
+}
+
 .modal-overlay.hidden {
   display: none;
 }
 
 .doc-modal-card {
-  width: min(1120px, 96vw);
-  height: min(88vh, 940px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 14px;
-  background: rgba(18, 28, 37, 0.98);
-  padding: 2.5rem 0.9rem 0.9rem;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0.45rem 0 0;
   position: relative;
   display: flex;
 }

@@ -513,6 +513,30 @@ export class LiveService extends EventEmitter {
     return this.#songProfileStore.setDefaults(snapshot);
   }
 
+  getTrackDefaults() {
+    if (!this.#songProfileStore) {
+      return {
+        levels: {},
+        mutes: {},
+        updatedAt: null
+      };
+    }
+
+    return this.#songProfileStore.getDefaults();
+  }
+
+  async clearTrackDefaults() {
+    if (!this.#songProfileStore) {
+      return {
+        levels: {},
+        mutes: {},
+        updatedAt: null
+      };
+    }
+
+    return this.#songProfileStore.setDefaults({ levels: {}, mutes: {} });
+  }
+
   getConnectionStatus() {
     return {
       abletonOnline: this.#abletonOnline,

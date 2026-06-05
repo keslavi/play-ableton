@@ -172,6 +172,27 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
     ctx.body = { ok: true, defaults };
   });
 
+  router.get("/api/tracks/defaults", (ctx) => {
+    const defaults = typeof liveService.getTrackDefaults === "function"
+      ? liveService.getTrackDefaults()
+      : { levels: {}, mutes: {}, updatedAt: null };
+
+    ctx.body = { ok: true, defaults };
+  });
+
+  router.post("/api/tracks/defaults/add", async (ctx) => {
+    const defaults = await liveService.recheckTrackDefaults();
+    ctx.body = { ok: true, defaults };
+  });
+
+  router.post("/api/tracks/defaults/clear", async (ctx) => {
+    const defaults = typeof liveService.clearTrackDefaults === "function"
+      ? await liveService.clearTrackDefaults()
+      : { levels: {}, mutes: {}, updatedAt: null };
+
+    ctx.body = { ok: true, defaults };
+  });
+
   router.post("/api/songs/:sceneIndex/document", upload.single("file"), async (ctx) => {
     const result = parseIndex(ctx.params.sceneIndex);
     if (!result.success) {

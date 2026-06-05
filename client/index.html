@@ -22,9 +22,9 @@
           <button id="stop-song-button" class="danger-button" type="button">Stop</button>
           <nav class="header-menu" aria-label="Drawer menu">
             <button id="open-songs" class="menu-button active" type="button">Songs</button>
-            <button id="open-library" class="menu-button" type="button">Library</button>
             <button id="open-doc" class="menu-button hidden" type="button">Doc</button>
             <button id="open-mixer" class="menu-button" type="button">Mixer</button>
+            <button id="open-library" class="menu-button" type="button">Lib</button>
             <button id="open-log" class="menu-button" type="button">Log</button>
           </nav>
         </div>
@@ -33,7 +33,6 @@
             <input id="scene-search" type="search" placeholder="Find a scene" />
             <button id="clear-scene-search" class="clear-search-button hidden" type="button" aria-label="Clear scene search">×</button>
           </div>
-          <button id="recheck-defaults-button" class="menu-button" type="button">Refresh Clip Defaults</button>
           <button id="ws-status" class="status-light status-red" type="button" aria-label="Connection status"></button>
           <span id="connection-address" class="meta hidden"></span>
         </div>
@@ -58,6 +57,12 @@
         <section id="page-mixer" class="panel page mixer-page">
           <div class="page-caption">
             <h2>Tracks and Buses</h2>
+            <div class="mixer-default-controls" aria-label="Global Defaults controls">
+              <span class="mixer-default-label">Global Defaults</span>
+              <button id="recheck-defaults-button" class="menu-button" type="button">Refresh Clip Defaults</button>
+              <button id="add-global-defaults-button" class="menu-button" type="button">Add</button>
+              <button id="clear-global-defaults-button" class="menu-button" type="button">Clear</button>
+            </div>
           </div>
           <ul id="track-list" class="track-grid"></ul>
         </section>
@@ -73,7 +78,7 @@
 
     <section id="doc-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="active-song-doc-title">
       <div class="doc-modal-card">
-        <button id="close-doc-modal" class="doc-modal-close" type="button" aria-label="Close document">×</button>
+        <button id="close-doc-modal" class="doc-modal-close hidden" type="button" aria-label="Close document">×</button>
         <section id="active-song-doc" class="song-doc-panel hidden">
           <div class="song-doc-header">
             <strong id="active-song-doc-title">Song Document</strong>
