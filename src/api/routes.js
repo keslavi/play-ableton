@@ -2,6 +2,7 @@ import Router from "@koa/router";
 import multer from "@koa/multer";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { lanIpCandidates } from "../utils/network.js";
 import { z } from "zod";
 
 const indexSchema = z.coerce.number().int().nonnegative();
@@ -9,6 +10,11 @@ const volumeSchema = z.coerce.number().min(0).max(1);
 const notesSchema = z.object({
   notes: z.string().max(500).default(""),
   tags: z.array(z.string().max(40)).max(20).optional(),
+  confidence: z.union([z.number().int().min(1).max(5), z.null()]).optional(),
+  pdfCuePoints: z.array(z.object({
+    atSeconds: z.number().min(0),
+    scrollRatio: z.number().min(0).max(1)
+  })).max(200).optional(),
   useFixedDocFont: z.boolean().optional()
 });
 const notesByTitleSchema = notesSchema.extend({
@@ -74,6 +80,9 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
       },
       storage: {
         songDocsDefaultRoot: storageConfig?.songDocsDefaultRoot ?? ""
+      },
+      network: {
+        lanIps: lanIpCandidates()
       }
     };
   });
@@ -137,7 +146,9 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
       result.data,
       notesResult.data.notes,
       notesResult.data.tags,
-      notesResult.data.useFixedDocFont
+      notesResult.data.useFixedDocFont,
+      notesResult.data.confidence,
+      notesResult.data.pdfCuePoints
     );
 
     ctx.body = { ok: true, profile };
@@ -155,7 +166,9 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
       notesResult.data.sceneTitle,
       notesResult.data.notes,
       notesResult.data.tags,
-      notesResult.data.useFixedDocFont
+      notesResult.data.useFixedDocFont,
+      notesResult.data.confidence,
+      notesResult.data.pdfCuePoints
     );
 
     if (!profile) {
@@ -172,6 +185,14 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
     ctx.body = { ok: true, defaults };
   });
 
+  router.get("/api/tracks/state", async (ctx) => {
+    const stateSnapshot = typeof liveService.getTrackStateSnapshot === "function"
+      ? await liveService.getTrackStateSnapshot()
+      : { levels: {}, mutes: {} };
+
+    ctx.body = { ok: true, state: stateSnapshot };
+  });
+
   router.get("/api/tracks/defaults", (ctx) => {
     const defaults = typeof liveService.getTrackDefaults === "function"
       ? liveService.getTrackDefaults()
@@ -183,6 +204,14 @@ export const createApiRouter = ({ liveService, oscConfig, storageConfig }) => {
   router.post("/api/tracks/defaults/add", async (ctx) => {
     const defaults = await liveService.recheckTrackDefaults();
     ctx.body = { ok: true, defaults };
+  });
+
+  router.post("/api/tracks/defaults/reset", async (ctx) => {
+    const applied = typeof liveService.applyTrackDefaults === "function"
+      ? await liveService.applyTrackDefaults()
+      : { levels: {}, mutes: {} };
+
+    ctx.body = { ok: true, applied };
   });
 
   router.post("/api/tracks/defaults/clear", async (ctx) => {

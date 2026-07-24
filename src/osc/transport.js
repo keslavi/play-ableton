@@ -74,8 +74,18 @@ export class OscTransport extends EventEmitter {
 
     this.#port.open();
 
-    await new Promise((resolve) => {
-      this.once("ready", resolve);
+    await new Promise((resolve, reject) => {
+      const onReady = () => {
+        this.off("error", onError);
+        resolve();
+      };
+      const onError = (error) => {
+        this.off("ready", onReady);
+        reject(error);
+      };
+
+      this.once("ready", onReady);
+      this.once("error", onError);
     });
   }
 

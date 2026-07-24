@@ -48,6 +48,19 @@ const normalizedMutes = (mutes = {}) => {
   return Object.fromEntries(entries.map(([trackIndex, mute]) => [String(trackIndex), Boolean(mute)]));
 };
 
+const normalizeConfidence = (value) => {
+  if (value === null || value === undefined || value === "") {
+    return null;
+  }
+
+  const normalized = Number(value);
+  if (!Number.isInteger(normalized) || normalized < 1 || normalized > 5) {
+    return null;
+  }
+
+  return normalized;
+};
+
 const normalizeTags = (tags) => {
   if (!Array.isArray(tags)) {
     return [];
@@ -68,6 +81,29 @@ const normalizeTags = (tags) => {
   }
 
   return Array.from(deduped);
+};
+
+const normalizePdfCuePoints = (cuePoints) => {
+  if (!Array.isArray(cuePoints)) {
+    return [];
+  }
+
+  return cuePoints
+    .map((cuePoint) => {
+      const atSeconds = Number(cuePoint?.atSeconds);
+      const scrollRatio = Number(cuePoint?.scrollRatio);
+      if (!Number.isFinite(atSeconds) || atSeconds < 0 || !Number.isFinite(scrollRatio)) {
+        return null;
+      }
+
+      return {
+        atSeconds: Math.round(atSeconds * 10) / 10,
+        scrollRatio: Math.max(0, Math.min(1, scrollRatio))
+      };
+    })
+    .filter(Boolean)
+    .sort((left, right) => left.atSeconds - right.atSeconds)
+    .slice(0, 200);
 };
 
 const titleFromLegacyKey = (key) => {
@@ -144,6 +180,8 @@ export class SongProfileStore {
         mutes: normalizedMutes(profile?.mutes),
         notes: typeof profile?.notes === "string" ? profile.notes : "",
         tags: normalizeTags(profile?.tags),
+        confidence: normalizeConfidence(profile?.confidence),
+        pdfCuePoints: normalizePdfCuePoints(profile?.pdfCuePoints),
         useFixedDocFont: Boolean(profile?.useFixedDocFont),
         updatedAt: typeof profile?.updatedAt === "string" ? profile.updatedAt : null
       };
@@ -206,6 +244,8 @@ export class SongProfileStore {
       mutes: { ...profile.mutes },
       notes: profile.notes,
       tags: [...(profile.tags ?? [])],
+      confidence: normalizeConfidence(profile.confidence),
+      pdfCuePoints: normalizePdfCuePoints(profile.pdfCuePoints),
       useFixedDocFont: Boolean(profile.useFixedDocFont),
       updatedAt: profile.updatedAt
     };
@@ -220,6 +260,8 @@ export class SongProfileStore {
       mutes: { ...profile.mutes },
       notes: profile.notes,
       tags: [...(profile.tags ?? [])],
+      confidence: normalizeConfidence(profile.confidence),
+      pdfCuePoints: normalizePdfCuePoints(profile.pdfCuePoints),
       useFixedDocFont: Boolean(profile.useFixedDocFont),
       updatedAt: profile.updatedAt
     }));
@@ -241,6 +283,8 @@ export class SongProfileStore {
         mutes: {},
         notes: "",
         tags: [],
+        confidence: null,
+        pdfCuePoints: [],
         useFixedDocFont: false,
         updatedAt: new Date().toISOString()
       };
@@ -257,33 +301,51 @@ export class SongProfileStore {
     return { normalizedSceneTitle, normalizedSceneTitleKey, profile: this.#state.songs[normalizedSceneTitleKey] };
   }
 
-  async setSongTrackLevel(sceneTitle, trackIndex, level, songPath = "") {
+  async setSongTrackLevel(sceneTitle, trackIndex, level, songPath = "", defaults = null) {
     const normalizedTrackIndex = Number(trackIndex);
     if (!Number.isInteger(normalizedTrackIndex) || normalizedTrackIndex < 0) {
       return null;
     }
 
     const { normalizedSceneTitle, profile } = this.#ensureProfile(sceneTitle, songPath);
-    profile.levels[String(normalizedTrackIndex)] = Math.max(0, Math.min(1, Number(level)));
+    const trackKey = String(normalizedTrackIndex);
+    const normalizedLevel = Math.max(0, Math.min(1, Number(level)));
+    const defaultLevel = defaults?.levels?.[trackKey];
+
+    if (Number.isFinite(defaultLevel) && normalizedLevel === defaultLevel) {
+      delete profile.levels[trackKey];
+    } else {
+      profile.levels[trackKey] = normalizedLevel;
+    }
+
     profile.updatedAt = new Date().toISOString();
     await this.#enqueuePersist();
     return this.getSongProfile(normalizedSceneTitle);
   }
 
-  async setSongTrackMute(sceneTitle, trackIndex, mute, songPath = "") {
+  async setSongTrackMute(sceneTitle, trackIndex, mute, songPath = "", defaults = null) {
     const normalizedTrackIndex = Number(trackIndex);
     if (!Number.isInteger(normalizedTrackIndex) || normalizedTrackIndex < 0) {
       return null;
     }
 
     const { normalizedSceneTitle, profile } = this.#ensureProfile(sceneTitle, songPath);
-    profile.mutes[String(normalizedTrackIndex)] = Boolean(mute);
+    const trackKey = String(normalizedTrackIndex);
+    const normalizedMute = Boolean(mute);
+    const defaultMute = defaults?.mutes?.[trackKey];
+
+    if (typeof defaultMute === "boolean" && normalizedMute === defaultMute) {
+      delete profile.mutes[trackKey];
+    } else {
+      profile.mutes[trackKey] = normalizedMute;
+    }
+
     profile.updatedAt = new Date().toISOString();
     await this.#enqueuePersist();
     return this.getSongProfile(normalizedSceneTitle);
   }
 
-  async upsertSongMeta(sceneTitle, { notes, tags, useFixedDocFont, songPath }) {
+  async upsertSongMeta(sceneTitle, { notes, tags, confidence, pdfCuePoints, useFixedDocFont, songPath }) {
     const { normalizedSceneTitle, profile } = this.#ensureProfile(sceneTitle, songPath);
 
     if (typeof notes === "string") {
@@ -292,6 +354,14 @@ export class SongProfileStore {
 
     if (tags !== undefined) {
       profile.tags = normalizeTags(tags);
+    }
+
+    if (confidence !== undefined) {
+      profile.confidence = normalizeConfidence(confidence);
+    }
+
+    if (pdfCuePoints !== undefined) {
+      profile.pdfCuePoints = normalizePdfCuePoints(pdfCuePoints);
     }
 
     if (typeof useFixedDocFont === "boolean") {

@@ -1,8 +1,10 @@
 import { EventEmitter } from "node:events";
+import { resolveSongTrackMix } from "./songMix.js";
 
 const DEFAULT_PLAYING_SLOT_POLL_INTERVAL_MS = 1000;
 const DEFAULT_SONG_TIME_POLL_INTERVAL_MS = 5000;
 const TRACK_STATE_SNAPSHOT_TIMEOUT_MS = 1200;
+const SCENE_AUTO_STOP_GRACE_MS = 3000;
 
 export class LiveService extends EventEmitter {
   #abletonClient;
@@ -28,6 +30,7 @@ export class LiveService extends EventEmitter {
   #currentSongTimeSeconds;
   #trackLevels;
   #trackMutes;
+  #sceneStopGraceUntil;
 
   constructor({
     abletonClient,
@@ -66,6 +69,7 @@ export class LiveService extends EventEmitter {
     this.#currentSongTimeSeconds = null;
     this.#trackLevels = new Map();
     this.#trackMutes = new Map();
+    this.#sceneStopGraceUntil = 0;
 
     this.#abletonClient.on("tracksSnapshot", ({ names }) => {
       this.#cacheStore.setTracks(names);
@@ -118,10 +122,11 @@ export class LiveService extends EventEmitter {
         type: "song.playback.status",
         isPlaying,
         activeSceneIndex: this.#activeSceneIndex,
+        currentSongTimeSeconds: this.#currentSongTimeSeconds,
         timestamp: new Date().toISOString()
       });
 
-      if (!isPlaying && this.#playbackStopArmed) {
+      if (!isPlaying && this.#canEvaluateAutoStop()) {
         const event = {
           type: "song.playback.ended",
           reason: "playback-ended",
@@ -142,6 +147,13 @@ export class LiveService extends EventEmitter {
       }
       this.#lastPlaybackResponseAt = Date.now();
       this.#setAbletonOnline(true);
+      this.emit("song.playback.status", {
+        type: "song.playback.status",
+        isPlaying: this.#currentSongIsPlaying === true,
+        activeSceneIndex: this.#activeSceneIndex,
+        currentSongTimeSeconds: this.#currentSongTimeSeconds,
+        timestamp: new Date().toISOString()
+      });
     });
 
     this.#abletonClient.on("trackPlayingSlot", ({ trackIndex, slotIndex }) => {
@@ -240,11 +252,16 @@ export class LiveService extends EventEmitter {
     this.#sceneStopTimer = null;
   }
 
+  #canEvaluateAutoStop() {
+    return this.#playbackStopArmed && Date.now() >= this.#sceneStopGraceUntil;
+  }
+
   #armSceneStopController(sceneIndex) {
     this.#sceneStopToken += 1;
     this.#playbackStopArmed = true;
     this.#activeSceneIndex = sceneIndex;
     this.#sceneSlotsObservedSinceArm = false;
+    this.#sceneStopGraceUntil = Date.now() + SCENE_AUTO_STOP_GRACE_MS;
     this.#clearSceneStopTimer();
 
     if (this.#sceneFallbackStopMs <= 0) {
@@ -261,7 +278,7 @@ export class LiveService extends EventEmitter {
   }
 
   #evaluateSceneStopFromTrackSlots() {
-    if (!this.#playbackStopArmed || !Number.isInteger(this.#activeSceneIndex)) {
+    if (!this.#canEvaluateAutoStop() || !Number.isInteger(this.#activeSceneIndex)) {
       return;
     }
 
@@ -396,22 +413,15 @@ export class LiveService extends EventEmitter {
     const appliedMutes = {};
     for (const track of tracks) {
       const trackKey = String(track.index);
-      const targetLevel = profile?.levels?.[trackKey] ?? defaults.levels?.[trackKey];
-      const hasProfileMute = typeof profile?.mutes?.[trackKey] === "boolean";
-      const hasDefaultMute = typeof defaults.mutes?.[trackKey] === "boolean";
-      const targetMute = hasProfileMute
-        ? profile.mutes[trackKey]
-        : hasDefaultMute
-          ? defaults.mutes[trackKey]
-          : false;
+      const { level, mute } = resolveSongTrackMix(trackKey, profile, defaults);
 
-      if (Number.isFinite(targetLevel)) {
-        operations.push(this.#setTrackVolumeInternal(track.index, targetLevel));
-        appliedLevels[trackKey] = Math.max(0, Math.min(1, Number(targetLevel)));
+      if (level !== null) {
+        operations.push(this.#setTrackVolumeInternal(track.index, level));
+        appliedLevels[trackKey] = level;
       }
 
-      operations.push(this.#setTrackMuteInternal(track.index, targetMute));
-      appliedMutes[trackKey] = Boolean(targetMute);
+      operations.push(this.#setTrackMuteInternal(track.index, mute));
+      appliedMutes[trackKey] = mute;
     }
 
     await Promise.all(operations);
@@ -470,7 +480,7 @@ export class LiveService extends EventEmitter {
     return this.#songProfileStore.getSongProfile(songIdentity.sceneTitle);
   }
 
-  async setSongNotesForScene(sceneIndex, notes, tags, useFixedDocFont) {
+  async setSongNotesForScene(sceneIndex, notes, tags, useFixedDocFont, confidence, pdfCuePoints) {
     if (!this.#songProfileStore) {
       return null;
     }
@@ -483,12 +493,14 @@ export class LiveService extends EventEmitter {
     return this.#songProfileStore.upsertSongMeta(songIdentity.sceneTitle, {
       notes,
       tags,
+      confidence,
+      pdfCuePoints,
       useFixedDocFont,
       songPath: songIdentity.songPath
     });
   }
 
-  async setSongNotesForTitle(sceneTitle, notes, tags, useFixedDocFont) {
+  async setSongNotesForTitle(sceneTitle, notes, tags, useFixedDocFont, confidence, pdfCuePoints) {
     if (!this.#songProfileStore) {
       return null;
     }
@@ -500,6 +512,8 @@ export class LiveService extends EventEmitter {
     return this.#songProfileStore.upsertSongMeta(sceneTitle, {
       notes,
       tags,
+      confidence,
+      pdfCuePoints,
       useFixedDocFont
     });
   }
@@ -511,6 +525,41 @@ export class LiveService extends EventEmitter {
 
     const snapshot = await this.#requestTrackStateSnapshot();
     return this.#songProfileStore.setDefaults(snapshot);
+  }
+
+  async getTrackStateSnapshot() {
+    return this.#requestTrackStateSnapshot();
+  }
+
+  async applyTrackDefaults() {
+    if (!this.#songProfileStore) {
+      return { levels: {}, mutes: {} };
+    }
+
+    const defaults = this.#songProfileStore.getDefaults();
+    const tracks = this.#cacheStore.getTracks();
+    const operations = [];
+    const appliedLevels = {};
+    const appliedMutes = {};
+
+    for (const track of tracks) {
+      const trackKey = String(track.index);
+      const level = defaults.levels?.[trackKey];
+      const mute = defaults.mutes?.[trackKey];
+
+      if (Number.isFinite(level)) {
+        operations.push(this.#setTrackVolumeInternal(track.index, level));
+        appliedLevels[trackKey] = Math.max(0, Math.min(1, Number(level)));
+      }
+
+      if (typeof mute === "boolean") {
+        operations.push(this.#setTrackMuteInternal(track.index, mute));
+        appliedMutes[trackKey] = mute;
+      }
+    }
+
+    await Promise.all(operations);
+    return { levels: appliedLevels, mutes: appliedMutes };
   }
 
   getTrackDefaults() {
@@ -624,11 +673,6 @@ export class LiveService extends EventEmitter {
       });
     }
 
-    if (this.#songProfileStore) {
-      void this.recheckTrackDefaults().catch((error) => {
-        this.#logger.error("Failed initial track default refresh", error);
-      });
-    }
   }
 
   stopAutoRefresh() {
@@ -700,7 +744,8 @@ export class LiveService extends EventEmitter {
           songIdentity.sceneTitle,
           trackIndex,
           mute,
-          songIdentity.songPath
+          songIdentity.songPath,
+          this.#songProfileStore.getDefaults()
         );
       }
     }
@@ -724,7 +769,8 @@ export class LiveService extends EventEmitter {
           songIdentity.sceneTitle,
           trackIndex,
           normalizedLevel,
-          songIdentity.songPath
+          songIdentity.songPath,
+          this.#songProfileStore.getDefaults()
         );
       }
     }

@@ -1,15 +1,61 @@
 {
   "version": 1,
   "defaults": {
-    "levels": {},
-    "mutes": {},
-    "updatedAt": "2026-06-05T17:09:22.707Z"
+    "levels": {
+      "0": 0.800000011920929,
+      "1": 0.31515392661094666,
+      "2": 0.6899999976158142,
+      "3": 0.8500000238418579,
+      "4": 0.8500000238418579,
+      "5": 0.8500000238418579,
+      "6": 0.8500000238418579,
+      "7": 0.8057122826576233,
+      "8": 0.8500000238418579,
+      "9": 0.8500000238418579,
+      "10": 0.8500000238418579,
+      "11": 0.8500000238418579,
+      "12": 0.8500000238418579,
+      "13": 0.37263357639312744,
+      "14": 0.8500000238418579,
+      "15": 0.8500000238418579,
+      "16": 0.6275193095207214,
+      "17": 0.6824570298194885,
+      "18": 0.6824570298194885,
+      "19": 0.6275193095207214,
+      "20": 0.8500000238418579,
+      "21": 1
+    },
+    "mutes": {
+      "0": false,
+      "1": false,
+      "2": false,
+      "3": false,
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false,
+      "9": false,
+      "10": false,
+      "11": false,
+      "12": false,
+      "13": true,
+      "14": false,
+      "15": false,
+      "16": true,
+      "17": false,
+      "18": false,
+      "19": false,
+      "20": false,
+      "21": false
+    },
+    "updatedAt": "2026-06-06T02:30:35.016Z"
   },
   "songs": {
     "1985 b": {
-      "sceneTitle": "1985 B",
+      "sceneTitle": "1985- B",
       "sceneTitleKey": "1985 b",
-      "songPath": "1985_B",
+      "songPath": "1985-_B",
       "levels": {},
       "mutes": {},
       "notes": "I,  V,  vi,  IV.   (dropped 1/2 step, so they fingered in C)",
@@ -17,13 +63,15 @@
         "00s",
         "punk-pop"
       ],
+      "confidence": 2,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T02:09:12.710Z"
+      "updatedAt": "2026-06-07T15:20:15.399Z"
     },
     "a thousand miles b": {
-      "sceneTitle": "A Thousand Miles B",
+      "sceneTitle": "A Thousand Miles-B",
       "sceneTitleKey": "a thousand miles b",
-      "songPath": "A_Thousand_Miles_B",
+      "songPath": "A_Thousand_Miles-B",
       "levels": {
         "21": 1
       },
@@ -36,15 +84,18 @@
         "00s",
         "pop"
       ],
+      "confidence": 2,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-03T02:16:37.343Z"
+      "updatedAt": "2026-06-07T15:22:14.548Z"
     },
     "africa toto a": {
-      "sceneTitle": "Africa Toto A",
+      "sceneTitle": "Africa - Toto - A",
       "sceneTitleKey": "africa toto a",
-      "songPath": "Africa_Toto_A",
+      "songPath": "Africa_-_Toto_-_A",
       "levels": {},
       "mutes": {
+        "13": true,
         "16": false
       },
       "notes": "",
@@ -53,34 +104,42 @@
         "80s",
         "yacht rock"
       ],
+      "confidence": 3,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:02.816Z"
+      "updatedAt": "2026-06-07T15:51:52.050Z"
     },
     "aint too proud to beg the temptations c": {
-      "sceneTitle": "Ain't Too Proud To Beg The Temptations C",
+      "sceneTitle": "Ain't Too Proud To Beg - The Temptations - C",
       "sceneTitleKey": "aint too proud to beg the temptations c",
-      "songPath": "Ain't_Too_Proud_To_Beg_The_Temptations_C",
+      "songPath": "Ain't_Too_Proud_To_Beg_-_The_Temptations_-_C",
       "levels": {},
-      "mutes": {},
+      "mutes": {
+        "14": true
+      },
       "notes": "",
       "tags": [
         "60s",
         "oldies",
         "r&b"
       ],
+      "confidence": 1,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T02:17:43.455Z"
+      "updatedAt": "2026-06-07T15:52:13.538Z"
     },
     "american girl tom petty d around": {
-      "sceneTitle": "American Girl Tom Petty D around",
+      "sceneTitle": "American Girl - Tom Petty - D - around",
       "sceneTitleKey": "american girl tom petty d around",
-      "songPath": "American_Girl_Tom_Petty_D_around",
+      "songPath": "American_Girl_-_Tom_Petty_-_D_-_around",
       "levels": {},
       "mutes": {},
-      "notes": "",
+      "notes": "Work on solo and intro",
       "tags": [],
+      "confidence": 4,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:02.826Z"
+      "updatedAt": "2026-06-07T15:57:37.444Z"
     },
     "all the small things c": {
       "sceneTitle": "All The Small Things C",
@@ -95,6 +154,8 @@
         "90s",
         "punk-pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-03T01:57:02.830Z"
     },
@@ -109,36 +170,42 @@
         "80s",
         "rap"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-03T01:57:02.835Z"
     },
     "baby one more time britney spears cm": {
-      "sceneTitle": "Baby One More Time Britney Spears Cm",
+      "sceneTitle": "Baby One More Time - Britney Spears Cm",
       "sceneTitleKey": "baby one more time britney spears cm",
-      "songPath": "Baby_One_More_Time_Britney_Spears_Cm",
+      "songPath": "Baby_One_More_Time_-_Britney_Spears_Cm",
       "levels": {
         "16": 0.6275193054321824
       },
       "mutes": {},
-      "notes": "(minor key, 3b) i,  V,  iii,   iv,   Vsus - V",
+      "notes": "(minor key, 3b) i,  V,  iii,   iv,   Vsus - V\nNeeds more guiding on breakdown parts",
       "tags": [
         "90s",
         "pop",
         "upbeat"
       ],
+      "confidence": 4,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:02.840Z"
+      "updatedAt": "2026-06-07T16:03:52.301Z"
     },
     "billie jean m jackson em": {
-      "sceneTitle": "Billie Jean M Jackson Em",
+      "sceneTitle": "Billie Jean - M Jackson Em",
       "sceneTitleKey": "billie jean m jackson em",
-      "songPath": "Billie_Jean_M_Jackson_Em",
+      "songPath": "Billie_Jean_-_M_Jackson_Em",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": 3,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:02.843Z"
+      "updatedAt": "2026-06-07T16:25:21.779Z"
     },
     "bohemian rhapsody bb 10810 bpm": {
       "sceneTitle": "Bohemian Rhapsody Bb 108.10 bpm",
@@ -146,13 +213,15 @@
       "songPath": "Bohemian_Rhapsody_Bb_108.10_bpm",
       "levels": {},
       "mutes": {},
-      "notes": "",
+      "notes": "Pat rice practice",
       "tags": [
         "70s",
         "rock classic"
       ],
+      "confidence": 3,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T02:21:51.742Z"
+      "updatedAt": "2026-06-07T16:25:11.070Z"
     },
     "boogie shoes b": {
       "sceneTitle": "Boogie Shoes B",
@@ -162,8 +231,10 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": 2,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:02.852Z"
+      "updatedAt": "2026-06-07T16:28:08.561Z"
     },
     "black magic woman g 107bpm": {
       "sceneTitle": "Black Magic Woman G 107bpm",
@@ -176,6 +247,8 @@
         "70s",
         "rock classic"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T02:26:50.054Z"
     },
@@ -191,8 +264,10 @@
         "disco",
         "pop"
       ],
+      "confidence": 4,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-04T01:13:50.260Z"
+      "updatedAt": "2026-06-07T16:36:02.549Z"
     },
     "cake by the ocean em": {
       "sceneTitle": "Cake by the Ocean Em",
@@ -206,6 +281,8 @@
         "disco",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-03T02:34:05.525Z"
     },
@@ -221,6 +298,8 @@
         "disco",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T02:36:01.092Z"
     },
@@ -234,19 +313,23 @@
       "tags": [
         "10s"
       ],
+      "confidence": 1,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T02:40:36.171Z"
+      "updatedAt": "2026-06-07T18:22:56.995Z"
     },
     "come together the beatles dm": {
-      "sceneTitle": "Come Together The Beatles Dm",
+      "sceneTitle": "Come Together - The Beatles - Dm",
       "sceneTitleKey": "come together the beatles dm",
-      "songPath": "Come_Together_The_Beatles_Dm",
+      "songPath": "Come_Together_-_The_Beatles_-_Dm",
       "levels": {},
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": 1,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:02.876Z"
+      "updatedAt": "2026-06-07T18:27:02.642Z"
     },
     "crazy little thing called love queen d": {
       "sceneTitle": "Crazy Little Thing Called Love Queen D",
@@ -256,6 +339,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:02.880Z"
     },
@@ -263,12 +348,16 @@
       "sceneTitle": "Don't Stop Believin E",
       "sceneTitleKey": "dont stop believin e",
       "songPath": "Don't_Stop_Believin_E",
-      "levels": {},
+      "levels": {
+        "6": 1
+      },
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:02.884Z"
+      "updatedAt": "2026-06-06T02:00:29.184Z"
     },
     "easy g": {
       "sceneTitle": "Easy G",
@@ -283,6 +372,8 @@
         "r&b",
         "soul"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-03T01:57:02.889Z"
     },
@@ -297,6 +388,8 @@
         "90s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-04T01:19:50.632Z"
     },
@@ -311,33 +404,43 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-03T01:57:02.897Z"
     },
     "faith george michael b": {
-      "sceneTitle": "Faith George Michael B",
+      "sceneTitle": "Faith - George Michael - B",
       "sceneTitleKey": "faith george michael b",
-      "songPath": "Faith_George_Michael_B",
+      "songPath": "Faith_-_George_Michael_-_B",
       "levels": {},
-      "mutes": {},
+      "mutes": {
+        "16": true
+      },
       "notes": "",
       "tags": [
         "80s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:02.901Z"
+      "updatedAt": "2026-06-06T02:22:51.890Z"
     },
     "footloose kenny loggins a around": {
-      "sceneTitle": "Footloose Kenny Loggins A around",
+      "sceneTitle": "Footloose - Kenny Loggins - A around",
       "sceneTitleKey": "footloose kenny loggins a around",
-      "songPath": "Footloose_Kenny_Loggins_A_around",
+      "songPath": "Footloose_-_Kenny_Loggins_-_A_around",
       "levels": {},
-      "mutes": {},
+      "mutes": {
+        "16": true
+      },
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
-      "updatedAt": "2026-06-03T01:57:02.905Z"
+      "updatedAt": "2026-06-06T02:30:03.972Z"
     },
     "forget you cee lo green c": {
       "sceneTitle": "Forget you cee lo green - C",
@@ -350,6 +453,8 @@
         "10s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T01:24:33.600Z"
     },
@@ -364,6 +469,8 @@
         "10s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T01:25:57.151Z"
     },
@@ -375,6 +482,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.011Z"
     },
@@ -386,6 +495,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.020Z"
     },
@@ -397,6 +508,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.026Z"
     },
@@ -408,6 +521,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T01:33:20.463Z"
     },
@@ -423,6 +538,8 @@
         "oldies",
         "r&b"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T01:35:19.736Z"
     },
@@ -434,6 +551,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.041Z"
     },
@@ -448,6 +567,8 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T01:36:28.872Z"
     },
@@ -463,6 +584,8 @@
         "rock classic",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T01:38:28.489Z"
     },
@@ -478,6 +601,8 @@
         "pop",
         "r&b"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T01:40:23.385Z"
     },
@@ -492,6 +617,8 @@
         "80s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T01:51:47.968Z"
     },
@@ -503,6 +630,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.065Z"
     },
@@ -514,6 +643,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.071Z"
     },
@@ -525,6 +656,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.076Z"
     },
@@ -536,6 +669,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.080Z"
     },
@@ -547,6 +682,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.084Z"
     },
@@ -561,6 +698,8 @@
         "00s",
         "alt rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T01:54:20.214Z"
     },
@@ -575,6 +714,8 @@
         "00s",
         "punk-pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-04T01:55:36.047Z"
     },
@@ -589,6 +730,8 @@
         "70s",
         "disco"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T02:00:47.516Z"
     },
@@ -600,6 +743,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.103Z"
     },
@@ -615,6 +760,8 @@
         "oldies",
         "rock classic"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-03T01:57:03.108Z"
     },
@@ -626,6 +773,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.114Z"
     },
@@ -641,6 +790,8 @@
         "80s",
         "pop rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T02:03:48.846Z"
     },
@@ -652,6 +803,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.125Z"
     },
@@ -663,6 +816,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.130Z"
     },
@@ -677,6 +832,8 @@
         "80s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T02:12:25.327Z"
     },
@@ -691,6 +848,8 @@
         "00s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T02:20:03.641Z"
     },
@@ -702,6 +861,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.144Z"
     },
@@ -713,6 +874,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.148Z"
     },
@@ -728,6 +891,8 @@
         "motown",
         "oldies"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T02:30:04.073Z"
     },
@@ -739,6 +904,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.159Z"
     },
@@ -750,6 +917,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.163Z"
     },
@@ -764,6 +933,8 @@
         "10s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T21:08:19.529Z"
     },
@@ -778,6 +949,8 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-04T21:08:51.899Z"
     },
@@ -793,6 +966,8 @@
         "disco",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-04T02:34:53.058Z"
     },
@@ -804,6 +979,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.237Z"
     },
@@ -818,6 +995,8 @@
         "10s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T02:39:17.255Z"
     },
@@ -832,6 +1011,8 @@
         "70s",
         "rock classic"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-04T21:09:39.558Z"
     },
@@ -848,6 +1029,8 @@
         "pop",
         "r&b"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-04T11:09:04.772Z"
     },
@@ -862,6 +1045,8 @@
         "70s",
         "classic rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T11:11:11.938Z"
     },
@@ -876,6 +1061,8 @@
         "20s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-04T21:10:15.884Z"
     },
@@ -892,6 +1079,8 @@
         "blues",
         "jazz"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T11:20:45.920Z"
     },
@@ -906,6 +1095,8 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T13:11:03.974Z"
     },
@@ -921,6 +1112,8 @@
         "70s",
         "oldies"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T13:36:17.464Z"
     },
@@ -936,6 +1129,8 @@
         "disco",
         "funk"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T13:45:44.323Z"
     },
@@ -952,6 +1147,8 @@
         "funk",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T13:51:54.484Z"
     },
@@ -967,6 +1164,8 @@
         "70s",
         "classic rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T13:56:30.391Z"
     },
@@ -981,6 +1180,8 @@
         "60s",
         "classic rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T14:21:57.974Z"
     },
@@ -995,6 +1196,8 @@
         "60s",
         "classic rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T14:03:27.941Z"
     },
@@ -1006,6 +1209,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.365Z"
     },
@@ -1020,6 +1225,8 @@
         "80s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T14:30:32.846Z"
     },
@@ -1036,6 +1243,8 @@
         "classic rock",
         "oldies"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-04T14:36:49.053Z"
     },
@@ -1050,6 +1259,8 @@
         "60s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T14:57:15.623Z"
     },
@@ -1061,6 +1272,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.383Z"
     },
@@ -1075,6 +1288,8 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-05T15:58:27.102Z"
     },
@@ -1090,6 +1305,8 @@
         "rock soft",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-05T15:59:35.852Z"
     },
@@ -1105,6 +1322,8 @@
         "oldies",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T21:21:07.572Z"
     },
@@ -1120,6 +1339,8 @@
         "r&b",
         "soul"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-05T16:01:15.063Z"
     },
@@ -1134,6 +1355,8 @@
         "70s",
         "rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T21:33:21.215Z"
     },
@@ -1148,6 +1371,8 @@
         "70s",
         "rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T21:36:53.271Z"
     },
@@ -1162,6 +1387,8 @@
         "10s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T21:42:30.731Z"
     },
@@ -1176,6 +1403,8 @@
         "70s",
         "rock classic"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T21:48:35.299Z"
     },
@@ -1191,6 +1420,8 @@
         "r&b",
         "soul"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-04T21:50:32.332Z"
     },
@@ -1205,6 +1436,8 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-04T21:51:41.790Z"
     },
@@ -1219,6 +1452,8 @@
         "10s",
         "rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-04T21:56:54.783Z"
     },
@@ -1230,6 +1465,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.455Z"
     },
@@ -1241,6 +1478,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.460Z"
     },
@@ -1252,6 +1491,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.480Z"
     },
@@ -1267,6 +1508,8 @@
         "funk",
         "r&b"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T23:42:48.312Z"
     },
@@ -1282,6 +1525,8 @@
         "funk",
         "soul"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T23:48:08.712Z"
     },
@@ -1297,6 +1542,8 @@
         "rock soft",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T23:52:16.914Z"
     },
@@ -1311,6 +1558,8 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-04T23:59:40.804Z"
     },
@@ -1325,6 +1574,8 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-05T00:01:20.221Z"
     },
@@ -1336,6 +1587,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.540Z"
     },
@@ -1352,6 +1605,8 @@
         "r&b",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-05T00:02:31.337Z"
     },
@@ -1363,6 +1618,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.547Z"
     },
@@ -1377,6 +1634,8 @@
         "70s",
         "rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-05T00:09:20.814Z"
     },
@@ -1392,6 +1651,8 @@
         "rock soft",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-05T00:10:37.411Z"
     },
@@ -1406,6 +1667,8 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-05T00:13:25.220Z"
     },
@@ -1420,6 +1683,8 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-05T00:16:43.471Z"
     },
@@ -1435,6 +1700,8 @@
         "rock",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-05T00:22:42.715Z"
     },
@@ -1449,6 +1716,8 @@
         "70s",
         "rock soft"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-05T00:27:20.190Z"
     },
@@ -1463,6 +1732,8 @@
         "80s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-05T00:31:29.530Z"
     },
@@ -1477,6 +1748,8 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-05T00:32:47.044Z"
     },
@@ -1491,6 +1764,8 @@
         "20s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
       "updatedAt": "2026-06-05T00:33:44.902Z"
     },
@@ -1505,6 +1780,8 @@
         "70s",
         "disco"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-05T16:24:04.488Z"
     },
@@ -1516,6 +1793,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.620Z"
     },
@@ -1527,6 +1806,8 @@
       "mutes": {},
       "notes": "",
       "tags": [],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-03T01:57:03.627Z"
     },
@@ -1535,14 +1816,18 @@
       "sceneTitleKey": "easy the commodores g",
       "songPath": "Easy_-_The_Commodores_G",
       "levels": {},
-      "mutes": {},
+      "mutes": {
+        "16": false
+      },
       "notes": "",
       "tags": [
         "70s",
         "r&b"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": true,
-      "updatedAt": "2026-06-04T01:18:18.938Z"
+      "updatedAt": "2026-06-06T23:52:51.569Z"
     },
     "escape the pina colada song rupert holmes c": {
       "sceneTitle": "Escape (The Pina Colada Song) - Rupert Holmes - C",
@@ -1555,6 +1840,8 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T01:22:17.682Z"
     },
@@ -1569,6 +1856,8 @@
         "60s",
         "oldies"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T02:02:00.748Z"
     },
@@ -1583,6 +1872,8 @@
         "10s",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T02:32:35.327Z"
     },
@@ -1597,6 +1888,8 @@
         "70s",
         "yacht rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T02:33:40.703Z"
     },
@@ -1611,6 +1904,8 @@
         "70s",
         "rock classic"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T11:06:19.360Z"
     },
@@ -1626,6 +1921,8 @@
         "disco",
         "pop"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-04T11:13:11.870Z"
     },
@@ -1640,6 +1937,8 @@
         "60s",
         "rock"
       ],
+      "confidence": null,
+      "pdfCuePoints": [],
       "useFixedDocFont": false,
       "updatedAt": "2026-06-05T15:56:33.206Z"
     }

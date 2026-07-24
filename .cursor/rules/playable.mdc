@@ -1,0 +1,34 @@
+---
+description: playAble project — Ableton live performance control surface
+alwaysApply: true
+---
+
+# playAble
+
+Live-performance UI for Ableton Live. Each **scene = song**. Node/Koa server bridges browser ↔ Ableton via **AbletonOSC (UDP/OSC)** — not MIDI or Live API.
+
+**Full context:** read `PROJECT_CONTEXT.md` before exploring the codebase.
+
+## Core features
+
+1. **Songs** — start/stop scenes; auto-stop on playback end, slots ended, or timer
+2. **Mixer** — per-track mute/volume; settings persist per **song title** (not index) + global defaults in `data/song-profiles.json`; only saved while that song is actively playing
+3. **PDF lyrics** — `data/song-docs/{title}.pdf`; auto-opens in iframe modal on scene start; fuzzy title matching in `client/app.js`
+
+## Key paths
+
+- `src/domain/liveService.js` — scene start/stop, mix apply/save, OSC
+- `src/domain/songProfileStore.js` — `song-profiles.json`
+- `src/api/routes.js` — REST API
+- `client/app.js` — UI (songs, mixer, library, doc modal)
+
+## Coding style
+
+- **Favor ES6/ESNext** over legacy vanilla JavaScript in both `client/` and `src/`
+- Use ES modules (`import`/`export`), `const`/`let`, `async`/`await`, arrow functions, destructuring, template literals, optional chaining, etc.
+- Avoid `var`, IIFEs, and callback pyramids when modern syntax is clearer
+- Client loads as `<script type="module">` — no bundler; keep browser-native ESM
+
+## Run
+
+`npm run dev` → http://127.0.0.1:3000 (Node 20+, AbletonOSC in Live)

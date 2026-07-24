@@ -11,6 +11,7 @@ const addGlobalDefaultsButton = document.querySelector("#add-global-defaults-but
 const clearGlobalDefaultsButton = document.querySelector("#clear-global-defaults-button");
 const sceneSearch = document.querySelector("#scene-search");
 const clearSceneSearch = document.querySelector("#clear-scene-search");
+const sceneSort = document.querySelector("#scene-sort");
 const openSongsButton = document.querySelector("#open-songs");
 const openLibraryButton = document.querySelector("#open-library");
 const openDocButton = document.querySelector("#open-doc");
@@ -23,10 +24,13 @@ const songDocInput = document.querySelector("#song-doc-input");
 const activeSongDocPanel = document.querySelector("#active-song-doc");
 const activeSongDocTitle = document.querySelector("#active-song-doc-title");
 const activeSongDocOpen = document.querySelector("#active-song-doc-open");
+const activeSongDocPages = document.querySelector("#active-song-doc-pages");
 const activeSongDocFrame = document.querySelector("#active-song-doc-frame");
 const activeSongDocFallback = document.querySelector("#active-song-doc-fallback");
 const songMetaModal = document.querySelector("#song-meta-modal");
+const songMetaTitle = document.querySelector("#song-meta-title");
 const songMetaNotes = document.querySelector("#song-meta-notes");
+const songConfidenceRating = document.querySelector("#song-confidence-rating");
 const songTagInput = document.querySelector("#song-tag-input");
 const songTagAdd = document.querySelector("#song-tag-add");
 const songTagSuggestions = document.querySelector("#song-tag-suggestions");
@@ -43,6 +47,12 @@ const pages = {
   log: document.querySelector("#page-log")
 };
 const TRACK_DB_STEP = 2;
+const SCENE_SORT_STORAGE_KEY = "playable.sceneSortBy";
+const SCENE_SORT_OPTIONS = new Set(["unsorted", "title", "tag", "confidence"]);
+const DOC_CUE_SAVE_DEBOUNCE_MS = 400;
+const DOC_CUE_MATCH_WINDOW_SECONDS = 2;
+const DOC_CUE_MIN_SAVE_DELTA_SECONDS = 2;
+const DOC_CUE_MIN_SAVE_DELTA_RATIO = 0.03;
 const ABLETON_COLOR_PALETTE = [
   "#f26c63", "#f28c52", "#f2a93b", "#d6b54c", "#a4c95a", "#7acb5a", "#4fcb63", "#35c98a",
   "#2fc7a8", "#38c0c7", "#43b2d9", "#5b9df2", "#7b88f8", "#9a78f2", "#b36cf2", "#d16af2",
@@ -79,19 +89,40 @@ const abletonIndexedColor = (colorIndex, fallback) => {
   return ABLETON_COLOR_PALETTE[colorIndex % ABLETON_COLOR_PALETTE.length] ?? fallback;
 };
 
+const isIpadLikeDevice = () => {
+  if (typeof navigator === "undefined") {
+    return false;
+  }
+
+  const platform = String(navigator.platform ?? "");
+  const userAgent = String(navigator.userAgent ?? "");
+  const hasTouch = Number(navigator.maxTouchPoints ?? 0) > 1;
+
+  return hasTouch && (
+    /iPad/i.test(userAgent) ||
+    /iPad/i.test(platform) ||
+    (/Mac/i.test(platform) && /Safari/i.test(userAgent))
+  );
+};
+
 const state = {
   scenes: [],
   tracks: [],
   sceneQuery: "",
+  sceneSortBy: "unsorted",
   activePage: "songs",
   showConnectionAddress: false,
   connectionInfo: null,
   wsConnected: false,
   abletonOnline: false,
   isPlaying: false,
+  currentSongTimeSeconds: null,
   activeSceneIndex: null,
+  startingSceneIndex: null,
   songProfiles: new Map(),
   availablePdfs: new Set(),
+  docBlobCache: new Map(),
+  docPreloadPromise: null,
   docNotFoundToastId: null,
   trackLevels: new Map(),
   trackMutes: new Map(),
@@ -107,16 +138,27 @@ const state = {
   editingSongSceneTitle: null,
   editingSongTags: [],
   editingUseFixedDocFont: false,
+  editingSongConfidence: null,
   activeDocObjectUrl: null,
+  activeDocRenderUrl: null,
   activeDocEmbedUrl: null,
   activeDocOpenHref: null,
   activeDocTitle: null,
+  activeDocCueKey: null,
+  activeDocCueRestoreAtSeconds: null,
   docPreviewAutoCloseId: null,
+  docCueSaveTimerId: null,
+  docCueRestoreFrameId: null,
+  suppressDocCueCapture: false,
+  docModalCloseViewportBound: false,
   pageScrollTopByPage: {
     songs: 0,
     library: 0,
     mixer: 0,
     log: 0
+  },
+  cacheSignatures: {
+    tracks: ""
   }
 };
 
@@ -140,6 +182,37 @@ const scrollContainerForPage = (page) => {
   return pages[page] ?? null;
 };
 
+const readPageScrollTop = (page) => {
+  if (state.activePage === page) {
+    const container = scrollContainerForPage(page);
+    return container?.scrollTop ?? state.pageScrollTopByPage[page] ?? 0;
+  }
+
+  return state.pageScrollTopByPage[page] ?? 0;
+};
+
+const tracksDataSignature = (tracks = []) => JSON.stringify(
+  tracks.map((track) => [track.index, track.name, track.colorIndex ?? null])
+);
+
+const writePageScrollTop = (page, scrollTop) => {
+  state.pageScrollTopByPage[page] = scrollTop;
+  if (state.activePage !== page) {
+    return;
+  }
+
+  const container = scrollContainerForPage(page);
+  if (!container) {
+    return;
+  }
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      container.scrollTop = scrollTop;
+    });
+  });
+};
+
 const isDocModalOpen = () => Boolean(docModal && !docModal.classList.contains("hidden"));
 
 const clearDocPreviewAutoClose = () => {
@@ -151,8 +224,83 @@ const clearDocPreviewAutoClose = () => {
   state.docPreviewAutoCloseId = null;
 };
 
+const clearDocCueSaveTimer = () => {
+  if (!state.docCueSaveTimerId) {
+    return;
+  }
+
+  clearTimeout(state.docCueSaveTimerId);
+  state.docCueSaveTimerId = null;
+};
+
+const clearDocCueRestoreFrame = () => {
+  if (!state.docCueRestoreFrameId) {
+    return;
+  }
+
+  cancelAnimationFrame(state.docCueRestoreFrameId);
+  state.docCueRestoreFrameId = null;
+};
+
+const resetActiveDocCueRestore = () => {
+  state.activeDocCueRestoreAtSeconds = null;
+};
+
 const syncDocButtonState = () => {
   openDocButton?.classList.toggle("active", isDocModalOpen());
+};
+
+const docModalCloseInsetPx = () => {
+  const rootFontSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+  return Math.max(rootFontSize * 0.85, 0);
+};
+
+const resetDocModalClosePosition = () => {
+  if (!closeDocModalButton) {
+    return;
+  }
+
+  closeDocModalButton.style.top = "";
+  closeDocModalButton.style.right = "";
+  closeDocModalButton.style.left = "";
+};
+
+const syncDocModalClosePosition = () => {
+  if (!closeDocModalButton || !docModal || docModal.classList.contains("hidden")) {
+    return;
+  }
+
+  const visualViewport = window.visualViewport;
+  if (!visualViewport) {
+    return;
+  }
+
+  const zoomed =
+    visualViewport.offsetTop !== 0 ||
+    visualViewport.offsetLeft !== 0 ||
+    Math.abs(visualViewport.scale - 1) > 0.01 ||
+    Math.abs(visualViewport.width - window.innerWidth) > 1;
+
+  if (!zoomed) {
+    resetDocModalClosePosition();
+    return;
+  }
+
+  const inset = docModalCloseInsetPx();
+  closeDocModalButton.style.top = `${visualViewport.offsetTop + visualViewport.height / 2}px`;
+  closeDocModalButton.style.left = `${visualViewport.offsetLeft + inset}px`;
+  closeDocModalButton.style.right = "auto";
+};
+
+const bindDocModalCloseViewportTracking = () => {
+  if (state.docModalCloseViewportBound || !window.visualViewport) {
+    return;
+  }
+
+  state.docModalCloseViewportBound = true;
+  window.visualViewport.addEventListener("resize", syncDocModalClosePosition);
+  window.visualViewport.addEventListener("scroll", syncDocModalClosePosition);
+  window.addEventListener("resize", syncDocModalClosePosition);
 };
 
 const openDocModal = () => {
@@ -162,6 +310,9 @@ const openDocModal = () => {
 
   clearDocPreviewAutoClose();
   docModal.classList.remove("hidden");
+  document.body.classList.add("doc-modal-open");
+  bindDocModalCloseViewportTracking();
+  syncDocModalClosePosition();
   syncDocButtonState();
 };
 
@@ -172,6 +323,8 @@ const closeDocModal = () => {
 
   clearDocPreviewAutoClose();
   docModal.classList.add("hidden");
+  document.body.classList.remove("doc-modal-open");
+  resetDocModalClosePosition();
   syncDocButtonState();
 };
 
@@ -182,16 +335,14 @@ const releaseActiveDocObjectUrl = () => {
 
   URL.revokeObjectURL(state.activeDocObjectUrl);
   state.activeDocObjectUrl = null;
+  state.activeDocRenderUrl = null;
 };
 
 const clearActiveSongDocument = () => {
   releaseActiveDocObjectUrl();
   state.activeDocOpenHref = null;
   state.activeDocTitle = null;
-  if (state.activeDocEmbedUrl !== "about:blank") {
-    activeSongDocFrame.src = "about:blank";
-    state.activeDocEmbedUrl = "about:blank";
-  }
+  resetSongDocViewer();
 };
 
 const markDocUnavailable = async (anchorElement = null) => {
@@ -204,70 +355,189 @@ const markDocUnavailable = async (anchorElement = null) => {
   showDocNotFoundToast("no attachment", anchorElement);
 };
 
-const loadSceneDocument = async (sceneIndex, anchorElement = null) => {
-  const scene = sceneForIndex(sceneIndex);
-  if (!sceneHasDoc(scene)) {
-    showDocNotFoundToast("no attachment", anchorElement);
+const normalizeLoadDocOptions = (options) => {
+  if (options instanceof Element) {
+    return { anchorElement: options, silent: false, activeSceneIndex: null };
+  }
+
+  return {
+    anchorElement: options?.anchorElement ?? null,
+    silent: Boolean(options?.silent),
+    activeSceneIndex: Number.isInteger(options?.activeSceneIndex) ? options.activeSceneIndex : null
+  };
+};
+
+const DOC_PRELOAD_CONCURRENCY = 6;
+
+const docOpenHrefForBasename = (basename) => {
+  const params = new URLSearchParams({ sceneTitle: basename });
+  return `/api/songs/document/by-title?${params.toString()}`;
+};
+
+const revokeDocBlobCache = () => {
+  for (const entry of state.docBlobCache.values()) {
+    if (entry?.objectUrl) {
+      URL.revokeObjectURL(entry.objectUrl);
+    }
+  }
+
+  state.docBlobCache.clear();
+};
+
+const showActiveSongDocViewer = () => {
+  activeSongDocPanel?.classList.remove("hidden");
+  activeSongDocPages?.classList.remove("hidden");
+  activeSongDocFrame?.classList.add("hidden");
+};
+
+const applyDocEntry = ({ sceneIndex = null, sceneTitle = "Song Document", objectUrl, openHref }) => {
+  if (state.activeDocObjectUrl !== objectUrl) {
+    releaseActiveDocObjectUrl();
+    state.activeDocObjectUrl = objectUrl;
+    state.activeDocRenderUrl = null;
+  }
+
+  state.activeSceneIndex = Number.isInteger(sceneIndex) ? sceneIndex : null;
+  state.activeDocOpenHref = openHref;
+  state.activeDocTitle = String(sceneTitle || "Song Document").trim() || "Song Document";
+  state.activeDocCueKey = normalizeSceneTitleKey(sceneTitle);
+  state.activeDocCueRestoreAtSeconds = null;
+  renderActiveSongDocument();
+  updateSceneCardStates();
+};
+
+const cacheDocBasename = async (basename) => {
+  if (!basename || state.docBlobCache.has(basename)) {
+    return state.docBlobCache.get(basename) ?? null;
+  }
+
+  const openHref = docOpenHrefForBasename(basename);
+  const response = await fetch(openHref);
+  if (!response.ok) {
+    return null;
+  }
+
+  const blob = await response.blob();
+  const entry = {
+    objectUrl: URL.createObjectURL(blob),
+    openHref
+  };
+  state.docBlobCache.set(basename, entry);
+  return entry;
+};
+
+const preloadDocCache = async () => {
+  revokeDocBlobCache();
+  const basenames = [...state.availablePdfs];
+  if (basenames.length === 0) {
+    return;
+  }
+
+  let nextIndex = 0;
+  const workers = Array.from({ length: DOC_PRELOAD_CONCURRENCY }, async () => {
+    while (nextIndex < basenames.length) {
+      const basename = basenames[nextIndex];
+      nextIndex += 1;
+      try {
+        await cacheDocBasename(basename);
+      } catch (error) {
+        writeLog("song.doc.preload.error", { basename, message: error.message });
+      }
+    }
+  });
+
+  await Promise.all(workers);
+  writeLog("song.doc.preload.done", { count: state.docBlobCache.size, total: basenames.length });
+};
+
+const scheduleDocPreload = () => {
+  state.docPreloadPromise = preloadDocCache().catch((error) => {
+    writeLog("song.doc.preload.error", { message: error.message });
+  });
+};
+
+const loadDocForBasename = async (basename, { sceneIndex = null, sceneTitle = "Song Document", anchorElement = null, silent = false } = {}) => {
+  if (!basename) {
+    if (!silent) {
+      showDocNotFoundToast("no attachment", anchorElement);
+    }
     return false;
   }
 
-  try {
-    const response = await fetch(`/api/songs/${sceneIndex}/document`);
-    if (!response.ok) {
-      if (scene?.name) {
-        const loadedByTitle = await loadSongDocumentByTitle(scene.name, anchorElement);
-        if (loadedByTitle) {
-          return true;
-        }
-      }
+  const cached = state.docBlobCache.get(basename);
+  if (cached?.objectUrl) {
+    applyDocEntry({
+      sceneIndex,
+      sceneTitle,
+      objectUrl: cached.objectUrl,
+      openHref: cached.openHref
+    });
+    return true;
+  }
 
-      await markDocUnavailable(anchorElement);
+  if (state.docPreloadPromise) {
+    await state.docPreloadPromise;
+    const preloaded = state.docBlobCache.get(basename);
+    if (preloaded?.objectUrl) {
+      applyDocEntry({
+        sceneIndex,
+        sceneTitle,
+        objectUrl: preloaded.objectUrl,
+        openHref: preloaded.openHref
+      });
+      return true;
+    }
+  }
+
+  try {
+    const entry = await cacheDocBasename(basename);
+    if (!entry?.objectUrl) {
+      if (!silent) {
+        await markDocUnavailable(anchorElement);
+      }
       return false;
     }
 
-    const blob = await response.blob();
-    releaseActiveDocObjectUrl();
-    state.activeDocObjectUrl = URL.createObjectURL(blob);
-    state.activeSceneIndex = sceneIndex;
-    state.activeDocOpenHref = `/api/songs/${sceneIndex}/document`;
-    state.activeDocTitle = scene?.name ?? "Song Document";
-    renderActiveSongDocument();
+    applyDocEntry({
+      sceneIndex,
+      sceneTitle,
+      objectUrl: entry.objectUrl,
+      openHref: entry.openHref
+    });
     return true;
   } catch (error) {
-    writeLog("song.doc.load.error", { sceneIndex, message: error.message });
-    await markDocUnavailable(anchorElement);
+    writeLog("song.doc.load.error", { basename, message: error.message });
+    if (!silent) {
+      await markDocUnavailable(anchorElement);
+    }
     return false;
   }
 };
 
-const loadSongDocumentByTitle = async (sceneTitle, anchorElement = null) => {
+const loadSceneDocument = async (sceneIndex, options = {}) => {
+  const { anchorElement, silent } = normalizeLoadDocOptions(options);
+  const scene = sceneForIndex(sceneIndex);
+  const sceneTitle = scene?.name ?? null;
+  const basename = sceneTitle ? findDocBasenameForTitle(sceneTitle) : null;
+
+  return loadDocForBasename(basename, {
+    sceneIndex,
+    sceneTitle,
+    anchorElement,
+    silent
+  });
+};
+
+const loadSongDocumentByTitle = async (sceneTitle, options = {}) => {
+  const { anchorElement, silent, activeSceneIndex = null } = normalizeLoadDocOptions(options);
   const matchedDocBasename = findDocBasenameForTitle(sceneTitle);
-  if (!matchedDocBasename) {
-    showDocNotFoundToast("no attachment", anchorElement);
-    return false;
-  }
 
-  try {
-    const params = new URLSearchParams({ sceneTitle: matchedDocBasename });
-    const response = await fetch(`/api/songs/document/by-title?${params.toString()}`);
-    if (!response.ok) {
-      await markDocUnavailable(anchorElement);
-      return false;
-    }
-
-    const blob = await response.blob();
-    releaseActiveDocObjectUrl();
-    state.activeDocObjectUrl = URL.createObjectURL(blob);
-    state.activeSceneIndex = null;
-    state.activeDocOpenHref = `/api/songs/document/by-title?${params.toString()}`;
-    state.activeDocTitle = String(sceneTitle || "Song Document").trim() || "Song Document";
-    renderActiveSongDocument();
-    return true;
-  } catch (error) {
-    writeLog("song.doc.loadByTitle.error", { sceneTitle, message: error.message });
-    showDocNotFoundToast("no attachment", anchorElement);
-    return false;
-  }
+  return loadDocForBasename(matchedDocBasename, {
+    sceneIndex: activeSceneIndex,
+    sceneTitle,
+    anchorElement,
+    silent
+  });
 };
 
 const previewDocModalForTitle = async (sceneTitle, durationMs = 2000, anchorElement = null) => {
@@ -436,13 +706,23 @@ const renderConnectionAddress = () => {
   const wsAddress = `${wsProtocol}://${window.location.host}/ws`;
   const status = state.connectionInfo?.status;
   const osc = state.connectionInfo?.osc;
+  const lanIps = Array.isArray(state.connectionInfo?.network?.lanIps)
+    ? state.connectionInfo.network.lanIps
+    : [];
+  const preferredLanIp = lanIps.find((ip) => typeof ip === "string" && ip.trim().length > 0) ?? null;
+  const connectHost = preferredLanIp || (
+    osc?.localAddress && osc.localAddress !== "0.0.0.0" && osc.localAddress !== "::"
+      ? osc.localAddress
+      : window.location.hostname
+  );
+  const connectUrl = `${window.location.protocol}//${connectHost}${window.location.port ? `:${window.location.port}` : ""}`;
   const oscInfo = osc
     ? `${osc.remoteHost}:${osc.remotePort} (local ${osc.localAddress}:${osc.localPort}, time poll ${osc.songTimePollIntervalMs}ms)`
     : "unknown";
   const statusInfo = status
     ? `Ableton online: ${status.abletonOnline ? "yes" : "no"}, playing: ${status.isPlaying ? "yes" : "no"}`
     : "Ableton status: unknown";
-  connectionAddress.textContent = `URL: ${httpAddress} | WS: ${wsAddress} | Ableton OSC: ${oscInfo} | ${statusInfo}`;
+  connectionAddress.textContent = `Connect: ${connectUrl}\nURL: ${httpAddress} | WS: ${wsAddress} | Ableton OSC: ${oscInfo} | ${statusInfo}`;
   connectionAddress.classList.remove("hidden");
 };
 
@@ -605,7 +885,98 @@ const allKnownTags = () => {
   return Array.from(tagSet).sort((left, right) => left.localeCompare(right));
 };
 
+const normalizeSongConfidence = (value) => {
+  if (value === null || value === undefined || value === "") {
+    return null;
+  }
+
+  const normalized = Number(value);
+  if (!Number.isInteger(normalized) || normalized < 1 || normalized > 5) {
+    return null;
+  }
+
+  return normalized;
+};
+
+const readStoredSceneSort = () => {
+  try {
+    const stored = localStorage.getItem(SCENE_SORT_STORAGE_KEY);
+    if (stored && SCENE_SORT_OPTIONS.has(stored)) {
+      return stored;
+    }
+  } catch {
+    // Ignore storage access errors.
+  }
+
+  return "unsorted";
+};
+
+const writeStoredSceneSort = (sortBy) => {
+  try {
+    localStorage.setItem(SCENE_SORT_STORAGE_KEY, sortBy);
+  } catch {
+    // Ignore storage access errors.
+  }
+};
+
+const renderSceneSortControl = () => {
+  if (!sceneSort) {
+    return;
+  }
+
+  sceneSort.value = state.sceneSortBy;
+};
+
+const compareScenesForDisplay = (leftScene, rightScene) => {
+  const leftProfile = profileForScene(leftScene);
+  const rightProfile = profileForScene(rightScene);
+  const leftName = leftScene.name.trim().toLowerCase();
+  const rightName = rightScene.name.trim().toLowerCase();
+
+  if (state.sceneSortBy === "tag") {
+    const leftTag = leftProfile?.tags?.[0]?.toLowerCase() ?? "";
+    const rightTag = rightProfile?.tags?.[0]?.toLowerCase() ?? "";
+    if (!leftTag && rightTag) {
+      return 1;
+    }
+
+    if (leftTag && !rightTag) {
+      return -1;
+    }
+
+    const tagCompare = leftTag.localeCompare(rightTag);
+    if (tagCompare !== 0) {
+      return tagCompare;
+    }
+  }
+
+  if (state.sceneSortBy === "confidence") {
+    const leftConfidence = normalizeSongConfidence(leftProfile?.confidence);
+    const rightConfidence = normalizeSongConfidence(rightProfile?.confidence);
+    const leftMissing = leftConfidence === null;
+    const rightMissing = rightConfidence === null;
+    if (leftMissing && !rightMissing) {
+      return 1;
+    }
+
+    if (!leftMissing && rightMissing) {
+      return -1;
+    }
+
+    if (!leftMissing && !rightMissing && leftConfidence !== rightConfidence) {
+      return leftConfidence - rightConfidence;
+    }
+  }
+
+  return leftName.localeCompare(rightName);
+};
+
 const renderSongMetaModal = () => {
+  if (songMetaTitle) {
+    const scene = Number.isInteger(state.editingSongSceneIndex) ? sceneForIndex(state.editingSongSceneIndex) : null;
+    songMetaTitle.textContent = normalizeSceneDisplayName(scene?.name ?? state.editingSongSceneTitle ?? "Song");
+  }
+
   if (!songSelectedTags || !songTagSuggestions) {
     return;
   }
@@ -657,6 +1028,15 @@ const renderSongMetaModal = () => {
   if (songFixedDocFont) {
     songFixedDocFont.checked = Boolean(state.editingUseFixedDocFont);
   }
+
+  if (songConfidenceRating) {
+    const selectedConfidence = normalizeSongConfidence(state.editingSongConfidence);
+    for (const button of songConfidenceRating.querySelectorAll(".modal-confidence-option")) {
+      const optionConfidence = normalizeSongConfidence(button.dataset.confidence);
+      button.classList.toggle("is-selected", optionConfidence !== null && optionConfidence === selectedConfidence);
+      button.setAttribute("aria-checked", String(optionConfidence !== null && optionConfidence === selectedConfidence));
+    }
+  }
 };
 
 const profileForScene = (scene) => {
@@ -671,12 +1051,297 @@ const profileForScene = (scene) => {
 
 const profileForSceneIndex = (sceneIndex) => profileForScene(sceneForIndex(sceneIndex));
 
+const activeDocProfile = () => {
+  if (Number.isInteger(state.activeSceneIndex)) {
+    return profileForSceneIndex(state.activeSceneIndex);
+  }
+
+  if (!state.activeDocCueKey) {
+    return null;
+  }
+
+  return state.songProfiles.get(state.activeDocCueKey) ?? null;
+};
+
+const docScrollMetrics = () => {
+  if (!activeSongDocPages) {
+    return null;
+  }
+
+  const maxScrollTop = Math.max(activeSongDocPages.scrollHeight - activeSongDocPages.clientHeight, 0);
+  return {
+    scrollTop: activeSongDocPages.scrollTop,
+    maxScrollTop,
+    scrollRatio: maxScrollTop > 0 ? activeSongDocPages.scrollTop / maxScrollTop : 0
+  };
+};
+
+const upsertPdfCuePoint = (cuePoints = [], nextCuePoint) => {
+  const normalizedAtSeconds = Math.round(Number(nextCuePoint.atSeconds) * 10) / 10;
+  const normalizedScrollRatio = Math.max(0, Math.min(1, Number(nextCuePoint.scrollRatio)));
+  const nextCuePoints = [];
+  let replaced = false;
+
+  for (const cuePoint of cuePoints) {
+    const atSeconds = Number(cuePoint?.atSeconds);
+    const scrollRatio = Number(cuePoint?.scrollRatio);
+    if (!Number.isFinite(atSeconds) || atSeconds < 0 || !Number.isFinite(scrollRatio)) {
+      continue;
+    }
+
+    if (Math.abs(atSeconds - normalizedAtSeconds) <= DOC_CUE_MATCH_WINDOW_SECONDS) {
+      if (!replaced) {
+        nextCuePoints.push({ atSeconds: normalizedAtSeconds, scrollRatio: normalizedScrollRatio });
+        replaced = true;
+      }
+      continue;
+    }
+
+    nextCuePoints.push({
+      atSeconds: Math.round(atSeconds * 10) / 10,
+      scrollRatio: Math.max(0, Math.min(1, scrollRatio))
+    });
+  }
+
+  if (!replaced) {
+    nextCuePoints.push({ atSeconds: normalizedAtSeconds, scrollRatio: normalizedScrollRatio });
+  }
+
+  return nextCuePoints
+    .sort((left, right) => left.atSeconds - right.atSeconds)
+    .slice(0, 200);
+};
+
+const applyProfileToState = (profile) => {
+  const profileKey = normalizeSceneTitleKey(profile?.sceneTitleKey || profile?.sceneTitle);
+  if (profileKey) {
+    state.songProfiles.set(profileKey, profile);
+  }
+};
+
+const saveSongProfilePatch = async ({ sceneIndex = null, sceneTitle = null, patch }) => {
+  const hasSceneIndex = Number.isInteger(sceneIndex);
+  const hasSceneTitle = typeof sceneTitle === "string" && sceneTitle.trim().length > 0;
+  if (!hasSceneIndex && !hasSceneTitle) {
+    return null;
+  }
+
+  const response = hasSceneIndex
+    ? await fetch(`/api/songs/${sceneIndex}/profile`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(patch)
+    })
+    : await fetch("/api/songs/profile/by-title", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        sceneTitle,
+        ...patch
+      })
+    });
+
+  const payload = await response.json();
+  if (!response.ok) {
+    throw new Error(payload.error ?? "Failed to update song details");
+  }
+
+  applyProfileToState(payload.profile);
+  return payload.profile;
+};
+
+const scheduleActiveDocCueSave = () => {
+  if (state.suppressDocCueCapture || !state.isPlaying || !Number.isFinite(state.currentSongTimeSeconds)) {
+    return;
+  }
+
+  const metrics = docScrollMetrics();
+  if (!metrics || metrics.maxScrollTop <= 0) {
+    return;
+  }
+
+  const scene = Number.isInteger(state.activeSceneIndex) ? sceneForIndex(state.activeSceneIndex) : null;
+  const sceneTitle = scene?.name ?? state.activeDocTitle;
+  if (!sceneTitle) {
+    return;
+  }
+
+  clearDocCueSaveTimer();
+  state.docCueSaveTimerId = setTimeout(() => {
+    state.docCueSaveTimerId = null;
+    const profile = activeDocProfile();
+    const currentCuePoints = Array.isArray(profile?.pdfCuePoints) ? profile.pdfCuePoints : [];
+    const atSeconds = Number(state.currentSongTimeSeconds);
+    const scrollRatio = metrics.scrollRatio;
+    const existingCuePoint = currentCuePoints.find((cuePoint) => Math.abs(Number(cuePoint?.atSeconds) - atSeconds) <= DOC_CUE_MATCH_WINDOW_SECONDS) ?? null;
+    if (existingCuePoint) {
+      const existingAtSeconds = Number(existingCuePoint.atSeconds);
+      const existingScrollRatio = Number(existingCuePoint.scrollRatio);
+      if (
+        Math.abs(existingAtSeconds - atSeconds) < DOC_CUE_MIN_SAVE_DELTA_SECONDS &&
+        Math.abs(existingScrollRatio - scrollRatio) < DOC_CUE_MIN_SAVE_DELTA_RATIO
+      ) {
+        return;
+      }
+    }
+
+    const nextCuePoints = upsertPdfCuePoint(currentCuePoints, { atSeconds, scrollRatio });
+    void saveSongProfilePatch({
+      sceneIndex: Number.isInteger(state.activeSceneIndex) ? state.activeSceneIndex : null,
+      sceneTitle,
+      patch: {
+        notes: profile?.notes ?? "",
+        tags: profile?.tags ?? [],
+        confidence: normalizeSongConfidence(profile?.confidence),
+        useFixedDocFont: Boolean(profile?.useFixedDocFont),
+        pdfCuePoints: nextCuePoints
+      }
+    }).then(() => {
+      writeLog("song.doc.cue.saved", {
+        sceneTitle,
+        atSeconds: Math.round(atSeconds * 10) / 10,
+        scrollRatio: Math.round(scrollRatio * 1000) / 1000,
+        cueCount: nextCuePoints.length
+      });
+    }).catch((error) => {
+      writeLog("song.doc.cue.save.error", { message: error.message, sceneTitle });
+    });
+  }, DOC_CUE_SAVE_DEBOUNCE_MS);
+};
+
+const restoreActiveDocCuePosition = () => {
+  if (!state.isPlaying || !Number.isFinite(state.currentSongTimeSeconds) || !activeSongDocPages || activeSongDocPages.classList.contains("hidden")) {
+    return;
+  }
+
+  const profile = activeDocProfile();
+  const cuePoints = Array.isArray(profile?.pdfCuePoints) ? profile.pdfCuePoints : [];
+  if (cuePoints.length === 0) {
+    return;
+  }
+
+  const currentTime = Number(state.currentSongTimeSeconds);
+  let matchedCuePoint = null;
+  for (const cuePoint of cuePoints) {
+    const atSeconds = Number(cuePoint?.atSeconds);
+    if (!Number.isFinite(atSeconds) || atSeconds > currentTime) {
+      break;
+    }
+    matchedCuePoint = cuePoint;
+  }
+
+  if (!matchedCuePoint || matchedCuePoint.atSeconds === state.activeDocCueRestoreAtSeconds) {
+    return;
+  }
+
+  const metrics = docScrollMetrics();
+  if (!metrics || metrics.maxScrollTop <= 0) {
+    return;
+  }
+
+  state.activeDocCueRestoreAtSeconds = matchedCuePoint.atSeconds;
+  state.suppressDocCueCapture = true;
+  activeSongDocPages.scrollTop = metrics.maxScrollTop * Math.max(0, Math.min(1, Number(matchedCuePoint.scrollRatio) || 0));
+  writeLog("song.doc.cue.restored", {
+    atSeconds: matchedCuePoint.atSeconds,
+    scrollRatio: Math.round((Number(matchedCuePoint.scrollRatio) || 0) * 1000) / 1000
+  });
+  requestAnimationFrame(() => {
+    state.suppressDocCueCapture = false;
+  });
+};
+
+const PDF_RENDER_SCALE = 2;
+let pdfjsLibPromise = null;
+let pdfRenderTaskId = 0;
+
+const loadPdfJs = () => {
+  if (!pdfjsLibPromise) {
+    pdfjsLibPromise = import("/vendor/pdfjs/pdf.mjs").then((pdfjsLib) => {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.mjs";
+      return pdfjsLib;
+    });
+  }
+
+  return pdfjsLibPromise;
+};
+
+const resetSongDocViewer = () => {
+  pdfRenderTaskId += 1;
+  clearDocCueRestoreFrame();
+  clearDocCueSaveTimer();
+  resetActiveDocCueRestore();
+  activeSongDocPages?.classList.add("hidden");
+  if (activeSongDocPages) {
+    activeSongDocPages.innerHTML = "";
+  }
+  activeSongDocFrame?.classList.add("hidden");
+  if (activeSongDocFrame && state.activeDocEmbedUrl !== "about:blank") {
+    activeSongDocFrame.src = "about:blank";
+    state.activeDocEmbedUrl = "about:blank";
+  }
+};
+
+const renderActiveSongPdfPages = async (objectUrl) => {
+  if (!activeSongDocPages) {
+    return false;
+  }
+
+  const taskId = ++pdfRenderTaskId;
+  activeSongDocPages.innerHTML = "";
+  activeSongDocPages.classList.remove("hidden");
+  activeSongDocFrame?.classList.add("hidden");
+
+  try {
+    const pdfjsLib = await loadPdfJs();
+    if (taskId !== pdfRenderTaskId) {
+      return false;
+    }
+
+    const pdf = await pdfjsLib.getDocument(objectUrl).promise;
+    for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
+      if (taskId !== pdfRenderTaskId) {
+        return false;
+      }
+
+      const page = await pdf.getPage(pageNumber);
+      const viewport = page.getViewport({ scale: PDF_RENDER_SCALE });
+      const outputScale = window.devicePixelRatio || 1;
+      const canvas = document.createElement("canvas");
+      canvas.className = "song-doc-page-canvas";
+      const context = canvas.getContext("2d");
+      if (!context) {
+        throw new Error("Canvas 2D context unavailable");
+      }
+
+      canvas.width = Math.floor(viewport.width * outputScale);
+      canvas.height = Math.floor(viewport.height * outputScale);
+      canvas.style.width = `${viewport.width}px`;
+      canvas.style.height = `${viewport.height}px`;
+      context.setTransform(outputScale, 0, 0, outputScale, 0, 0);
+      await page.render({ canvasContext: context, viewport }).promise;
+      activeSongDocPages.append(canvas);
+    }
+
+    clearDocCueRestoreFrame();
+    state.docCueRestoreFrameId = requestAnimationFrame(() => {
+      state.docCueRestoreFrameId = null;
+      restoreActiveDocCuePosition();
+    });
+
+    return true;
+  } catch (error) {
+    writeLog("song.doc.render.error", { message: error.message });
+    return false;
+  }
+};
+
 const docEmbedUrl = () => {
   if (!state.activeDocObjectUrl) {
     return null;
   }
 
-  return `${state.activeDocObjectUrl}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`;
+  return `${state.activeDocObjectUrl}#toolbar=0&navpanes=0&scrollbar=1&zoom=100`;
 };
 
 const renderDocMenuButton = () => {
@@ -706,7 +1371,7 @@ const hydrateSongProfiles = (profiles = []) => {
 };
 
 const renderActiveSongDocument = () => {
-  if (!activeSongDocPanel || !activeSongDocTitle || !activeSongDocOpen || !activeSongDocFrame || !activeSongDocFallback) {
+  if (!activeSongDocPanel || !activeSongDocTitle || !activeSongDocOpen || !activeSongDocFallback) {
     return;
   }
 
@@ -723,6 +1388,7 @@ const renderActiveSongDocument = () => {
   const openHref = Number.isInteger(state.activeSceneIndex)
     ? `/api/songs/${state.activeSceneIndex}/document`
     : state.activeDocOpenHref;
+  const objectUrl = state.activeDocObjectUrl;
 
   activeSongDocPanel.classList.remove("hidden");
   activeSongDocTitle.textContent = sceneTitle ? `Song Document: ${sceneTitle}` : "Song Document";
@@ -732,14 +1398,42 @@ const renderActiveSongDocument = () => {
     activeSongDocOpen.removeAttribute("href");
   }
   activeSongDocOpen.textContent = sceneTitle || "Open in New Tab";
-  const embedUrl = docEmbedUrl();
-  const nextEmbedUrl = embedUrl || "about:blank";
-  if (nextEmbedUrl !== state.activeDocEmbedUrl) {
-    activeSongDocFrame.src = nextEmbedUrl;
-    state.activeDocEmbedUrl = nextEmbedUrl;
-  }
   activeSongDocFallback.classList.add("hidden");
   renderDocMenuButton();
+
+  if (objectUrl === state.activeDocRenderUrl) {
+    showActiveSongDocViewer();
+    restoreActiveDocCuePosition();
+    return;
+  }
+
+  state.activeDocRenderUrl = objectUrl;
+  void renderActiveSongPdfPages(objectUrl).then((didRender) => {
+    if (state.activeDocObjectUrl !== objectUrl) {
+      return;
+    }
+
+    if (didRender) {
+      return;
+    }
+
+    if (isIpadLikeDevice()) {
+      activeSongDocFallback.classList.remove("hidden");
+      activeSongDocFallback.textContent = "PDF preview unavailable on this device. Cue saving requires the rendered preview.";
+      activeSongDocPages?.classList.remove("hidden");
+      activeSongDocFrame?.classList.add("hidden");
+      return;
+    }
+
+    const embedUrl = docEmbedUrl();
+    const nextEmbedUrl = embedUrl || "about:blank";
+    activeSongDocPages?.classList.add("hidden");
+    activeSongDocFrame?.classList.remove("hidden");
+    if (nextEmbedUrl !== state.activeDocEmbedUrl) {
+      activeSongDocFrame.src = nextEmbedUrl;
+      state.activeDocEmbedUrl = nextEmbedUrl;
+    }
+  });
 };
 
 const uploadSceneDocument = async (sceneIndex, file) => {
@@ -795,6 +1489,7 @@ const openSongMetaEditor = (sceneIndex) => {
     ? profile.tags.map(normalizeTag).filter(Boolean)
     : [];
   state.editingUseFixedDocFont = Boolean(profile?.useFixedDocFont);
+  state.editingSongConfidence = normalizeSongConfidence(profile?.confidence);
 
   if (songMetaNotes) {
     songMetaNotes.value = profile?.notes ?? "";
@@ -806,7 +1501,6 @@ const openSongMetaEditor = (sceneIndex) => {
 
   renderSongMetaModal();
   songMetaModal?.classList.remove("hidden");
-  songMetaNotes?.focus();
 };
 
 const openSongMetaEditorForTitle = (sceneTitle) => {
@@ -822,6 +1516,7 @@ const openSongMetaEditorForTitle = (sceneTitle) => {
     ? profile.tags.map(normalizeTag).filter(Boolean)
     : [];
   state.editingUseFixedDocFont = Boolean(profile?.useFixedDocFont);
+  state.editingSongConfidence = normalizeSongConfidence(profile?.confidence);
 
   if (songMetaNotes) {
     songMetaNotes.value = profile?.notes ?? "";
@@ -833,7 +1528,6 @@ const openSongMetaEditorForTitle = (sceneTitle) => {
 
   renderSongMetaModal();
   songMetaModal?.classList.remove("hidden");
-  songMetaNotes?.focus();
 };
 
 const closeSongMetaEditor = () => {
@@ -841,6 +1535,7 @@ const closeSongMetaEditor = () => {
   state.editingSongSceneIndex = null;
   state.editingSongSceneTitle = null;
   state.editingSongTags = [];
+  state.editingSongConfidence = null;
 };
 
 const addEditingTagFromInput = () => {
@@ -869,32 +1564,16 @@ const saveSongMetaEditor = async () => {
   }
 
   const notes = songMetaNotes?.value ?? "";
-  const response = hasSceneIndex
-    ? await fetch(`/api/songs/${state.editingSongSceneIndex}/profile`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ notes, tags: state.editingSongTags, useFixedDocFont: state.editingUseFixedDocFont })
-    })
-    : await fetch("/api/songs/profile/by-title", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        sceneTitle: state.editingSongSceneTitle,
-        notes,
-        tags: state.editingSongTags,
-        useFixedDocFont: state.editingUseFixedDocFont
-      })
-    });
-
-  const payload = await response.json();
-  if (!response.ok) {
-    throw new Error(payload.error ?? "Failed to update song details");
-  }
-
-  const profileKey = normalizeSceneTitleKey(payload.profile?.sceneTitleKey || payload.profile?.sceneTitle);
-  if (profileKey) {
-    state.songProfiles.set(profileKey, payload.profile);
-  }
+  await saveSongProfilePatch({
+    sceneIndex: hasSceneIndex ? state.editingSongSceneIndex : null,
+    sceneTitle: hasSceneTitle ? state.editingSongSceneTitle : null,
+    patch: {
+      notes,
+      tags: state.editingSongTags,
+      confidence: state.editingSongConfidence,
+      useFixedDocFont: state.editingUseFixedDocFont
+    }
+  });
 
   renderScenes();
   renderActiveSongDocument();
@@ -984,37 +1663,16 @@ const contrastInkForHex = (hexColor) => {
   return luminance > 150 ? "#10202a" : "#f7fbff";
 };
 
-const pinViewportToTop = () => {
-  // Temporarily disabled: keep current scroll position when switching pages/songs.
-  // window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  // document.documentElement.scrollTop = 0;
-  // document.body.scrollTop = 0;
-};
-
 const setActivePage = (page) => {
   if (!pages[page]) {
     page = "songs";
   }
 
   const previousPage = state.activePage;
-  const previousContainer = scrollContainerForPage(previousPage);
-  if (previousContainer) {
-    state.pageScrollTopByPage[previousPage] = previousContainer.scrollTop;
-  }
+  state.pageScrollTopByPage[previousPage] = readPageScrollTop(previousPage);
 
   state.activePage = page;
-
-  pinViewportToTop();
-  requestAnimationFrame(() => {
-    pinViewportToTop();
-    document.body.classList.toggle("mixer-lock-scroll", page === "mixer");
-    requestAnimationFrame(() => {
-      pinViewportToTop();
-    });
-    setTimeout(() => {
-      pinViewportToTop();
-    }, 80);
-  });
+  document.body.classList.toggle("mixer-lock-scroll", page === "mixer");
 
   for (const [key, element] of Object.entries(pages)) {
     element?.classList.toggle("active", key === page);
@@ -1026,13 +1684,7 @@ const setActivePage = (page) => {
   openLogButton?.classList.toggle("active", page === "log");
   syncDocButtonState();
 
-  const activeContainer = scrollContainerForPage(page);
-  const nextScrollTop = state.pageScrollTopByPage[page] ?? 0;
-  if (activeContainer) {
-    requestAnimationFrame(() => {
-      activeContainer.scrollTop = nextScrollTop;
-    });
-  }
+  writePageScrollTop(page, state.pageScrollTopByPage[page] ?? 0);
 };
 
 const applySceneMixToUiState = (mix) => {
@@ -1095,26 +1747,84 @@ const applyDefaultsToUiState = (defaults) => {
   }
 };
 
+const updateSceneCardStates = () => {
+  if (!sceneList) {
+    return;
+  }
+
+  const isPlayLocked = state.startingSceneIndex !== null;
+  for (const li of sceneList.querySelectorAll(".scene-card")) {
+    const sceneIndex = Number(li.dataset.sceneIndex);
+    if (!Number.isInteger(sceneIndex)) {
+      continue;
+    }
+
+    const isActive = state.activeSceneIndex === sceneIndex;
+    li.classList.toggle("is-active", isActive);
+    li.setAttribute("aria-current", isActive ? "true" : "false");
+
+    const button = li.querySelector(".scene-card-play");
+    if (!button) {
+      continue;
+    }
+
+    const isStarting = state.startingSceneIndex === sceneIndex;
+    button.disabled = isPlayLocked;
+    button.classList.toggle("is-processing", isStarting);
+    button.setAttribute("aria-busy", String(isStarting));
+    button.textContent = isStarting ? "…" : "Play";
+  }
+};
+
+const setSceneStartProcessing = (sceneIndex) => {
+  state.startingSceneIndex = sceneIndex;
+  updateSceneCardStates();
+};
+
+const clearSceneStartProcessing = () => {
+  state.startingSceneIndex = null;
+  updateSceneCardStates();
+};
+
 const startScene = async (sceneIndex) => {
-  clearSceneStopTimer("scene-start");
+  if (state.startingSceneIndex !== null) {
+    return;
+  }
+
+  setSceneStartProcessing(sceneIndex);
   console.info("[scene] start requested", { sceneIndex });
+
+  clearSceneStopTimer("scene-start");
+
   try {
+    const didLoadDoc = await loadSceneDocument(sceneIndex, { silent: true });
+    if (didLoadDoc) {
+      openDocModal();
+    } else {
+      clearActiveSongDocument();
+      closeDocModal();
+    }
+
     const response = await fetch(`/api/scenes/${sceneIndex}/start`, { method: "POST" });
     const payload = await response.json();
+    if (!response.ok) {
+      throw new Error(payload.error ?? "Failed to start scene");
+    }
+
     writeLog("scene.start", payload);
     console.info("[scene] start response", payload);
     applySceneMixToUiState(payload?.event?.appliedMix);
     state.activeSceneIndex = sceneIndex;
+    state.isPlaying = true;
+    renderStopButton();
     renderActiveSongDocument();
-    void loadSceneDocument(sceneIndex).then((didLoad) => {
-      if (didLoad) {
-        openDocModal();
-      }
-    });
+    updateSceneCardStates();
     armSceneStopTimer(sceneIndex);
   } catch (error) {
     console.info("[scene] start error", { sceneIndex, message: error.message });
     writeLog("scene.start.error", { message: error.message });
+  } finally {
+    clearSceneStartProcessing();
   }
 };
 
@@ -1197,7 +1907,7 @@ const toggleTrackMute = async (trackIndex) => {
 };
 
 const renderScenes = () => {
-  const previousScrollTop = sceneList.scrollTop;
+  const scrollTopToKeep = readPageScrollTop("songs");
   sceneList.innerHTML = "";
 
   const displayScenes = state.scenes.filter((scene) => {
@@ -1210,11 +1920,18 @@ const renderScenes = () => {
     return matchesSceneQuery(name, state.sceneQuery, profile?.tags ?? []);
   });
 
+  if (state.sceneSortBy !== "unsorted") {
+    displayScenes.sort(compareScenesForDisplay);
+  }
+
   for (const scene of displayScenes) {
     const songProfile = profileForScene(scene);
 
     const li = document.createElement("li");
-    li.className = "scene-card";
+    const isActiveScene = state.activeSceneIndex === scene.index;
+    li.className = isActiveScene ? "scene-card is-active" : "scene-card";
+    li.dataset.sceneIndex = String(scene.index);
+    li.setAttribute("aria-current", isActiveScene ? "true" : "false");
     const sceneColor = colorFromScene(scene);
     li.style.borderColor = sceneColor;
     li.style.boxShadow = `inset 0 0 0 1px ${sceneColor}33`;
@@ -1230,14 +1947,31 @@ const renderScenes = () => {
     label.className = "scene-card-name";
     label.textContent = normalizeSceneDisplayName(scene.name);
 
+    const isStarting = state.startingSceneIndex === scene.index;
+    const isPlayLocked = state.startingSceneIndex !== null;
+
     const button = document.createElement("button");
     button.type = "button";
     button.className = "scene-card-play";
-    button.textContent = "Play";
+    button.classList.toggle("is-processing", isStarting);
+    button.disabled = isPlayLocked;
+    button.setAttribute("aria-busy", String(isStarting));
+    button.textContent = isStarting ? "…" : "Play";
     button.addEventListener("click", (event) => {
       event.stopPropagation();
       void startScene(scene.index);
     });
+
+    const confidence = normalizeSongConfidence(songProfile?.confidence);
+    const confidenceLabel = document.createElement("span");
+    confidenceLabel.className = "scene-card-confidence";
+    confidenceLabel.setAttribute("aria-hidden", "true");
+    if (confidence !== null) {
+      confidenceLabel.textContent = String(confidence);
+      confidenceLabel.title = `Confidence ${confidence}`;
+      confidenceLabel.removeAttribute("aria-hidden");
+    }
+    const primaryChildren = [confidenceLabel, button, label];
 
     const notesPreview = document.createElement("span");
     notesPreview.className = "scene-card-notes";
@@ -1245,7 +1979,7 @@ const renderScenes = () => {
       ? songProfile.notes
       : "";
 
-    primary.append(button, label);
+    primary.append(...primaryChildren);
     meta.append(notesPreview);
 
     const hasAttachment = sceneHasDoc(scene);
@@ -1309,10 +2043,7 @@ const renderScenes = () => {
     sceneList.append(li);
   }
 
-  requestAnimationFrame(() => {
-    sceneList.scrollTop = previousScrollTop;
-    state.pageScrollTopByPage.songs = sceneList.scrollTop;
-  });
+  writePageScrollTop("songs", scrollTopToKeep);
 };
 
 const orderedLibraryTitles = () => {
@@ -1334,7 +2065,7 @@ const renderLibrarySongs = () => {
     return;
   }
 
-  const previousScrollTop = librarySongList.scrollTop;
+  const scrollTopToKeep = readPageScrollTop("library");
   librarySongList.innerHTML = "";
 
   const titles = orderedLibraryTitles();
@@ -1410,10 +2141,7 @@ const renderLibrarySongs = () => {
     librarySongList.append(li);
   }
 
-  requestAnimationFrame(() => {
-    librarySongList.scrollTop = previousScrollTop;
-    state.pageScrollTopByPage.library = librarySongList.scrollTop;
-  });
+  writePageScrollTop("library", scrollTopToKeep);
 };
 
 const renderTracks = () => {
@@ -1430,7 +2158,17 @@ const renderTracks = () => {
     return left.index - right.index;
   });
 
-  for (const track of sortedTracks) {
+  for (const [trackIndex, track] of sortedTracks.entries()) {
+    const previousTrack = trackIndex > 0 ? sortedTracks[trackIndex - 1] : null;
+    const previousIsBus = previousTrack ? /\bbus\b/i.test(previousTrack.name) : false;
+    const currentIsBus = /\bbus\b/i.test(track.name);
+    if (previousIsBus && !currentIsBus) {
+      const rowBreak = document.createElement("li");
+      rowBreak.className = "track-row-break";
+      rowBreak.setAttribute("aria-hidden", "true");
+      trackList.append(rowBreak);
+    }
+
     const trackColor = colorFromTrack(track);
     const trackInk = contrastInkForHex(trackColor);
     const li = document.createElement("li");
@@ -1563,10 +2301,25 @@ const refreshCache = async () => {
   state.scenes = scenesPayload.scenes ?? [];
   hydrateSongProfiles(profilesPayload.profiles ?? []);
   state.availablePdfs = new Set(Array.isArray(docsPayload.pdfs) ? docsPayload.pdfs : []);
+  state.cacheSignatures.tracks = tracksDataSignature(state.tracks);
+  scheduleDocPreload();
   renderTracks();
   renderScenes();
   renderLibrarySongs();
   renderActiveSongDocument();
+};
+
+const applyCacheUpdate = (payload = {}) => {
+  // Scenes are fetched once on app open and never change during a session.
+  const nextTracks = payload.tracks ?? state.tracks;
+  const nextTracksSignature = tracksDataSignature(nextTracks);
+  if (nextTracksSignature === state.cacheSignatures.tracks) {
+    return;
+  }
+
+  state.tracks = nextTracks;
+  state.cacheSignatures.tracks = nextTracksSignature;
+  renderTracks();
 };
 
 const addGlobalDefaults = async () => {
@@ -1587,7 +2340,59 @@ const clearGlobalDefaults = async () => {
     throw new Error(payload.error ?? "Failed to clear global defaults");
   }
 
+  const stateResponse = await fetch("/api/tracks/state");
+  const statePayload = await stateResponse.json();
+  if (!stateResponse.ok) {
+    throw new Error(statePayload.error ?? "Failed to refresh Ableton track state");
+  }
+
+  applySceneMixToUiState(statePayload.state);
   writeLog("track.defaults.clear", payload);
+};
+
+const resetGlobalDefaults = async () => {
+  const response = await fetch("/api/tracks/defaults/reset", { method: "POST" });
+  const payload = await response.json();
+  if (!response.ok) {
+    throw new Error(payload.error ?? "Failed to reset defaults in Ableton");
+  }
+
+  applySceneMixToUiState(payload.applied);
+  writeLog("track.defaults.reset", payload);
+};
+
+const runMixerDefaultsActionWithFeedback = async (button, {
+  pendingLabel,
+  successLabel,
+  action,
+  errorLogLabel
+}) => {
+  if (!button || typeof action !== "function") {
+    return;
+  }
+
+  const originalLabel = button.dataset.defaultLabel || button.textContent;
+  button.dataset.defaultLabel = originalLabel;
+
+  if (button.disabled) {
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = pendingLabel;
+
+  try {
+    await action();
+    button.textContent = successLabel;
+  } catch (error) {
+    button.textContent = "Error";
+    writeLog(errorLogLabel, { message: error.message });
+  } finally {
+    setTimeout(() => {
+      button.textContent = button.dataset.defaultLabel || originalLabel;
+      button.disabled = false;
+    }, 900);
+  }
 };
 
 const startWs = () => {
@@ -1614,23 +2419,33 @@ const startWs = () => {
       writeLog("ws.message", payload);
 
       if (payload.type === "cache.updated" && payload.payload) {
-        state.tracks = payload.payload.tracks ?? state.tracks;
-        state.scenes = payload.payload.scenes ?? state.scenes;
-        renderTracks();
-        renderScenes();
-        renderLibrarySongs();
-        renderActiveSongDocument();
+        applyCacheUpdate(payload.payload);
       }
 
       if (payload.type === "song.playback.status") {
+        const previousSceneIndex = state.activeSceneIndex;
+        const previousSongTimeSeconds = state.currentSongTimeSeconds;
+        const previousIsPlaying = state.isPlaying;
         state.abletonOnline = true;
         if (Number.isInteger(payload.activeSceneIndex)) {
           state.activeSceneIndex = payload.activeSceneIndex;
           renderActiveSongDocument();
+          updateSceneCardStates();
         }
+        state.currentSongTimeSeconds = Number.isFinite(payload.currentSongTimeSeconds)
+          ? payload.currentSongTimeSeconds
+          : null;
         setWsStatus(state.wsConnected);
         state.isPlaying = Boolean(payload.isPlaying);
+        if (
+          previousSceneIndex !== state.activeSceneIndex ||
+          (Number.isFinite(previousSongTimeSeconds) && Number.isFinite(state.currentSongTimeSeconds) && state.currentSongTimeSeconds + 0.75 < previousSongTimeSeconds) ||
+          (!previousIsPlaying && state.isPlaying)
+        ) {
+          resetActiveDocCueRestore();
+        }
         renderStopButton();
+        restoreActiveDocCuePosition();
       }
 
       if (payload.type === "osc.connection.status") {
@@ -1644,6 +2459,8 @@ const startWs = () => {
 
       if (payload.type === "song.stop.requested" || payload.type === "song.playback.ended") {
         state.isPlaying = false;
+        state.currentSongTimeSeconds = null;
+        resetActiveDocCueRestore();
         renderStopButton();
         clearSceneStopTimer(`ws-${payload.type}`);
         setActivePage("songs");
@@ -1663,7 +2480,10 @@ const startWs = () => {
       if (payload.type === "scene.start.requested" && Number.isInteger(payload.sceneIndex)) {
         applySceneMixToUiState(payload.appliedMix);
         state.activeSceneIndex = payload.sceneIndex;
+        state.isPlaying = true;
+        renderStopButton();
         renderActiveSongDocument();
+        updateSceneCardStates();
       }
     } catch (error) {
       writeLog("ws.parse.error", { message: error.message });
@@ -1676,26 +2496,43 @@ const startWs = () => {
   renderStopButton();
   try {
     await Promise.all([refreshCache(), fetchConnectionInfo()]);
+
     try {
-      const defaultsResponse = await fetch("/api/tracks/defaults");
-      if (defaultsResponse.ok) {
-        const defaultsPayload = await defaultsResponse.json();
-        applyDefaultsToUiState(defaultsPayload.defaults);
-        writeLog("track.defaults.load", defaultsPayload);
+      const stateResponse = await fetch("/api/tracks/state");
+      if (stateResponse.ok) {
+        const statePayload = await stateResponse.json();
+        applySceneMixToUiState(statePayload.state);
+        writeLog("track.state.load", statePayload);
       }
     } catch (error) {
-      writeLog("track.defaults.load.error", { message: error.message });
+      writeLog("track.state.load.error", { message: error.message });
+    }
+
+    try {
+      const defaultsResetResponse = await fetch("/api/tracks/defaults/reset", { method: "POST" });
+      if (defaultsResetResponse.ok) {
+        const defaultsResetPayload = await defaultsResetResponse.json();
+        applySceneMixToUiState(defaultsResetPayload.applied);
+        writeLog("track.defaults.reset.load", defaultsResetPayload);
+      }
+    } catch (error) {
+      writeLog("track.defaults.reset.load.error", { message: error.message });
     }
 
     if (state.connectionInfo?.status) {
       state.abletonOnline = Boolean(state.connectionInfo.status.abletonOnline);
       state.isPlaying = Boolean(state.connectionInfo.status.isPlaying);
+      state.currentSongTimeSeconds = Number.isFinite(state.connectionInfo.status.currentSongTimeSeconds)
+        ? state.connectionInfo.status.currentSongTimeSeconds
+        : null;
+      resetActiveDocCueRestore();
       if (Number.isInteger(state.connectionInfo.status.activeSceneIndex)) {
         state.activeSceneIndex = state.connectionInfo.status.activeSceneIndex;
       }
       setWsStatus(state.wsConnected);
       renderStopButton();
       renderActiveSongDocument();
+      updateSceneCardStates();
     }
   } catch (error) {
     writeLog("bootstrap.error", { message: error.message });
@@ -1718,6 +2555,24 @@ sceneSearch?.addEventListener("input", () => {
   state.sceneQuery = sceneSearch.value.trim();
   renderSearchClear();
   renderScenes();
+});
+
+sceneSort?.addEventListener("change", () => {
+  const nextSort = sceneSort.value;
+  state.sceneSortBy = SCENE_SORT_OPTIONS.has(nextSort) ? nextSort : "unsorted";
+  writeStoredSceneSort(state.sceneSortBy);
+  renderScenes();
+});
+
+songConfidenceRating?.addEventListener("click", (event) => {
+  const button = event.target.closest(".modal-confidence-option");
+  if (!button) {
+    return;
+  }
+
+  const nextConfidence = normalizeSongConfidence(button.dataset.confidence);
+  state.editingSongConfidence = state.editingSongConfidence === nextConfidence ? null : nextConfidence;
+  renderSongMetaModal();
 });
 
 clearSceneSearch?.addEventListener("click", () => {
@@ -1760,6 +2615,12 @@ openDocButton?.addEventListener("click", () => {
     return;
   }
 
+  if (state.activeDocObjectUrl && state.activeDocRenderUrl === state.activeDocObjectUrl) {
+    showActiveSongDocViewer();
+    openDocModal();
+    return;
+  }
+
   void loadSceneDocument(state.activeSceneIndex, openDocButton).then((didLoad) => {
     if (didLoad) {
       openDocModal();
@@ -1767,34 +2628,38 @@ openDocButton?.addEventListener("click", () => {
   });
 });
 
+activeSongDocPages?.addEventListener("scroll", () => {
+  scheduleActiveDocCueSave();
+});
+
 closeDocModalButton?.addEventListener("click", () => {
   closeDocModal();
 });
 
 recheckDefaultsButton?.addEventListener("click", () => {
-  void fetch("/api/tracks/recheck-defaults", { method: "POST" })
-    .then(async (response) => {
-      const payload = await response.json();
-      if (!response.ok) {
-        throw new Error(payload.error ?? "Failed to recheck defaults");
-      }
-      applyDefaultsToUiState(payload.defaults);
-      writeLog("track.defaults.recheck", payload);
-    })
-    .catch((error) => {
-      writeLog("track.defaults.recheck.error", { message: error.message });
-    });
+  void runMixerDefaultsActionWithFeedback(recheckDefaultsButton, {
+    pendingLabel: "Resetting...",
+    successLabel: "Reset",
+    errorLogLabel: "track.defaults.reset.error",
+    action: resetGlobalDefaults
+  });
 });
 
 addGlobalDefaultsButton?.addEventListener("click", () => {
-  void addGlobalDefaults().catch((error) => {
-    writeLog("track.defaults.add.error", { message: error.message });
+  void runMixerDefaultsActionWithFeedback(addGlobalDefaultsButton, {
+    pendingLabel: "Saving...",
+    successLabel: "Saved",
+    errorLogLabel: "track.defaults.add.error",
+    action: addGlobalDefaults
   });
 });
 
 clearGlobalDefaultsButton?.addEventListener("click", () => {
-  void clearGlobalDefaults().catch((error) => {
-    writeLog("track.defaults.clear.error", { message: error.message });
+  void runMixerDefaultsActionWithFeedback(clearGlobalDefaultsButton, {
+    pendingLabel: "Clearing...",
+    successLabel: "Cleared",
+    errorLogLabel: "track.defaults.clear.error",
+    action: clearGlobalDefaults
   });
 });
 
@@ -1888,6 +2753,8 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
+state.sceneSortBy = readStoredSceneSort();
+renderSceneSortControl();
 renderConnectionAddress();
 renderStopButton();
 renderSearchClear();

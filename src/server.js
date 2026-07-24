@@ -15,6 +15,7 @@ import { LiveService } from "./domain/liveService.js";
 import { SongProfileStore } from "./domain/songProfileStore.js";
 import { BroadcastHub } from "./ws/broadcastHub.js";
 import { createApiRouter } from "./api/routes.js";
+import { networkUrlsForPort } from "./utils/network.js";
 
 const runtimeDir = path.dirname(fileURLToPath(import.meta.url));
 const staticRoot = path.resolve(runtimeDir, "../client");
@@ -101,7 +102,15 @@ export const createRuntime = (overrides = {}) => {
     });
 
     const address = server.address();
-    logger.info("Server ready", address);
+    const port = address?.port ?? runtimeConfig.server.port;
+    const localUrl = `http://127.0.0.1:${port}`;
+    const networkUrls = networkUrlsForPort(port);
+
+    logger.info("Server ready", { local: localUrl, address });
+    for (const networkUrl of networkUrls) {
+      logger.info("Network", networkUrl);
+    }
+
     return address;
   };
 
@@ -137,7 +146,13 @@ const isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.arg
 if (isMain) {
   const runtime = createRuntime();
   runtime.start().catch((error) => {
-    defaultLogger.error("Startup failed", error);
+    if (error?.code === "EADDRINUSE" && Number(error?.port) === config.osc.localPort) {
+      defaultLogger.error(
+        `OSC port ${config.osc.localPort} is already in use. Stop the other playAble instance (npm run server-restart) or change OSC_LOCAL_PORT in .env`
+      );
+    } else {
+      defaultLogger.error("Startup failed", error);
+    }
     process.exitCode = 1;
   });
 }
